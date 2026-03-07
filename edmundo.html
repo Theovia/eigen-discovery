@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuestionario Operativo — Despacho Edmundo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f4f1;
+    --card: #ffffff;
+    --border: #e5e3de;
+    --text: #1a1a1a;
+    --muted: #71706b;
+    --accent: #c4a265;
+    --accent-bg: #faf7f0;
+    --radius: 12px;
+    --font: 'Inter', -apple-system, system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100dvh;
+  }
+
+  .container {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 0 16px 80px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    padding: 48px 0 32px;
+    text-align: center;
+  }
+  .header-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-bg);
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .header p {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 420px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ── PROGRESS ── */
+  .progress-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    padding: 12px 0 8px;
+  }
+  .progress-bar {
+    height: 3px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .progress-text {
+    font-size: 11px;
+    color: var(--muted);
+    text-align: right;
+    margin-top: 4px;
+  }
+
+  /* ── STEP ── */
+  .step {
+    display: none;
+    animation: slideIn 0.3s ease;
+  }
+  .step.active { display: block; }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+
+  .card-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .card-question {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.45;
+    margin-bottom: 6px;
+  }
+
+  .card-hint {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+
+  .card textarea, .card input, .card select {
+    width: 100%;
+    font-family: var(--font);
+    font-size: 15px;
+    color: var(--text);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .card textarea {
+    min-height: 100px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+  .card textarea:focus, .card input:focus, .card select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(196, 162, 101, 0.12);
+  }
+  .card textarea::placeholder, .card input::placeholder {
+    color: #b5b3ae;
+  }
+  .card select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5' stroke='%2371706b' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+
+  /* ── RANGE SLIDER ── */
+  .range-wrap { margin-top: 4px; }
+  .range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .range-value {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .range-unit {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: var(--border);
+    border-radius: 6px;
+    outline: none;
+    border: none;
+    padding: 0;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px; height: 24px;
+    background: var(--accent);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(196,162,101,0.35);
+  }
+
+  /* ── CHIP SELECT ── */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .chip {
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--card);
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .chip:hover { border-color: var(--accent); }
+  .chip.selected {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  /* ── CONTEXT BOX ── */
+  .context-box {
+    background: var(--accent-bg);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .context-box strong { color: var(--text); }
+
+  /* ── NAV ── */
+  .nav {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .btn {
+    flex: 1;
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 14px 24px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-back {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .btn-back:hover { border-color: var(--accent); color: var(--text); }
+  .btn-next {
+    background: var(--text);
+    color: white;
+  }
+  .btn-next:hover { background: #333; transform: translateY(-1px); }
+  .btn-submit {
+    background: var(--accent);
+    color: white;
+    flex: 1;
+  }
+  .btn-submit:hover { filter: brightness(1.05); transform: translateY(-1px); }
+  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* ── SUCCESS ── */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 80px 24px;
+  }
+  .success-screen.show { display: block; }
+  .success-icon { font-size: 56px; margin-bottom: 20px; }
+  .success-screen h2 {
+    font-size: 22px; font-weight: 600; margin-bottom: 8px;
+  }
+  .success-screen p {
+    font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 360px; margin: 0 auto;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 32px 0 24px;
+    font-size: 11px;
+    color: #b5b3ae;
+    letter-spacing: 0.5px;
+  }
+  .footer strong { color: var(--muted); font-weight: 500; }
+
+  @media (max-width: 640px) {
+    .container { padding: 0 12px 80px; }
+    .header { padding: 32px 0 24px; }
+    .header h1 { font-size: 21px; }
+    .card { padding: 20px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-badge">🔒 Confidencial</div>
+    <h1>Cuestionario Operativo</h1>
+    <p>Hola — soy Raúl. Ya platiqué con Edmundo sobre el despacho. Ahora necesito entender <strong>desde su perspectiva</strong> qué procesos les quitan más tiempo. Son ~5 minutos.</p>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-text" id="progressText">Paso 1 de 5</div>
+  </div>
+
+  <form id="briefForm">
+
+  <!-- ═══ STEP 1: Quién eres ═══ -->
+  <div class="step active" data-step="1">
+    <div class="card">
+      <div class="card-label">Sobre usted</div>
+      <div class="card-question">¿Cuál es su nombre?</div>
+      <input type="text" name="nombre" placeholder="Ej: María García" required>
+    </div>
+
+    <div class="card">
+      <div class="card-question">¿Cuál es su rol principal en el despacho?</div>
+      <div class="card-hint">Seleccione lo que mejor describa su función día a día.</div>
+      <div class="chips" data-name="rol">
+        <div class="chip" data-value="Contabilidad general">Contabilidad general</div>
+        <div class="chip" data-value="Nómina y seguro social">Nómina y seguro social</div>
+        <div class="chip" data-value="Cálculo y presentación de impuestos">Impuestos</div>
+        <div class="chip" data-value="Estados financieros y reportes">Reportes financieros</div>
+        <div class="chip" data-value="Atención a clientes">Atención a clientes</div>
+        <div class="chip" data-value="Todo un poco">Un poco de todo</div>
+      </div>
+      <input type="hidden" name="rol" required>
+    </div>
+
+    <div class="nav">
+      <button type="button" class="btn btn-next" onclick="goStep(2)">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 2: Los 3 dolores ═══ -->
+  <div class="step" data-step="2">
+    <div class="context-box">
+      Edmundo nos contó que la <strong>reclasificación de facturas</strong> y la <strong>captura manual</strong> son los procesos más pesados. Queremos saber si desde su experiencia diaria hay algo más que les quite tiempo.
+    </div>
+
+    <div class="card">
+      <div class="card-label">Dolor #1</div>
+      <div class="card-question">¿Qué tarea le quita más tiempo en la semana?</div>
+      <div class="card-hint">Sea específica: "reclasificar 200 facturas nuevas al mes" es mejor que "captura de datos".</div>
+      <textarea name="dolor1" placeholder="Describa la tarea y aproximadamente cuántas horas le dedica por semana..."></textarea>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Dolor #2</div>
+      <div class="card-question">¿Qué otra tarea repetitiva le gustaría no tener que hacer?</div>
+      <textarea name="dolor2" placeholder="Puede ser algo que no es difícil pero consume mucho tiempo..."></textarea>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Dolor #3</div>
+      <div class="card-question">¿Hay algo que hagan a mano y que sienta que una computadora debería poder hacer?</div>
+      <textarea name="dolor3" placeholder="Copiar datos de un lado a otro, buscar folios, comparar documentos..."></textarea>
+    </div>
+
+    <div class="nav">
+      <button type="button" class="btn btn-back" onclick="goStep(1)">← Atrás</button>
+      <button type="button" class="btn btn-next" onclick="goStep(3)">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 3: Tiempo y volumen ═══ -->
+  <div class="step" data-step="3">
+    <div class="card">
+      <div class="card-label">Volumen</div>
+      <div class="card-question">¿Cuántos clientes maneja usted directamente?</div>
+      <div class="range-wrap">
+        <div class="range-value" id="clientesVal">15</div>
+        <div class="range-unit">clientes</div>
+        <input type="range" name="clientes" min="1" max="60" value="15" oninput="document.getElementById('clientesVal').textContent=this.value">
+        <div class="range-labels"><span>1</span><span>30</span><span>60</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Horas</div>
+      <div class="card-question">De sus horas de trabajo al día, ¿cuántas son de captura/procesamiento manual?</div>
+      <div class="range-wrap">
+        <div class="range-value" id="horasVal">4</div>
+        <div class="range-unit">horas al día en trabajo manual</div>
+        <input type="range" name="horas_manuales" min="0" max="8" value="4" oninput="document.getElementById('horasVal').textContent=this.value">
+        <div class="range-labels"><span>0h</span><span>4h</span><span>8h</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-question">¿Hay meses o periodos donde la carga se vuelve insostenible?</div>
+      <div class="card-hint">Ej: declaraciones anuales en marzo/abril, cierre de año, mes de nóminas extra...</div>
+      <textarea name="picos" placeholder="¿Cuándo es la época más pesada y por qué?"></textarea>
+    </div>
+
+    <div class="nav">
+      <button type="button" class="btn btn-back" onclick="goStep(2)">← Atrás</button>
+      <button type="button" class="btn btn-next" onclick="goStep(4)">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 4: Herramientas y flujo ═══ -->
+  <div class="step" data-step="4">
+    <div class="context-box">
+      Ya sabemos que usan <strong>Contpaq</strong> como sistema principal y un <strong>sistema de descarga masiva</strong> de facturas. Aquí queremos entender qué más usan y dónde hay trabajo manual entre un sistema y otro.
+    </div>
+
+    <div class="card">
+      <div class="card-label">Herramientas</div>
+      <div class="card-question">¿Qué otros programas o portales usa en su día a día?</div>
+      <div class="card-hint">Excel, portal del SAT, portal del IMSS, editor de PDF, WhatsApp para clientes, etc.</div>
+      <textarea name="herramientas" placeholder="Liste todo lo que use, aunque parezca obvio..."></textarea>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Transferencia manual</div>
+      <div class="card-question">¿En qué momento tiene que copiar datos de un programa a otro manualmente?</div>
+      <div class="card-hint">Ej: "Copio el total del estado de cuenta al Excel, luego lo verifico contra Contpaq".</div>
+      <textarea name="transferencia" placeholder="Describa los pasos donde mueve información a mano..."></textarea>
+    </div>
+
+    <div class="card">
+      <div class="card-question">¿Cómo les llega la información de los clientes?</div>
+      <div class="chips" data-name="canales" data-multi="true">
+        <div class="chip" data-value="WhatsApp">WhatsApp</div>
+        <div class="chip" data-value="Correo electrónico">Correo</div>
+        <div class="chip" data-value="Portal/sistema">Portal</div>
+        <div class="chip" data-value="En persona / USB">En persona</div>
+        <div class="chip" data-value="Descarga directa SAT">Descarga SAT</div>
+      </div>
+      <input type="hidden" name="canales">
+    </div>
+
+    <div class="nav">
+      <button type="button" class="btn btn-back" onclick="goStep(3)">← Atrás</button>
+      <button type="button" class="btn btn-next" onclick="goStep(5)">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 5: La pregunta final ═══ -->
+  <div class="step" data-step="5">
+    <div class="card" style="background: var(--text); color: white; border-color: transparent;">
+      <div class="card-label" style="color: var(--accent);">Pregunta final</div>
+      <div class="card-question" style="font-size: 18px; color: white;">
+        Si pudiéramos quitarle <strong style="color: var(--accent);">una sola tarea</strong> de encima para siempre, ¿cuál escogería?
+      </div>
+      <div class="card-hint" style="color: #999;">Esta respuesta define la prioridad #1 de la propuesta que le haremos a Edmundo.</div>
+      <textarea name="prioridad" placeholder="La que más le pese..." style="background: rgba(255,255,255,0.08); color: white; border-color: rgba(255,255,255,0.15);"></textarea>
+    </div>
+
+    <div class="card">
+      <div class="card-question">¿Hay algo más que quiera comentar?</div>
+      <div class="card-hint">Cualquier detalle que sienta relevante y que no hayamos preguntado.</div>
+      <textarea name="adicional" placeholder="Opcional — pero todo suma..."></textarea>
+    </div>
+
+    <div class="nav">
+      <button type="button" class="btn btn-back" onclick="goStep(4)">← Atrás</button>
+      <button type="submit" class="btn btn-submit" id="submitBtn">Enviar ✓</button>
+    </div>
+  </div>
+
+  </form>
+
+  <!-- SUCCESS -->
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">✦</div>
+    <h2>¡Listo, gracias!</h2>
+    <p>Sus respuestas ya llegaron. Raúl las revisará y preparará una propuesta personalizada para el despacho. No necesita hacer nada más.</p>
+  </div>
+
+  <div class="footer">
+    Cifrado HTTPS · Información confidencial · <strong>Raúl Zhou</strong>
+  </div>
+
+</div>
+
+<script>
+const WORKER_URL = 'https://discovery-webhook.raul-chio-leon.workers.dev';
+const TOTAL_STEPS = 5;
+let currentStep = 1;
+
+function goStep(n) {
+  if (n < 1 || n > TOTAL_STEPS) return;
+  document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
+  document.querySelector(`.step[data-step="${n}"]`).classList.add('active');
+  currentStep = n;
+  document.getElementById('progressFill').style.width = ((n / TOTAL_STEPS) * 100) + '%';
+  document.getElementById('progressText').textContent = `Paso ${n} de ${TOTAL_STEPS}`;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Chip selection
+document.querySelectorAll('.chips').forEach(group => {
+  const multi = group.dataset.multi === 'true';
+  const hidden = group.nextElementSibling;
+  group.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      if (multi) {
+        chip.classList.toggle('selected');
+      } else {
+        group.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+        chip.classList.add('selected');
+      }
+      const vals = [...group.querySelectorAll('.chip.selected')].map(c => c.dataset.value);
+      if (hidden && hidden.tagName === 'INPUT') hidden.value = vals.join(', ');
+    });
+  });
+});
+
+// Submit
+document.getElementById('briefForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  const fd = new FormData(e.target);
+  const data = {
+    despacho: 'Despacho Edmundo',
+    contacto: fd.get('nombre') || '(sin nombre)',
+    contactInfo: 'Vía brief personalizado',
+    preguntas: [
+      { tag: 'Rol', pregunta: 'Rol principal en el despacho', respuesta: fd.get('rol') || '(sin selección)' },
+      { tag: 'Dolor #1', pregunta: 'Tarea que más tiempo quita en la semana', respuesta: fd.get('dolor1') || '(sin respuesta)' },
+      { tag: 'Dolor #2', pregunta: 'Otra tarea repetitiva que quisiera eliminar', respuesta: fd.get('dolor2') || '(sin respuesta)' },
+      { tag: 'Dolor #3', pregunta: 'Algo que hacen a mano y que una computadora debería hacer', respuesta: fd.get('dolor3') || '(sin respuesta)' },
+      { tag: 'Clientes', pregunta: 'Cuántos clientes maneja directamente', respuesta: fd.get('clientes') || '?' },
+      { tag: 'Horas manuales', pregunta: 'Horas al día de trabajo manual', respuesta: fd.get('horas_manuales') || '?' },
+      { tag: 'Picos de carga', pregunta: 'Meses o periodos donde la carga es insostenible', respuesta: fd.get('picos') || '(sin respuesta)' },
+      { tag: 'Herramientas', pregunta: 'Programas y portales que usa diariamente', respuesta: fd.get('herramientas') || '(sin respuesta)' },
+      { tag: 'Transferencia manual', pregunta: 'Dónde copia datos de un programa a otro', respuesta: fd.get('transferencia') || '(sin respuesta)' },
+      { tag: 'Canales de entrada', pregunta: 'Cómo reciben información de clientes', respuesta: fd.get('canales') || '(sin selección)' },
+      { tag: '⭐ Prioridad #1', pregunta: 'Si pudieran quitarle una sola tarea de encima para siempre', respuesta: fd.get('prioridad') || '(sin respuesta)' },
+      { tag: 'Comentarios', pregunta: 'Algo adicional', respuesta: fd.get('adicional') || '(nada)' },
+    ],
+  };
+
+  try {
+    const res = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    if (res.ok) {
+      document.getElementById('briefForm').style.display = 'none';
+      document.querySelector('.progress-wrap').style.display = 'none';
+      document.getElementById('successScreen').classList.add('show');
+    } else {
+      alert('Error al enviar. Intente de nuevo o contacte a Raúl directamente.');
+    }
+  } catch {
+    alert('Sin conexión. Verifique su internet.');
+  }
+  btn.disabled = false;
+  btn.textContent = 'Enviar ✓';
+});
+
+// Init progress
+document.getElementById('progressFill').style.width = ((1 / TOTAL_STEPS) * 100) + '%';
+</script>
+</body>
+</html>
