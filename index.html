@@ -13,84 +13,62 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #fafaf8;
-  --surface: #ffffff;
-  --surface-alt: #f5f4f0;
-  --border: #e8e6e1;
-  --border-focus: #1a1a1a;
-  --text: #1a1a1a;
-  --text-secondary: #6b6b6b;
-  --text-muted: #9a9a9a;
-  --accent: #1a1a1a;
-  --accent-soft: #f0efe8;
-  --green: #1a7a4c;
-  --green-bg: #edf7f0;
-  --green-border: #c5e8d0;
-  --red: #c53030;
-  --red-bg: #fef2f2;
-  --serif: 'Fraunces', Georgia, serif;
-  --sans: 'Inter', -apple-system, sans-serif;
-  --radius: 12px;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
+  --bg:#fafaf8;--surface:#ffffff;--surface-alt:#f5f4f0;--border:#e8e6e1;
+  --text:#1a1a1a;--text-secondary:#6b6b6b;--text-muted:#9a9a9a;
+  --accent:#1a1a1a;--accent-soft:#f0efe8;
+  --green:#1a7a4c;--green-bg:#edf7f0;--green-border:#c5e8d0;
+  --red:#c53030;--red-bg:#fef2f2;
+  --serif:'Fraunces',Georgia,serif;--sans:'Inter',-apple-system,sans-serif;
+  --radius:12px;--shadow-sm:0 1px 3px rgba(0,0,0,.04);--shadow-md:0 4px 20px rgba(0,0,0,.06);--shadow-lg:0 12px 40px rgba(0,0,0,.08);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;font-size:15px;-webkit-font-smoothing:antialiased;min-height:100vh}
-.app{max-width:640px;margin:0 auto;padding:40px 20px 80px}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;font-size:15px;-webkit-font-smoothing:antialiased}
+.app{max-width:640px;margin:0 auto;padding:48px 20px 80px}
 
-/* ═══ BRAND ═══ */
+/* BRAND */
 .brand{text-align:center;margin-bottom:40px}
 .brand-mark{font-family:var(--serif);font-size:18px;font-weight:500;letter-spacing:1px;margin-bottom:4px}
 .brand-mark span{color:var(--text-muted);font-weight:300}
-.brand-sub{font-size:11px;color:var(--text-muted);letter-spacing:0.5px}
+.brand-sub{font-size:11px;color:var(--text-muted);letter-spacing:.5px}
 .brand-cred{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);background:var(--surface-alt);border:1px solid var(--border);padding:4px 12px;border-radius:100px;margin-top:8px}
 
-/* ═══ HEADER ═══ */
+/* HEADER */
 .header{text-align:center;margin-bottom:48px}
 .header-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--green);background:var(--green-bg);border:1px solid var(--green-border);padding:6px 14px;border-radius:100px;margin-bottom:24px}
-.header-badge svg{width:14px;height:14px}
-.header h1{font-family:var(--serif);font-size:clamp(30px,6vw,40px);font-weight:400;line-height:1.2;letter-spacing:-0.5px;margin-bottom:12px}
+.header h1{font-family:var(--serif);font-size:clamp(30px,6vw,40px);font-weight:400;line-height:1.2;letter-spacing:-.5px;margin-bottom:12px}
 .header h1 em{font-style:italic;font-weight:300;opacity:.6}
 .header-sub{font-size:15px;color:var(--text-secondary);max-width:480px;margin:0 auto;line-height:1.7}
 .header-value{font-size:13px;color:var(--text-muted);margin-top:8px;font-style:italic}
 
-/* ═══ PROGRESS ═══ */
-.progress-wrap{position:sticky;top:0;z-index:100;background:rgba(250,250,248,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:16px 0 12px;margin-bottom:32px;border-bottom:1px solid transparent;transition:border-color .3s}
-.progress-wrap.scrolled{border-bottom-color:var(--border)}
-.progress-steps{display:flex;gap:6px;margin-bottom:8px}
-.progress-step{flex:1;height:4px;border-radius:100px;background:var(--border);transition:background .4s ease}
-.progress-step.done{background:var(--accent)}
-.progress-step.active{background:var(--accent)}
-.progress-text{display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);font-weight:500}
+/* SAVED BADGE */
+.save-indicator{position:fixed;bottom:20px;right:20px;font-size:12px;color:var(--green);background:var(--green-bg);border:1px solid var(--green-border);padding:6px 14px;border-radius:100px;opacity:0;transition:opacity .3s;z-index:50;display:flex;align-items:center;gap:6px;pointer-events:none}
+.save-indicator.show{opacity:1}
 
-/* ═══ STEPS ═══ */
-.step{display:none;animation:stepIn .4s ease}
-.step.active{display:block}
-@keyframes stepIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+/* SECTIONS */
+.section{margin-bottom:48px}
+.section-label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.section-label i{width:14px;height:14px}
 
-.step-header{margin-bottom:28px}
-.step-number{font-size:12px;font-weight:600;color:var(--text-muted);letter-spacing:0.5px;margin-bottom:4px}
-.step-title{font-family:var(--serif);font-size:26px;font-weight:400;letter-spacing:-0.3px;margin-bottom:4px}
-.step-desc{font-size:14px;color:var(--text-secondary);line-height:1.6}
-
-/* ═══ FIELDS ═══ */
+/* FIELDS */
 .field{margin-bottom:22px}
 .field-label{display:block;font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px}
 .field-hint{font-size:13px;color:var(--text-muted);line-height:1.5;margin-bottom:8px}
-input[type="text"],input[type="email"],textarea{width:100%;font-family:var(--sans);font-size:15px;color:var(--text);background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:12px 14px;outline:none;transition:border-color .2s,box-shadow .2s}
+input[type="text"],textarea{width:100%;font-family:var(--sans);font-size:15px;color:var(--text);background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:12px 14px;outline:none;transition:border-color .2s,box-shadow .2s}
 input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(26,26,26,.06)}
 input::placeholder,textarea::placeholder{color:#c0bfba}
 textarea{min-height:88px;resize:vertical;line-height:1.6}
-input.error,textarea.error{border-color:var(--red)}
+input.error{border-color:var(--red)}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
-/* ═══ RANKING ═══ */
+/* RANKING */
 .ranking{display:flex;flex-direction:column;gap:10px}
 .ranking-item{display:flex;align-items:center;gap:10px}
 .ranking-num{width:28px;height:28px;background:var(--surface-alt);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;color:var(--text-muted);flex-shrink:0}
 
-/* ═══ DARK CARD ═══ */
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:48px 0}
+
+/* DARK CARD */
 .dark-card{background:var(--accent);color:#fff;border-radius:var(--radius);padding:32px;margin-bottom:24px}
 .dark-card .field-label{color:rgba(255,255,255,.9)}
 .dark-card .field-hint{color:rgba(255,255,255,.4)}
@@ -98,19 +76,18 @@ input.error,textarea.error{border-color:var(--red)}
 .dark-card textarea:focus{border-color:rgba(255,255,255,.3);box-shadow:0 0 0 3px rgba(255,255,255,.05)}
 .dark-card textarea::placeholder{color:rgba(255,255,255,.3)}
 
-/* ═══ FILE UPLOAD ═══ */
-.upload-zone{border:2px dashed var(--border);border-radius:var(--radius);padding:32px 24px;text-align:center;cursor:pointer;transition:all .2s;background:var(--surface);position:relative;overflow:hidden}
+/* FILE UPLOAD */
+.upload-zone{border:2px dashed var(--border);border-radius:var(--radius);padding:32px 24px;text-align:center;cursor:pointer;transition:all .2s;background:var(--surface)}
 .upload-zone:hover,.upload-zone.dragover{border-color:var(--accent);background:var(--accent-soft)}
 .upload-zone[tabindex]:focus{outline:2px solid var(--accent);outline-offset:2px}
 .upload-icon{width:40px;height:40px;margin:0 auto 12px;background:var(--surface-alt);border-radius:10px;display:flex;align-items:center;justify-content:center}
-.upload-icon svg{width:20px;height:20px;color:var(--text-secondary)}
 .upload-text{font-size:14px;font-weight:500;margin-bottom:2px}
 .upload-sub{font-size:12px;color:var(--text-muted)}
 .upload-input{display:none}
 .upload-count{font-size:11px;color:var(--text-muted);margin-top:8px}
 
 .file-list{margin-top:12px}
-.file-item{padding:12px 14px;background:var(--surface-alt);border-radius:8px;margin-bottom:8px;animation:stepIn .3s ease}
+.file-item{padding:12px 14px;background:var(--surface-alt);border-radius:8px;margin-bottom:8px;animation:fadeUp .3s ease}
 .file-top{display:flex;align-items:center;gap:10px}
 .file-info{flex:1;min-width:0}
 .file-name{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -122,40 +99,28 @@ input.error,textarea.error{border-color:var(--red)}
 .file-desc::placeholder{color:#c0bfba}
 
 .encrypt-badge{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:10px;margin-top:16px;font-size:12px;color:var(--green);line-height:1.5}
-.encrypt-badge svg{width:16px;height:16px;flex-shrink:0;margin-top:1px}
 .encrypt-badge strong{font-weight:600}
 
-/* ═══ NAVIGATION ═══ */
-.nav{display:flex;gap:12px;margin-top:32px}
-.btn{font-family:var(--sans);font-size:14px;font-weight:600;border:none;border-radius:10px;padding:14px 28px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
-.btn-primary{background:var(--accent);color:#fff;flex:1;justify-content:center}
-.btn-primary:hover{opacity:.88;transform:translateY(-1px);box-shadow:var(--shadow-md)}
-.btn-primary:active{transform:translateY(0)}
-.btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
-.btn-secondary{background:var(--surface);color:var(--text-secondary);border:1px solid var(--border)}
-.btn-secondary:hover{background:var(--surface-alt)}
-.btn-submit{background:var(--accent);color:#fff;flex:1;justify-content:center;font-size:15px;padding:16px 32px}
+/* SUBMIT */
+.submit-wrap{text-align:center;margin-top:48px}
+.btn-submit{font-family:var(--sans);font-size:15px;font-weight:600;background:var(--accent);color:#fff;border:none;border-radius:10px;padding:16px 48px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
 .btn-submit:hover{opacity:.88;transform:translateY(-1px);box-shadow:var(--shadow-md)}
-.btn-submit:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
-
-.social-proof{text-align:center;margin-top:16px;font-size:12px;color:var(--text-muted);font-style:italic}
-
+.btn-submit:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.submit-note{font-size:12px;color:var(--text-muted);margin-top:12px}
+.social-proof{font-size:12px;color:var(--text-muted);margin-top:8px;font-style:italic}
 .error-msg{display:none;padding:12px 16px;background:var(--red-bg);border:1px solid #fecaca;border-radius:10px;color:var(--red);font-size:14px;margin-top:16px;text-align:center}
-.error-msg.show{display:block;animation:stepIn .3s ease}
+.error-msg.show{display:block}
 
-/* ═══ FOOTER ═══ */
+/* FOOTER */
 .footer{text-align:center;padding:32px 0;border-top:1px solid var(--border);margin-top:56px}
 .footer-name{font-family:var(--serif);font-size:16px;color:var(--text);margin-bottom:2px}
 .footer-role{font-size:12px;color:var(--text-muted)}
 
-/* ═══ SUCCESS ═══ */
-.success-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:1000;justify-content:center;align-items:center;padding:20px}
+/* SUCCESS */
+.success-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(8px);z-index:1000;justify-content:center;align-items:center;padding:20px}
 .success-overlay.show{display:flex;animation:fadeIn .3s ease}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.success-card{background:var(--surface);padding:48px 40px;border-radius:20px;text-align:center;max-width:440px;width:100%;box-shadow:var(--shadow-lg);animation:popIn .4s cubic-bezier(.2,.8,.2,1)}
-@keyframes popIn{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.success-card{background:var(--surface);padding:48px 40px;border-radius:20px;text-align:center;max-width:440px;width:100%;box-shadow:var(--shadow-lg)}
 .success-check{width:64px;height:64px;background:var(--green-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px}
-.success-check svg{width:32px;height:32px;color:var(--green)}
 .success-title{font-family:var(--serif);font-size:24px;margin-bottom:8px}
 .success-text{font-size:14px;color:var(--text-secondary);line-height:1.7;margin-bottom:24px}
 .success-next{font-size:13px;color:var(--text-muted);margin-bottom:24px;padding:16px;background:var(--surface-alt);border-radius:10px;text-align:left;line-height:1.7}
@@ -163,26 +128,21 @@ input.error,textarea.error{border-color:var(--red)}
 .success-close{font-size:14px;font-weight:600;color:var(--accent);background:var(--surface-alt);border:1px solid var(--border);padding:12px 32px;border-radius:10px;cursor:pointer}
 .success-close:hover{background:var(--border)}
 
-@media(max-width:640px){
-  .app{padding:24px 16px 60px}
-  .row{grid-template-columns:1fr}
-  .nav{flex-direction:column-reverse}
-  .btn-secondary{justify-content:center}
-}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:640px){.app{padding:32px 16px 60px}.row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
 <div class="app">
 
-  <!-- BRAND -->
   <div class="brand">
     <div class="brand-mark">RAÚL CHÍO LEÓN <span>| IA</span></div>
     <div class="brand-sub">Consultoría en Inteligencia Artificial</div>
     <div class="brand-cred"><i data-lucide="graduation-cap" style="width:12px;height:12px"></i> Ing. Biotecnología · M.C. IA Aplicada — Tec de Monterrey</div>
   </div>
 
-  <!-- HEADER -->
   <div class="header">
     <div class="header-badge">
       <i data-lucide="shield-check" style="width:14px;height:14px"></i>
@@ -193,30 +153,11 @@ input.error,textarea.error{border-color:var(--red)}
     <p class="header-value">Mientras más específicas sus respuestas, mejor la propuesta.</p>
   </div>
 
-  <!-- PROGRESS -->
-  <div class="progress-wrap" id="progressWrap">
-    <div class="progress-steps">
-      <div class="progress-step active" data-ps="1"></div>
-      <div class="progress-step" data-ps="2"></div>
-      <div class="progress-step" data-ps="3"></div>
-      <div class="progress-step" data-ps="4"></div>
-    </div>
-    <div class="progress-text">
-      <span id="progressLabel">Paso 1 de 4</span>
-      <span id="progressPct">0%</span>
-    </div>
-  </div>
-
   <form id="discoveryForm" novalidate>
 
-    <!-- ═══ STEP 1: QUIÉN ES ═══ -->
-    <div class="step active" data-step="1">
-      <div class="step-header">
-        <div class="step-number">Paso 1 de 4</div>
-        <div class="step-title">Sobre usted</div>
-        <div class="step-desc">Para personalizar la propuesta y dar seguimiento.</div>
-      </div>
-
+    <!-- SOBRE USTED -->
+    <div class="section">
+      <div class="section-label"><i data-lucide="user"></i> Sobre usted</div>
       <div class="row">
         <div class="field">
           <label class="field-label" for="empresa">Empresa</label>
@@ -242,56 +183,43 @@ input.error,textarea.error{border-color:var(--red)}
         <div class="field-hint">Director, socio, equipo de TI… Saber esto nos ayuda a preparar la propuesta para las personas correctas.</div>
         <input type="text" id="decisor" name="decisor" placeholder="Ej: Mi socio Carlos y el contador general">
       </div>
-
-      <div class="nav">
-        <button type="button" class="btn btn-primary" onclick="nextStep()">Siguiente →</button>
-      </div>
     </div>
 
-    <!-- ═══ STEP 2: SU OPERACIÓN ═══ -->
-    <div class="step" data-step="2">
-      <div class="step-header">
-        <div class="step-number">Paso 2 de 4</div>
-        <div class="step-title">Su operación hoy</div>
-        <div class="step-desc">Entender cómo funciona su negocio para proponer algo que encaje.</div>
-      </div>
+    <div class="divider"></div>
 
-      <div class="field">
-        <label class="field-label" for="equipo">¿Cuántas personas tiene el equipo?</label>
-        <input type="text" id="equipo" name="equipo" placeholder="Ej: 4 personas — 2 contadores, 1 admin, 1 director">
-      </div>
-      <div class="field">
-        <label class="field-label" for="volumen">¿Cuántos clientes, casos o transacciones manejan al mes?</label>
-        <input type="text" id="volumen" name="volumen" placeholder="Ej: ~60 clientes mensuales, ~200 declaraciones">
+    <!-- SU OPERACIÓN -->
+    <div class="section">
+      <div class="section-label"><i data-lucide="building-2"></i> Su operación hoy</div>
+      <div class="row">
+        <div class="field">
+          <label class="field-label" for="equipo">¿Cuántas personas tiene el equipo?</label>
+          <input type="text" id="equipo" name="equipo" placeholder="Ej: 4 personas">
+        </div>
+        <div class="field">
+          <label class="field-label" for="volumen">Clientes o casos al mes</label>
+          <input type="text" id="volumen" name="volumen" placeholder="Ej: ~60 clientes mensuales">
+        </div>
       </div>
       <div class="field">
         <label class="field-label" for="software">¿Qué software y herramientas usan?</label>
-        <div class="field-hint">Incluya todo: software contable, portales gubernamentales, Excel, WhatsApp, email…</div>
-        <textarea id="software" name="software" placeholder="Ej: Contpaq Nube, portal del SAT para CFDI, Excel para conciliaciones, WhatsApp para recibir docs de clientes…"></textarea>
+        <div class="field-hint">Software contable, portales gubernamentales, Excel, WhatsApp, email…</div>
+        <textarea id="software" name="software" placeholder="Ej: Contpaq Nube, portal del SAT para CFDI, Excel, WhatsApp para recibir docs…"></textarea>
       </div>
       <div class="field">
-        <label class="field-label" for="flujo">Describa el flujo de un caso típico de inicio a fin</label>
-        <div class="field-hint">¿Cómo llega la información? ¿Qué hacen con ella? ¿Dónde se atasca? ¿Cómo se entrega el resultado?</div>
-        <textarea id="flujo" name="flujo" placeholder="Ej: El cliente manda facturas por WhatsApp → alguien las descarga y renombra → se capturan en Contpaq → se cruzan contra el SAT → se genera la declaración → se envía por email…" style="min-height:120px"></textarea>
-      </div>
-
-      <div class="nav">
-        <button type="button" class="btn btn-secondary" onclick="prevStep()">← Atrás</button>
-        <button type="button" class="btn btn-primary" onclick="nextStep()">Siguiente →</button>
+        <label class="field-label" for="flujo">Flujo de un caso típico de inicio a fin</label>
+        <div class="field-hint">¿Cómo llega la información? ¿Qué hacen con ella? ¿Dónde se atasca? ¿Cómo se entrega?</div>
+        <textarea id="flujo" name="flujo" placeholder="Ej: Cliente manda facturas por WhatsApp → se descargan y renombran → se capturan en Contpaq → se cruzan contra SAT → se genera declaración → se envía por email…" style="min-height:120px"></textarea>
       </div>
     </div>
 
-    <!-- ═══ STEP 3: DOLORES ═══ -->
-    <div class="step" data-step="3">
-      <div class="step-header">
-        <div class="step-number">Paso 3 de 4</div>
-        <div class="step-title">Lo que más duele</div>
-        <div class="step-desc">Sin sugerencias ni sesgos — usted decide qué es lo que más afecta.</div>
-      </div>
+    <div class="divider"></div>
 
+    <!-- DOLORES -->
+    <div class="section">
+      <div class="section-label"><i data-lucide="alert-triangle"></i> Lo que más duele</div>
       <div class="field">
         <label class="field-label">Si pudiera eliminar 3 problemas de su operación, ¿cuáles serían?</label>
-        <div class="field-hint">En orden de importancia. "Perdemos 2 horas buscando facturas en PDFs escaneados" es mejor que "documentos".</div>
+        <div class="field-hint">"Perdemos 2 horas buscando facturas en PDFs escaneados" es mejor que "documentos".</div>
         <div class="ranking">
           <div class="ranking-item"><div class="ranking-num">1</div><input type="text" name="dolor_1" placeholder="El que más tiempo o dinero les cuesta…"></div>
           <div class="ranking-item"><div class="ranking-num">2</div><input type="text" name="dolor_2" placeholder="El segundo…"></div>
@@ -300,47 +228,39 @@ input.error,textarea.error{border-color:var(--red)}
       </div>
       <div class="row">
         <div class="field">
-          <label class="field-label" for="horas_dolor">¿Cuántas horas/semana cuesta el dolor #1?</label>
+          <label class="field-label" for="horas_dolor">Horas/semana que cuesta el dolor #1</label>
           <input type="text" id="horas_dolor" name="horas_dolor" placeholder="Ej: ~15 horas entre el equipo">
         </div>
         <div class="field">
           <label class="field-label" for="valor_resolver">¿Cuánto vale resolverlo al año?</label>
-          <div class="field-hint">Estimado en tiempo, dinero o ambos.</div>
-          <input type="text" id="valor_resolver" name="valor_resolver" placeholder="Ej: $200K MXN en salarios + multas">
+          <input type="text" id="valor_resolver" name="valor_resolver" placeholder="Ej: $200K en salarios + multas">
         </div>
       </div>
       <div class="field">
-        <label class="field-label" for="errores">¿Con qué frecuencia rehacen trabajo por errores y qué cuesta corregirlo?</label>
-        <div class="field-hint">Datos mal capturados, archivos confundidos, declaraciones incorrectas — incluya el costo en tiempo, multas o relación con clientes.</div>
-        <textarea id="errores" name="errores" placeholder="Ej: Mínimo 1-2 veces por semana alguien captura mal un RFC. Corregir una declaración cuesta 3-4 horas + llamada incómoda con el cliente…"></textarea>
+        <label class="field-label" for="errores">¿Rehacen trabajo por errores? ¿Qué cuesta corregirlo?</label>
+        <div class="field-hint">Datos mal capturados, declaraciones incorrectas — tiempo, multas, relación con clientes.</div>
+        <textarea id="errores" name="errores" placeholder="Ej: 1-2 veces por semana alguien captura mal un RFC. Corregir cuesta 3-4 horas + llamada con el cliente…"></textarea>
       </div>
       <div class="field">
-        <label class="field-label" for="estacionalidad">¿Cuáles son los meses o periodos donde la carga es insostenible?</label>
-        <textarea id="estacionalidad" name="estacionalidad" placeholder="Ej: Marzo-abril por declaración anual. Los primeros 5 días de cada mes por cierres…" style="min-height:72px"></textarea>
+        <label class="field-label" for="estacionalidad">¿Meses o periodos donde la carga es insostenible?</label>
+        <textarea id="estacionalidad" name="estacionalidad" placeholder="Ej: Marzo-abril por declaración anual. Primeros 5 días de cada mes por cierres…" style="min-height:72px"></textarea>
       </div>
       <div class="field">
-        <label class="field-label" for="intentos">¿Han intentado resolverlo antes? ¿Qué funcionó y qué no?</label>
-        <div class="field-hint">Macros de Excel, software que probaron y abandonaron, contratar más gente…</div>
-        <textarea id="intentos" name="intentos" placeholder="Ej: Probamos un OCR pero no leía bien las facturas del SAT. Contratamos un becario pero era mucho entrenamiento…"></textarea>
-      </div>
-
-      <div class="nav">
-        <button type="button" class="btn btn-secondary" onclick="prevStep()">← Atrás</button>
-        <button type="button" class="btn btn-primary" onclick="nextStep()">Siguiente →</button>
+        <label class="field-label" for="intentos">¿Han intentado resolverlo antes?</label>
+        <div class="field-hint">Macros, software que probaron, contratar más gente… ¿qué funcionó y qué no?</div>
+        <textarea id="intentos" name="intentos" placeholder="Ej: Probamos un OCR pero no leía bien las facturas del SAT…"></textarea>
       </div>
     </div>
 
-    <!-- ═══ STEP 4: VISIÓN + ARCHIVOS ═══ -->
-    <div class="step" data-step="4">
-      <div class="step-header">
-        <div class="step-number">Paso 4 de 4</div>
-        <div class="step-title">Visión y evidencia</div>
-        <div class="step-desc">La pregunta más importante y los documentos que nos ayudan a entender su realidad.</div>
-      </div>
+    <div class="divider"></div>
+
+    <!-- VISIÓN -->
+    <div class="section">
+      <div class="section-label"><i data-lucide="sparkles"></i> Visión y evidencia</div>
 
       <div class="dark-card">
         <div class="field" style="margin-bottom:0">
-          <label class="field-label" for="vision" style="font-family:var(--serif);font-size:19px;font-weight:400">Si la IA pudiera resolver <strong>un solo problema</strong> en los próximos 30 días, ¿cuál sería?</label>
+          <label class="field-label" for="vision" style="font-family:var(--serif);font-size:19px;font-weight:400">Si la IA pudiera resolver <strong>un solo problema</strong> en 30 días, ¿cuál sería?</label>
           <div class="field-hint">Esta respuesta define la prioridad #1 de la propuesta.</div>
           <textarea id="vision" name="vision" placeholder="Escriba aquí…"></textarea>
         </div>
@@ -349,24 +269,22 @@ input.error,textarea.error{border-color:var(--red)}
       <div class="field">
         <label class="field-label" for="datos_digitales">¿Tienen historial digital de sus procesos?</label>
         <div class="field-hint">Excel, bases de datos, archivos en la nube, PDFs organizados… Esto determina qué tan rápido podemos implementar.</div>
-        <textarea id="datos_digitales" name="datos_digitales" placeholder="Ej: Tenemos todo en Contpaq desde 2020. También hay Excels de conciliaciones y una carpeta compartida con PDFs de clientes…" style="min-height:72px"></textarea>
+        <textarea id="datos_digitales" name="datos_digitales" placeholder="Ej: Todo en Contpaq desde 2020, Excels de conciliaciones, carpeta compartida con PDFs…" style="min-height:72px"></textarea>
       </div>
 
       <div class="field">
         <label class="field-label" for="exito">¿Qué considerarían un éxito en 6 meses?</label>
-        <div class="field-hint">Esto nos alinea en expectativas antes de empezar.</div>
-        <textarea id="exito" name="exito" placeholder="Ej: Que el equipo recupere mínimo 10 horas a la semana y que los errores en declaraciones bajen a cero…" style="min-height:72px"></textarea>
+        <div class="field-hint">Nos alinea en expectativas antes de empezar.</div>
+        <textarea id="exito" name="exito" placeholder="Ej: Que el equipo recupere 10 horas/semana y los errores en declaraciones bajen a cero…" style="min-height:72px"></textarea>
       </div>
 
-      <!-- FILE UPLOAD -->
+      <!-- FILES -->
       <div class="field">
         <label class="field-label">Suba documentos que representen sus dolores</label>
-        <div class="field-hint">Si tienen un formato que llenan a mano o en Excel, eso es exactamente lo que necesitamos ver. También sirven capturas de pantalla de sus procesos.</div>
+        <div class="field-hint">Si tienen un formato que llenan a mano o en Excel, eso es exactamente lo que necesitamos ver.</div>
 
         <div class="upload-zone" id="uploadZone" tabindex="0" role="button" aria-label="Subir archivos">
-          <div class="upload-icon">
-            <i data-lucide="upload-cloud" style="width:24px;height:24px"></i>
-          </div>
+          <div class="upload-icon"><i data-lucide="upload-cloud" style="width:24px;height:24px"></i></div>
           <div class="upload-text">Arrastre archivos o haga clic para seleccionar</div>
           <div class="upload-sub">Cualquier formato — máx. 10 MB por archivo, hasta 10 archivos</div>
           <input type="file" class="upload-input" id="fileInput" multiple aria-hidden="true">
@@ -376,14 +294,15 @@ input.error,textarea.error{border-color:var(--red)}
 
         <div class="encrypt-badge">
           <i data-lucide="lock" style="width:16px;height:16px;flex-shrink:0;margin-top:1px"></i>
-          <div><strong>Cifrado y confidencial.</strong> Conexión HTTPS cifrada. Sus archivos son revisados exclusivamente por Raúl Chío León. No se almacenan en servidores de terceros ni se comparten con nadie.</div>
+          <div><strong>Cifrado y confidencial.</strong> Conexión HTTPS cifrada. Revisados exclusivamente por Raúl Chío León. No se almacenan en servidores de terceros.</div>
         </div>
       </div>
+    </div>
 
-      <div class="nav">
-        <button type="button" class="btn btn-secondary" onclick="prevStep()">← Atrás</button>
-        <button type="submit" class="btn btn-submit" id="submitBtn">Enviar Discovery Brief</button>
-      </div>
+    <!-- SUBMIT -->
+    <div class="submit-wrap">
+      <button type="submit" class="btn-submit" id="submitBtn">Enviar Discovery Brief</button>
+      <div class="submit-note">Sus respuestas son confidenciales. Raúl se pondrá en contacto en menos de 24 horas.</div>
       <p class="social-proof">Empresas han reducido hasta 60% su carga operativa tras el diagnóstico.</p>
       <div class="error-msg" id="errorMsg" role="alert"></div>
     </div>
@@ -396,32 +315,37 @@ input.error,textarea.error{border-color:var(--red)}
   </div>
 </div>
 
+<!-- SAVE INDICATOR -->
+<div class="save-indicator" id="saveIndicator">
+  <i data-lucide="check-circle" style="width:12px;height:12px"></i> Progreso guardado
+</div>
+
 <!-- SUCCESS -->
 <div class="success-overlay" id="successOverlay">
   <div class="success-card">
-    <div class="success-check">
-      <i data-lucide="check" style="width:32px;height:32px"></i>
-    </div>
+    <div class="success-check"><i data-lucide="check" style="width:32px;height:32px"></i></div>
     <div class="success-title">Brief recibido</div>
     <div class="success-text">Gracias por su tiempo. Ya tengo lo que necesito para preparar algo concreto.</div>
     <div class="success-next">
       <strong>Siguiente paso:</strong><br>
       En las próximas 24 horas agendo una llamada de 30 minutos para revisar sus respuestas juntos y presentar las opciones de solución.
     </div>
-    <button class="success-close" onclick="location.reload()">Cerrar</button>
+    <button class="success-close" onclick="clearSaved();location.reload()">Cerrar</button>
   </div>
 </div>
 
 <script>
-const WORKER_URL = 'https://discovery-webhook.raul-chio-leon.workers.dev';
-const TOTAL_STEPS = 4;
-const MAX_FILES = 10;
-const MAX_FILE_SIZE = 10 * 1024 * 1024;
-const MAX_TOTAL_SIZE = 50 * 1024 * 1024;
-let currentStep = 1;
-let uploadedFiles = [];
+const WORKER_URL='https://discovery-webhook.raul-chio-leon.workers.dev';
+const STORAGE_KEY='discovery_brief_draft';
+const MAX_FILES=10;
+const MAX_FILE_SIZE=10*1024*1024;
+const MAX_TOTAL_SIZE=50*1024*1024;
+let uploadedFiles=[];
+let saveTimeout=null;
 
-const PREGUNTAS = [
+const ALL_FIELDS=['empresa','contacto','contactInfo','giro','decisor','equipo','volumen','software','flujo','dolor_1','dolor_2','dolor_3','horas_dolor','valor_resolver','errores','estacionalidad','intentos','vision','datos_digitales','exito'];
+
+const PREGUNTAS=[
   {name:'decisor',tag:'Decisor'},
   {name:'equipo',tag:'Equipo'},
   {name:'volumen',tag:'Volumen'},
@@ -440,51 +364,51 @@ const PREGUNTAS = [
   {name:'exito',tag:'Criterio de Éxito (6 meses)'},
 ];
 
-// Sanitize text for innerHTML
-function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
-
-// Progress
-function updateProgress(){
-  const pct=Math.round(((currentStep-1)/(TOTAL_STEPS-1))*100);
-  document.querySelectorAll('.progress-step').forEach((el,i)=>{
-    el.classList.toggle('done',i+1<currentStep);
-    el.classList.toggle('active',i+1===currentStep);
+// ═══ AUTO-SAVE ═══
+function saveToLocal(){
+  const data={};
+  ALL_FIELDS.forEach(name=>{
+    const el=document.querySelector(`[name="${name}"]`)||document.getElementById(name);
+    if(el)data[name]=el.value;
   });
-  document.getElementById('progressLabel').textContent=`Paso ${currentStep} de ${TOTAL_STEPS}`;
-  document.getElementById('progressPct').textContent=pct+'%';
+  data._ts=Date.now();
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(data))}catch(e){}
+  // Show indicator
+  const ind=document.getElementById('saveIndicator');
+  ind.classList.add('show');
+  clearTimeout(saveTimeout);
+  saveTimeout=setTimeout(()=>ind.classList.remove('show'),2000);
 }
 
-function showStep(n){
-  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
-  document.querySelector(`[data-step="${n}"]`).classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-  updateProgress();
-}
-
-function nextStep(){
-  if(currentStep===1){
-    let valid=true;
-    ['empresa','contacto','contactInfo'].forEach(id=>{
-      const el=document.getElementById(id);
-      if(!el.value.trim()){
-        el.classList.add('error');
-        el.setAttribute('aria-invalid','true');
-        el.addEventListener('input',()=>{el.classList.remove('error');el.removeAttribute('aria-invalid')},{once:true});
-        valid=false;
-      }
+function loadFromLocal(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(!raw)return;
+    const data=JSON.parse(raw);
+    // Check if data is less than 30 days old
+    if(data._ts&&Date.now()-data._ts>30*24*60*60*1000){localStorage.removeItem(STORAGE_KEY);return}
+    ALL_FIELDS.forEach(name=>{
+      const el=document.querySelector(`[name="${name}"]`)||document.getElementById(name);
+      if(el&&data[name])el.value=data[name];
     });
-    if(!valid)return;
-  }
-  if(currentStep<TOTAL_STEPS){currentStep++;showStep(currentStep)}
+  }catch(e){}
 }
-function prevStep(){if(currentStep>1){currentStep--;showStep(currentStep)}}
 
-// Sticky progress shadow
-window.addEventListener('scroll',()=>{
-  document.getElementById('progressWrap').classList.toggle('scrolled',window.scrollY>10);
+function clearSaved(){try{localStorage.removeItem(STORAGE_KEY)}catch(e){}}
+
+// Debounced save on any input
+let debounce=null;
+document.addEventListener('input',(e)=>{
+  if(e.target.matches('input,textarea')){
+    clearTimeout(debounce);
+    debounce=setTimeout(saveToLocal,800);
+  }
 });
 
-// File upload
+// ═══ SANITIZE ═══
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+
+// ═══ FILE UPLOAD ═══
 const uploadZone=document.getElementById('uploadZone');
 const fileInput=document.getElementById('fileInput');
 const fileList=document.getElementById('fileList');
@@ -497,26 +421,23 @@ uploadZone.addEventListener('drop',(e)=>{e.preventDefault();uploadZone.classList
 fileInput.addEventListener('change',(e)=>handleFiles(e.target.files));
 
 function getTotalSize(){return uploadedFiles.reduce((s,f)=>s+f.size,0)}
-
 function handleFiles(files){
   for(const file of files){
     if(uploadedFiles.length>=MAX_FILES){alert(`Máximo ${MAX_FILES} archivos.`);break}
     if(file.size>MAX_FILE_SIZE){alert(`"${file.name}" excede 10 MB.`);continue}
-    if(getTotalSize()+file.size>MAX_TOTAL_SIZE){alert('El total de archivos excede 50 MB.');break}
-    if(uploadedFiles.some(f=>f.name===file.name&&f.size===file.size)){continue}// dedup
-    file._desc='';
-    uploadedFiles.push(file);
+    if(getTotalSize()+file.size>MAX_TOTAL_SIZE){alert('Total de archivos excede 50 MB.');break}
+    if(uploadedFiles.some(f=>f.name===file.name&&f.size===file.size))continue;
+    file._desc='';uploadedFiles.push(file);
   }
   renderFiles();fileInput.value='';
 }
 function removeFile(idx){uploadedFiles.splice(idx,1);renderFiles()}
-
 function renderFiles(){
   const countEl=document.getElementById('uploadCount');
   if(uploadedFiles.length>0){
-    const totalMB=(getTotalSize()/1024/1024).toFixed(1);
-    countEl.textContent=`${uploadedFiles.length} archivo${uploadedFiles.length>1?'s':''} · ${totalMB} MB total`;
-  }else{countEl.textContent=''}
+    const mb=(getTotalSize()/1024/1024).toFixed(1);
+    countEl.textContent=`${uploadedFiles.length} archivo${uploadedFiles.length>1?'s':''} · ${mb} MB`;
+  }else countEl.textContent='';
 
   fileList.innerHTML=uploadedFiles.map((f,i)=>`
     <div class="file-item">
@@ -541,18 +462,22 @@ function renderFiles(){
 
 function fileToBase64(file){
   return new Promise((resolve,reject)=>{
-    const reader=new FileReader();
-    reader.onload=()=>resolve(reader.result.split(',')[1]);
-    reader.onerror=reject;
-    reader.readAsDataURL(file);
+    const r=new FileReader();r.onload=()=>resolve(r.result.split(',')[1]);r.onerror=reject;r.readAsDataURL(file);
   });
 }
 
-// Submit
+// ═══ SUBMIT ═══
 document.getElementById('discoveryForm').addEventListener('submit',async(e)=>{
   e.preventDefault();
   const btn=document.getElementById('submitBtn');
   const errEl=document.getElementById('errorMsg');
+
+  let valid=true;
+  ['empresa','contacto','contactInfo'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el.value.trim()){el.classList.add('error');el.addEventListener('input',()=>el.classList.remove('error'),{once:true});valid=false}
+  });
+  if(!valid){document.getElementById('empresa').scrollIntoView({behavior:'smooth',block:'center'});return}
 
   btn.disabled=true;btn.textContent='Enviando…';errEl.classList.remove('show');
 
@@ -563,43 +488,28 @@ document.getElementById('discoveryForm').addEventListener('submit',async(e)=>{
     contacto:document.getElementById('contacto').value,
     contactInfo:document.getElementById('contactInfo').value,
     preguntas:PREGUNTAS.map(p=>({
-      tag:p.tag,
-      pregunta:p.tag,
-      respuesta:form.querySelector(`[name="${p.name}"]`)?.value||form.querySelector(`#${p.name}`)?.value||'(sin respuesta)',
+      tag:p.tag,pregunta:p.tag,
+      respuesta:(form.querySelector(`[name="${p.name}"]`)||document.getElementById(p.name))?.value||'(sin respuesta)',
     })),
     archivos:[],
   };
 
-  // Convert files
-  let fileErrors=0;
   for(const file of uploadedFiles){
-    try{
-      const b64=await fileToBase64(file);
-      payload.archivos.push({name:file.name,type:file.type,size:file.size,data:b64,desc:file._desc||''});
-    }catch(err){fileErrors++;console.error(err)}
-  }
-  if(fileErrors>0&&uploadedFiles.length>0){
-    errEl.textContent=`${fileErrors} archivo(s) no se pudieron procesar. El resto se enviará.`;
-    errEl.classList.add('show');
+    try{const b64=await fileToBase64(file);payload.archivos.push({name:file.name,type:file.type,size:file.size,data:b64,desc:file._desc||''})}catch(e){console.error(e)}
   }
 
   try{
     const res=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
     if(res.ok){
       document.getElementById('successOverlay').classList.add('show');
-      form.reset();uploadedFiles=[];renderFiles();currentStep=1;showStep(1);
-    }else{
-      errEl.textContent='Error al enviar. Intente de nuevo o contacte directamente a Raúl.';
-      errEl.classList.add('show');
-    }
-  }catch(err){
-    errEl.textContent='Error de conexión. Verifique su internet.';
-    errEl.classList.add('show');
-  }
+      clearSaved();form.reset();uploadedFiles=[];renderFiles();
+    }else{errEl.textContent='Error al enviar. Intente de nuevo o contacte directamente a Raúl.';errEl.classList.add('show')}
+  }catch(err){errEl.textContent='Error de conexión. Verifique su internet.';errEl.classList.add('show')}
   btn.disabled=false;btn.textContent='Enviar Discovery Brief';
 });
 
-updateProgress();
+// ═══ INIT ═══
+loadFromLocal();
 lucide.createIcons();
 </script>
 </body>
