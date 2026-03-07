@@ -15,7 +15,10 @@ function formatTelegram(data) {
   const { despacho, contacto, contactInfo, preguntas } = data;
 
   let msg = `📋 *Nuevo Discovery Brief*\n\n`;
+  msg += `⚡ *Contexto para Eigen:* Estas respuestas son de un prospecto de consultoría de IA\\. Hay que diseñarles una propuesta de proyecto\\. Analiza sus dolores, identifica qué solución tiene más sentido \\(puede ser un editor de PDFs con IA, un agente con skills especializados, automatización de flujos, o algo completamente distinto\\)\\. Lo importante es entender QUÉ hacen exactamente y proponer algo concreto\\.\n\n`;
+  msg += `─────────────────────\n\n`;
   msg += `🏢 *Despacho:* ${esc(despacho)}\n`;
+  if (data.giro) msg += `🏷 *Giro:* ${esc(data.giro)}\n`;
   msg += `👤 *Contacto:* ${esc(contacto)}\n`;
   msg += `📞 *Email/Tel:* ${esc(contactInfo)}\n`;
   msg += `\n─────────────────────\n\n`;
