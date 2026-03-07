@@ -6,6 +6,11 @@ const CORS_HEADERS = {
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
+function esc(s) {
+  if (!s) return '';
+  return String(s).replace(/[_*[\]()~`>#+\-=|{}.!\\]/g, '\\$&');
+}
+
 function formatTelegram(data) {
   const { despacho, contacto, contactInfo, preguntas } = data;
 
@@ -25,12 +30,47 @@ function formatTelegram(data) {
     }
   }
 
+  const numArchivos = data.archivos?.length || 0;
+  if (numArchivos > 0) {
+    msg += `\n📎 *${numArchivos} archivo${numArchivos > 1 ? 's' : ''} adjunto${numArchivos > 1 ? 's' : ''}* \\(enviados abajo\\)\n`;
+  }
+
   return msg.trim();
 }
 
-function esc(s) {
-  if (!s) return '';
-  return String(s).replace(/[_*[\]()~`>#+\-=|{}.!\\]/g, '\\$&');
+async function sendTelegramMessage(token, text) {
+  const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: TELEGRAM_CHAT_ID,
+      text,
+      parse_mode: 'MarkdownV2',
+    }),
+  });
+  return res.json();
+}
+
+async function sendTelegramDocument(token, fileBuffer, filename, caption) {
+  const form = new FormData();
+  form.append('chat_id', TELEGRAM_CHAT_ID);
+  form.append('document', new Blob([fileBuffer]), filename);
+  if (caption) form.append('caption', caption);
+
+  const res = await fetch(`https://api.telegram.org/bot${token}/sendDocument`, {
+    method: 'POST',
+    body: form,
+  });
+  return res.json();
+}
+
+function base64ToArrayBuffer(b64) {
+  const binary = atob(b64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return bytes.buffer;
 }
 
 export default {
@@ -50,24 +90,27 @@ export default {
       const data = await request.json();
       const text = formatTelegram(data);
 
-      const telegramUrl = `https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`;
-      const res = await fetch(telegramUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
-          text,
-          parse_mode: 'MarkdownV2',
-        }),
-      });
-
-      const result = await res.json();
+      // Send main message
+      const result = await sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, text);
       if (!result.ok) {
         console.error('Telegram error:', JSON.stringify(result));
-        return new Response(JSON.stringify({ error: 'Failed to send to Telegram', detail: result }), {
+        return new Response(JSON.stringify({ error: 'Failed to send', detail: result }), {
           status: 502,
           headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' },
         });
+      }
+
+      // Send file attachments
+      if (Array.isArray(data.archivos) && data.archivos.length > 0) {
+        for (const archivo of data.archivos) {
+          try {
+            const buffer = base64ToArrayBuffer(archivo.data);
+            const caption = `📎 ${archivo.name} (${(archivo.size / 1024).toFixed(0)} KB) — de ${data.despacho || 'Discovery'}`;
+            await sendTelegramDocument(env.TELEGRAM_BOT_TOKEN, buffer, archivo.name, caption);
+          } catch (e) {
+            console.error('File send error:', archivo.name, e.message);
+          }
+        }
       }
 
       return new Response(JSON.stringify({ success: true }), {
