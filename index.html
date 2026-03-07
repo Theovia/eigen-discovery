@@ -43,7 +43,6 @@ body {
   min-height: 100vh;
 }
 
-/* ═══ LAYOUT ═══ */
 .app {
   max-width: 680px;
   margin: 0 auto;
@@ -86,7 +85,7 @@ body {
 .header-sub {
   font-size: 15px;
   color: var(--text-secondary);
-  max-width: 480px;
+  max-width: 500px;
   margin: 0 auto;
   line-height: 1.7;
 }
@@ -150,7 +149,6 @@ body {
   border-color: var(--border-focus);
   box-shadow: var(--shadow-md);
 }
-
 .card-label {
   font-size: 11px;
   font-weight: 600;
@@ -173,7 +171,7 @@ body {
 }
 
 /* ═══ INPUTS ═══ */
-input[type="text"], input[type="email"], input[type="tel"], textarea {
+input[type="text"], input[type="email"], input[type="tel"], textarea, select {
   width: 100%;
   font-family: var(--sans);
   font-size: 15px;
@@ -186,7 +184,7 @@ input[type="text"], input[type="email"], input[type="tel"], textarea {
   transition: all 0.25s ease;
   line-height: 1.6;
 }
-input:focus, textarea:focus {
+input:focus, textarea:focus, select:focus {
   background: var(--surface);
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.06);
@@ -198,6 +196,14 @@ input::placeholder, textarea::placeholder {
 textarea {
   min-height: 100px;
   resize: vertical;
+}
+select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239a9a9a' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
 }
 
 .input-grid {
@@ -236,6 +242,69 @@ textarea {
   color: var(--text-secondary);
   margin-top: 6px;
   line-height: 1.6;
+}
+
+/* ═══ RANKING ═══ */
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+}
+.ranking-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.ranking-num {
+  width: 32px;
+  height: 40px;
+  background: var(--surface-alt);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.ranking-item input {
+  flex: 1;
+}
+
+/* ═══ PROCESS STEPS ═══ */
+.process-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.process-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.process-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--border);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 14px;
+  position: relative;
+}
+.process-step:not(:last-child) .process-dot::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 4px;
+  width: 2px;
+  height: calc(100% + 16px);
+  background: var(--border);
+}
+.process-step input {
+  flex: 1;
 }
 
 /* ═══ FILE UPLOAD ═══ */
@@ -495,17 +564,15 @@ textarea {
 
 <div class="app">
 
-  <!-- HEADER -->
   <div class="header">
     <div class="header-badge">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       Conexión segura · Cifrado de extremo a extremo
     </div>
     <h1>Discovery <em>Brief</em></h1>
-    <p class="header-sub">Diagnóstico previo al diseño de soluciones de IA para su operación. Toda la información es confidencial.</p>
+    <p class="header-sub">Diagnóstico previo al diseño de soluciones de IA. Toda la información es confidencial y será revisada exclusivamente por Raúl Zhou.</p>
   </div>
 
-  <!-- PROGRESS -->
   <div class="progress-wrap">
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
     <div class="progress-text">
@@ -516,29 +583,47 @@ textarea {
 
   <form id="discoveryForm" novalidate>
 
-    <!-- STEP 1: Contact -->
+    <!-- ═══ STEP 1: Contacto + Contexto ═══ -->
     <div class="step active" data-step="1">
       <div class="step-header">
         <div class="step-number">Paso 1 de 5</div>
-        <div class="step-title">¿Con quién hablamos?</div>
-        <div class="step-desc">Para personalizar la propuesta y darle seguimiento.</div>
+        <div class="step-title">Sobre su empresa</div>
+        <div class="step-desc">Para dimensionar la solución y personalizar la propuesta.</div>
       </div>
 
       <div class="card">
         <div class="input-grid">
           <div>
-            <label class="input-label">Nombre del despacho / empresa</label>
-            <input type="text" id="despacho" placeholder="Ej: Despacho García" required>
+            <label class="input-label">Nombre de la empresa</label>
+            <input type="text" id="empresa" placeholder="Ej: Despacho García & Asociados" required>
           </div>
           <div>
             <label class="input-label">Nombre de contacto</label>
             <input type="text" id="contacto" placeholder="Ej: María García" required>
           </div>
-          <div class="full">
+          <div>
             <label class="input-label">Email o teléfono</label>
             <input type="text" id="contactInfo" placeholder="correo@ejemplo.com o +52 33 1234 5678" required>
           </div>
+          <div>
+            <label class="input-label">Giro o industria</label>
+            <input type="text" id="giro" placeholder="Ej: Contabilidad, e-commerce, manufactura…">
+          </div>
         </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Contexto operativo</div>
+        <div class="card-question">¿Cuántas personas tiene su equipo y cuántos clientes o casos manejan al mes?</div>
+        <div class="card-hint">Esto nos ayuda a entender la escala. No necesitamos nombres ni datos sensibles.</div>
+        <textarea name="contexto_operativo" placeholder="Ej: Somos 4 personas, manejamos ~60 clientes mensuales. Usamos Contpaq, Excel y portal del SAT…"></textarea>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Stack tecnológico</div>
+        <div class="card-question">¿Qué software y herramientas usan en el día a día?</div>
+        <div class="card-hint">Incluya versiones si las conoce. Nos interesa saber qué es cloud vs. local, qué portales usan (SAT, IMSS, etc.), y si tienen APIs o integraciones existentes.</div>
+        <textarea name="stack" placeholder="Ej: Contpaq Nube, Excel 365, portal del SAT (CFDI), WhatsApp para comunicación con clientes…"></textarea>
       </div>
 
       <div class="nav">
@@ -546,32 +631,46 @@ textarea {
       </div>
     </div>
 
-    <!-- STEP 2: Documents -->
+    <!-- ═══ STEP 2: Top 3 dolores ═══ -->
     <div class="step" data-step="2">
       <div class="step-header">
         <div class="step-number">Paso 2 de 5</div>
-        <div class="step-title">El reto documental</div>
-        <div class="step-desc">Entender los documentos que más fricción generan en su día a día.</div>
+        <div class="step-title">Los 3 mayores dolores</div>
+        <div class="step-desc">Sin sugerencias ni sesgos — usted decide qué es lo que más duele.</div>
       </div>
 
       <div class="card">
-        <div class="card-label">Estructura</div>
-        <div class="card-question">¿Cómo están construidos los PDFs que más tiempo les quitan?</div>
-        <div class="card-hint">Imágenes escaneadas, tablas irregulares, documentos extensos donde solo necesitan un par de datos…</div>
-        <textarea name="estructura" placeholder="Describa la estructura de los documentos…"></textarea>
+        <div class="card-label">Ranking de dolores</div>
+        <div class="card-question">Si pudiera eliminar 3 problemas de su operación mañana, ¿cuáles serían?</div>
+        <div class="card-hint">En orden de importancia. Sea tan específico como pueda — "perder 2 horas buscando facturas en PDF" es mejor que "documentos".</div>
+        <div class="ranking-list">
+          <div class="ranking-item">
+            <div class="ranking-num">1</div>
+            <input type="text" name="dolor_1" placeholder="El problema #1 que más tiempo/dinero les cuesta…">
+          </div>
+          <div class="ranking-item">
+            <div class="ranking-num">2</div>
+            <input type="text" name="dolor_2" placeholder="El segundo mayor dolor…">
+          </div>
+          <div class="ranking-item">
+            <div class="ranking-num">3</div>
+            <input type="text" name="dolor_3" placeholder="El tercero…">
+          </div>
+        </div>
       </div>
 
       <div class="card">
-        <div class="card-label">Acción manual</div>
-        <div class="card-question">¿Cuál es el trabajo mecánico exacto que se hace con esos documentos?</div>
-        <div class="card-hint">Transcribir cifras a Excel, buscar folios entre páginas, renombrar archivos, cruzar datos contra Contpaq…</div>
-        <textarea name="accion_manual" placeholder="Describa las acciones manuales…"></textarea>
+        <div class="card-label">Impacto</div>
+        <div class="card-question">Para el dolor #1, ¿cuántas horas a la semana le cuesta a su equipo?</div>
+        <div class="card-hint">Un estimado está bien. Nos ayuda a calcular el retorno de inversión.</div>
+        <textarea name="impacto_dolor1" placeholder="Ej: Estimamos 10-15 horas semanales entre todo el equipo, especialmente en cierres mensuales…" style="min-height:80px"></textarea>
       </div>
 
       <div class="card">
-        <div class="card-label">Volumen</div>
-        <div class="card-question">¿Cuántos documentos procesan al mes y cuántas horas-equipo consume?</div>
-        <textarea name="volumen" placeholder="Ej: ~200 documentos/mes, ~40 horas entre todo el equipo…"></textarea>
+        <div class="card-label">Intentos previos</div>
+        <div class="card-question">¿Han intentado resolver estos problemas antes? ¿Qué funcionó y qué no?</div>
+        <div class="card-hint">Macros de Excel, software que probaron y no adoptaron, intentos de automatización, contratar más gente…</div>
+        <textarea name="intentos_previos" placeholder="Ej: Probamos un software de OCR pero no leía bien las facturas del SAT. También contratamos un becario pero era mucho entrenamiento…"></textarea>
       </div>
 
       <div class="nav">
@@ -580,24 +679,47 @@ textarea {
       </div>
     </div>
 
-    <!-- STEP 3: Team -->
+    <!-- ═══ STEP 3: Flujo de proceso ═══ -->
     <div class="step" data-step="3">
       <div class="step-header">
         <div class="step-number">Paso 3 de 5</div>
-        <div class="step-title">Operación del equipo</div>
-        <div class="step-desc">Identificar dónde se fuga el tiempo fuera del software principal.</div>
+        <div class="step-title">Un caso típico, paso a paso</div>
+        <div class="step-desc">Queremos ver el flujo real — desde que entra la información hasta que se entrega el resultado.</div>
       </div>
 
       <div class="card">
-        <div class="card-label">Tiempo perdido</div>
-        <div class="card-question">De las 8 horas laborales, ¿en qué tarea repetitiva invierten más tiempo del necesario?</div>
-        <textarea name="tiempo_perdido" placeholder="Describa las tareas que más tiempo consumen…"></textarea>
+        <div class="card-label">Flujo de trabajo</div>
+        <div class="card-question">Describa los pasos de un caso o cliente típico, de inicio a fin</div>
+        <div class="card-hint">Piense en el último caso que procesaron. ¿Cómo llegó la información? ¿Qué hicieron con ella? ¿Dónde se atascó? ¿Cómo se entregó el resultado?</div>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="process-dot"></div>
+            <input type="text" name="paso_1" placeholder="Paso 1: Recibimos la info del cliente por…">
+          </div>
+          <div class="process-step">
+            <div class="process-dot"></div>
+            <input type="text" name="paso_2" placeholder="Paso 2: La persona encargada hace…">
+          </div>
+          <div class="process-step">
+            <div class="process-dot"></div>
+            <input type="text" name="paso_3" placeholder="Paso 3: Se cruza/valida contra…">
+          </div>
+          <div class="process-step">
+            <div class="process-dot"></div>
+            <input type="text" name="paso_4" placeholder="Paso 4: Se genera el entregable…">
+          </div>
+          <div class="process-step">
+            <div class="process-dot"></div>
+            <input type="text" name="paso_5" placeholder="Paso 5: Se entrega al cliente vía…">
+          </div>
+        </div>
       </div>
 
       <div class="card">
-        <div class="card-label">Herramientas</div>
-        <div class="card-question">¿Usan algún otro software — además de Contpaq y el SAT — que implique copiar/pegar información?</div>
-        <textarea name="herramientas" placeholder="Liste herramientas y el tipo de trabajo manual…"></textarea>
+        <div class="card-label">Cuellos de botella</div>
+        <div class="card-question">¿En qué paso se atasca todo o se acumula trabajo?</div>
+        <div class="card-hint">¿Hay un paso que depende de una sola persona? ¿Algo que requiere esperar respuesta de alguien más?</div>
+        <textarea name="cuellos_botella" placeholder="Ej: El paso 2 depende 100% de Ana porque es la única que sabe usar el portal. Si se enferma, se para todo…"></textarea>
       </div>
 
       <div class="nav">
@@ -606,37 +728,33 @@ textarea {
       </div>
     </div>
 
-    <!-- STEP 4: Flow -->
+    <!-- ═══ STEP 4: Errores, retrabajo, estacionalidad ═══ -->
     <div class="step" data-step="4">
       <div class="step-header">
         <div class="step-number">Paso 4 de 5</div>
-        <div class="step-title">Flujo de información</div>
-        <div class="step-desc">Cómo entra la información al despacho y dónde se atasca.</div>
+        <div class="step-title">Errores, retrabajo y picos</div>
+        <div class="step-desc">Lo que nadie quiere medir pero donde está el mayor ahorro.</div>
       </div>
 
       <div class="card">
-        <div class="card-label">Carga de trabajo</div>
-        <div class="card-question">¿Cuántos clientes activos procesan al mes y cómo se distribuye entre el equipo?</div>
-        <textarea name="carga_trabajo" placeholder="Ej: 60 clientes, 15 por persona…"></textarea>
+        <div class="card-label">Tasa de error</div>
+        <div class="card-question">¿Con qué frecuencia tienen que rehacer trabajo por errores humanos?</div>
+        <div class="card-hint">Datos mal capturados, archivos confundidos, cálculos incorrectos, envíos duplicados, declaraciones con errores que hay que corregir…</div>
+        <textarea name="tasa_error" placeholder="Ej: Mínimo 1-2 veces por semana alguien captura mal un RFC o un monto y hay que rehacer la declaración…"></textarea>
       </div>
 
       <div class="card">
-        <div class="card-label">Canales de entrada</div>
-        <div class="card-question">¿Cómo reciben la información y documentos de sus clientes?</div>
-        <div class="card-hint">WhatsApp, correo electrónico, portal, entrega física, etc.</div>
-        <textarea name="canales_entrada" placeholder="Describa los canales de entrada…"></textarea>
+        <div class="card-label">Costo del error</div>
+        <div class="card-question">¿Qué pasa cuando ocurre un error? ¿Cuánto cuesta corregirlo?</div>
+        <div class="card-hint">No solo en dinero — también tiempo, relación con el cliente, multas, estrés del equipo.</div>
+        <textarea name="costo_error" placeholder="Ej: Una declaración incorrecta significa 3-4 horas de retrabajo + complementaria + llamada incómoda con el cliente…"></textarea>
       </div>
 
       <div class="card">
-        <div class="card-label">Seguimiento</div>
-        <div class="card-question">¿Cuánto tiempo al mes invierten en gestionar que los clientes envíen su información completa?</div>
-        <textarea name="persecucion" placeholder="Ej: mínimo 2 horas por semana haciendo seguimiento por WhatsApp…"></textarea>
-      </div>
-
-      <div class="card">
-        <div class="card-label">Entregables</div>
-        <div class="card-question">¿Tienen formato estandarizado para reportes mensuales o se genera manualmente caso por caso?</div>
-        <textarea name="entregables" placeholder="Describa cómo generan sus entregables…"></textarea>
+        <div class="card-label">Estacionalidad</div>
+        <div class="card-question">¿Cuáles son los meses o periodos del año donde la carga se vuelve insostenible?</div>
+        <div class="card-hint">Cierres mensuales, declaraciones anuales, periodos de auditoría, inicio de año fiscal…</div>
+        <textarea name="estacionalidad" placeholder="Ej: Marzo-abril es infernal por la declaración anual. También los primeros 5 días de cada mes por el cierre…"></textarea>
       </div>
 
       <div class="nav">
@@ -645,35 +763,66 @@ textarea {
       </div>
     </div>
 
-    <!-- STEP 5: Vision + Files -->
+    <!-- ═══ STEP 5: Presupuesto + Visión + Archivos ═══ -->
     <div class="step" data-step="5">
       <div class="step-header">
         <div class="step-number">Paso 5 de 5</div>
-        <div class="step-title">Visión y documentos</div>
-        <div class="step-desc">La pregunta más importante y documentos de apoyo opcionales.</div>
+        <div class="step-title">Visión y siguiente paso</div>
+        <div class="step-desc">Para alinear expectativas y dimensionar la solución correcta.</div>
       </div>
 
       <div class="card" style="background: var(--accent); color: #fff; border-color: var(--accent);">
-        <div class="card-label" style="color: rgba(255,255,255,0.5);">Pregunta final</div>
+        <div class="card-label" style="color: rgba(255,255,255,0.5);">Pregunta clave</div>
         <div class="card-question" style="font-family: var(--serif); font-size: 20px; font-weight: 400; line-height: 1.5;">
           Si esta integración de IA pudiera resolver <strong>un solo problema</strong> en los próximos 30 días, ¿cuál sería?
         </div>
-        <div class="card-hint" style="color: rgba(255,255,255,0.45);">Esta respuesta nos permite priorizar y entregar valor desde el primer mes.</div>
+        <div class="card-hint" style="color: rgba(255,255,255,0.45);">Esta respuesta define la prioridad #1 de la propuesta.</div>
         <textarea name="vision" placeholder="Escriba aquí…" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.15); color: #fff;"></textarea>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Inversión y timeline</div>
+        <div class="card-question">¿Tienen un rango de inversión en mente y una fecha ideal para empezar?</div>
+        <div class="card-hint">No hay respuesta incorrecta — esto nos permite proponer algo que haga sentido para su realidad. Si no tienen un número, está bien.</div>
+        <div class="input-grid">
+          <div>
+            <label class="input-label">Rango de inversión</label>
+            <select name="presupuesto">
+              <option value="">Seleccione una opción…</option>
+              <option value="explorar">Solo estoy explorando opciones</option>
+              <option value="5-15k">$5,000 - $15,000 MXN/mes</option>
+              <option value="15-30k">$15,000 - $30,000 MXN/mes</option>
+              <option value="30-60k">$30,000 - $60,000 MXN/mes</option>
+              <option value="60k+">$60,000+ MXN/mes</option>
+              <option value="proyecto">Prefiero un costo único por proyecto</option>
+              <option value="no-se">Aún no tengo un número en mente</option>
+            </select>
+          </div>
+          <div>
+            <label class="input-label">¿Cuándo les gustaría arrancar?</label>
+            <select name="timeline">
+              <option value="">Seleccione una opción…</option>
+              <option value="ya">Lo antes posible</option>
+              <option value="1mes">En el próximo mes</option>
+              <option value="3meses">En los próximos 3 meses</option>
+              <option value="explorando">Solo explorando por ahora</option>
+            </select>
+          </div>
+        </div>
       </div>
 
       <!-- FILE UPLOAD -->
       <div class="card">
-        <div class="card-label">Documentos de apoyo</div>
-        <div class="card-question">Adjunte archivos que nos ayuden a entender su operación</div>
-        <div class="card-hint">Ejemplos de PDFs, capturas de pantalla, formatos que usan. Opcional — máximo 5 archivos, 10 MB cada uno.</div>
+        <div class="card-label">Archivo ejemplo</div>
+        <div class="card-question">Suba el documento que más tiempo les quita procesar</div>
+        <div class="card-hint">Un PDF, captura de pantalla o Excel que represente el dolor #1 que describió. Esto nos permite proponer algo concreto en vez de genérico.</div>
 
         <div class="upload-zone" id="uploadZone">
           <div class="upload-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           </div>
           <div class="upload-text">Arrastre archivos aquí o haga clic para seleccionar</div>
-          <div class="upload-sub">PDF, imágenes, Excel — máx. 10 MB por archivo</div>
+          <div class="upload-sub">PDF, imágenes, Excel — máx. 10 MB por archivo, hasta 5 archivos</div>
           <input type="file" class="upload-input" id="fileInput" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.png,.jpg,.jpeg,.webp">
         </div>
 
@@ -727,19 +876,28 @@ const TOTAL_STEPS = 5;
 let currentStep = 1;
 let uploadedFiles = [];
 const MAX_FILES = 5;
-const MAX_SIZE = 10 * 1024 * 1024; // 10MB
+const MAX_SIZE = 10 * 1024 * 1024;
 
 const PREGUNTAS = [
-  { name: 'estructura', tag: 'Estructura', pregunta: '¿Cómo están construidos los PDFs que más tiempo les quitan?' },
-  { name: 'accion_manual', tag: 'Acción Manual', pregunta: '¿Cuál es el trabajo mecánico exacto que realiza el equipo?' },
-  { name: 'volumen', tag: 'Volumen', pregunta: '¿Cuántos documentos procesan al mes y cuántas horas-equipo consume?' },
-  { name: 'tiempo_perdido', tag: 'Tiempo Perdido', pregunta: '¿En qué tarea repetitiva invierten más tiempo del necesario?' },
-  { name: 'herramientas', tag: 'Herramientas', pregunta: '¿Usan algún otro software que implique copiar/pegar info?' },
-  { name: 'carga_trabajo', tag: 'Carga de Trabajo', pregunta: '¿Cuántos clientes activos procesan al mes?' },
-  { name: 'canales_entrada', tag: 'Canales de Entrada', pregunta: '¿Cómo reciben la información de sus clientes?' },
-  { name: 'persecucion', tag: 'Seguimiento', pregunta: '¿Cuánto tiempo invierten en que los clientes envíen info completa?' },
-  { name: 'entregables', tag: 'Entregables', pregunta: '¿Tienen formato estandarizado para reportes mensuales?' },
-  { name: 'vision', tag: 'Visión', pregunta: 'Si la IA pudiera resolver un solo problema en 30 días, ¿cuál sería?' },
+  { name: 'contexto_operativo', tag: 'Contexto Operativo', pregunta: '¿Cuántas personas tiene su equipo y cuántos clientes manejan?' },
+  { name: 'stack', tag: 'Stack Tecnológico', pregunta: '¿Qué software y herramientas usan en el día a día?' },
+  { name: 'dolor_1', tag: 'Dolor #1', pregunta: 'Problema #1 que más tiempo/dinero les cuesta' },
+  { name: 'dolor_2', tag: 'Dolor #2', pregunta: 'Segundo mayor dolor' },
+  { name: 'dolor_3', tag: 'Dolor #3', pregunta: 'Tercer dolor' },
+  { name: 'impacto_dolor1', tag: 'Impacto del Dolor #1', pregunta: '¿Cuántas horas a la semana cuesta el dolor #1?' },
+  { name: 'intentos_previos', tag: 'Intentos Previos', pregunta: '¿Han intentado resolver estos problemas antes?' },
+  { name: 'paso_1', tag: 'Flujo Paso 1', pregunta: 'Paso 1 del proceso típico' },
+  { name: 'paso_2', tag: 'Flujo Paso 2', pregunta: 'Paso 2' },
+  { name: 'paso_3', tag: 'Flujo Paso 3', pregunta: 'Paso 3' },
+  { name: 'paso_4', tag: 'Flujo Paso 4', pregunta: 'Paso 4' },
+  { name: 'paso_5', tag: 'Flujo Paso 5', pregunta: 'Paso 5' },
+  { name: 'cuellos_botella', tag: 'Cuellos de Botella', pregunta: '¿En qué paso se atasca todo?' },
+  { name: 'tasa_error', tag: 'Tasa de Error', pregunta: '¿Con qué frecuencia rehacen trabajo por errores?' },
+  { name: 'costo_error', tag: 'Costo del Error', pregunta: '¿Qué pasa cuando ocurre un error?' },
+  { name: 'estacionalidad', tag: 'Estacionalidad', pregunta: '¿Cuáles son los meses más pesados?' },
+  { name: 'vision', tag: 'Visión 30 Días', pregunta: 'Si la IA pudiera resolver un solo problema en 30 días, ¿cuál sería?' },
+  { name: 'presupuesto', tag: 'Presupuesto', pregunta: 'Rango de inversión' },
+  { name: 'timeline', tag: 'Timeline', pregunta: '¿Cuándo les gustaría arrancar?' },
 ];
 
 function updateProgress() {
@@ -757,20 +915,18 @@ function showStep(n) {
 }
 
 function nextStep() {
-  // Validate step 1 required fields
   if (currentStep === 1) {
-    const d = document.getElementById('despacho');
-    const c = document.getElementById('contacto');
-    const ci = document.getElementById('contactInfo');
-    if (!d.value.trim() || !c.value.trim() || !ci.value.trim()) {
-      [d, c, ci].forEach(el => {
-        if (!el.value.trim()) {
-          el.style.borderColor = 'var(--red)';
-          el.addEventListener('input', () => { el.style.borderColor = ''; }, { once: true });
-        }
-      });
-      return;
-    }
+    const fields = ['empresa', 'contacto', 'contactInfo'];
+    let valid = true;
+    fields.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) {
+        el.style.borderColor = 'var(--red)';
+        el.addEventListener('input', () => { el.style.borderColor = ''; }, { once: true });
+        valid = false;
+      }
+    });
+    if (!valid) return;
   }
   if (currentStep < TOTAL_STEPS) {
     currentStep++;
@@ -802,14 +958,8 @@ fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
 
 function handleFiles(files) {
   for (const file of files) {
-    if (uploadedFiles.length >= MAX_FILES) {
-      alert(`Máximo ${MAX_FILES} archivos permitidos.`);
-      break;
-    }
-    if (file.size > MAX_SIZE) {
-      alert(`"${file.name}" excede el límite de 10 MB.`);
-      continue;
-    }
+    if (uploadedFiles.length >= MAX_FILES) { alert(`Máximo ${MAX_FILES} archivos.`); break; }
+    if (file.size > MAX_SIZE) { alert(`"${file.name}" excede 10 MB.`); continue; }
     uploadedFiles.push(file);
   }
   renderFiles();
@@ -847,19 +997,19 @@ function fileToBase64(file) {
   });
 }
 
-// Submit
 document.getElementById('discoveryForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn = document.getElementById('submitBtn');
   const errEl = document.getElementById('errorMsg');
-  
+
   btn.disabled = true;
-  btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Enviando…';
+  btn.innerHTML = 'Enviando…';
   errEl.classList.remove('show');
 
   const form = e.target;
   const payload = {
-    despacho: document.getElementById('despacho').value,
+    despacho: document.getElementById('empresa').value,
+    giro: document.getElementById('giro')?.value || '',
     contacto: document.getElementById('contacto').value,
     contactInfo: document.getElementById('contactInfo').value,
     preguntas: PREGUNTAS.map(p => ({
@@ -870,14 +1020,11 @@ document.getElementById('discoveryForm').addEventListener('submit', async (e) =>
     archivos: [],
   };
 
-  // Convert files to base64
   for (const file of uploadedFiles) {
     try {
       const b64 = await fileToBase64(file);
       payload.archivos.push({ name: file.name, type: file.type, size: file.size, data: b64 });
-    } catch (err) {
-      console.error('Error reading file:', err);
-    }
+    } catch (err) { console.error('File error:', err); }
   }
 
   try {
@@ -895,7 +1042,7 @@ document.getElementById('discoveryForm').addEventListener('submit', async (e) =>
       currentStep = 1;
       showStep(1);
     } else {
-      errEl.textContent = 'Hubo un error al enviar. Intente de nuevo o contacte directamente a Raúl.';
+      errEl.textContent = 'Error al enviar. Intente de nuevo o contacte directamente a Raúl.';
       errEl.classList.add('show');
     }
   } catch (err) {
@@ -907,12 +1054,6 @@ document.getElementById('discoveryForm').addEventListener('submit', async (e) =>
   btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Enviar Discovery Brief';
 });
 
-// Add spin animation
-const style = document.createElement('style');
-style.textContent = '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }';
-document.head.appendChild(style);
-
-// Init
 updateProgress();
 </script>
 </body>
