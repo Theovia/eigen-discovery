@@ -8,6 +8,7 @@
 <meta property="og:title" content="Discovery Brief — Raúl Chío León">
 <meta property="og:description" content="Diagnóstico para diseñar una solución de IA a la medida de su operación.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
 <style>
@@ -178,13 +179,13 @@ input.error,textarea.error{border-color:var(--red)}
   <div class="brand">
     <div class="brand-mark">RAÚL CHÍO LEÓN <span>| IA</span></div>
     <div class="brand-sub">Consultoría en Inteligencia Artificial</div>
-    <div class="brand-cred">🎓 Ing. Biotecnología · M.C. IA Aplicada — Tec de Monterrey</div>
+    <div class="brand-cred"><i data-lucide="graduation-cap" style="width:12px;height:12px"></i> Ing. Biotecnología · M.C. IA Aplicada — Tec de Monterrey</div>
   </div>
 
   <!-- HEADER -->
   <div class="header">
     <div class="header-badge">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <i data-lucide="shield-check" style="width:14px;height:14px"></i>
       Conexión cifrada · Información confidencial
     </div>
     <h1>Discovery <em>Brief</em></h1>
@@ -364,7 +365,7 @@ input.error,textarea.error{border-color:var(--red)}
 
         <div class="upload-zone" id="uploadZone" tabindex="0" role="button" aria-label="Subir archivos">
           <div class="upload-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <i data-lucide="upload-cloud" style="width:24px;height:24px"></i>
           </div>
           <div class="upload-text">Arrastre archivos o haga clic para seleccionar</div>
           <div class="upload-sub">Cualquier formato — máx. 10 MB por archivo, hasta 10 archivos</div>
@@ -374,7 +375,7 @@ input.error,textarea.error{border-color:var(--red)}
         <div class="file-list" id="fileList"></div>
 
         <div class="encrypt-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <i data-lucide="lock" style="width:16px;height:16px;flex-shrink:0;margin-top:1px"></i>
           <div><strong>Cifrado y confidencial.</strong> Conexión HTTPS cifrada. Sus archivos son revisados exclusivamente por Raúl Chío León. No se almacenan en servidores de terceros ni se comparten con nadie.</div>
         </div>
       </div>
@@ -399,7 +400,7 @@ input.error,textarea.error{border-color:var(--red)}
 <div class="success-overlay" id="successOverlay">
   <div class="success-card">
     <div class="success-check">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      <i data-lucide="check" style="width:32px;height:32px"></i>
     </div>
     <div class="success-title">Brief recibido</div>
     <div class="success-text">Gracias por su tiempo. Ya tengo lo que necesito para preparar algo concreto.</div>
@@ -520,12 +521,13 @@ function renderFiles(){
   fileList.innerHTML=uploadedFiles.map((f,i)=>`
     <div class="file-item">
       <div class="file-top">
+        <i data-lucide="file-text" style="width:18px;height:18px;color:var(--text-muted);flex-shrink:0"></i>
         <div class="file-info">
           <div class="file-name">${esc(f.name)}</div>
           <div class="file-size">${(f.size/1024).toFixed(0)} KB</div>
         </div>
         <button type="button" class="file-remove" onclick="removeFile(${i})" aria-label="Eliminar ${esc(f.name)}">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <i data-lucide="x" style="width:14px;height:14px"></i>
         </button>
       </div>
       <input type="text" class="file-desc" data-file-idx="${i}" placeholder="¿Qué es este archivo y qué representa?" value="${esc(f._desc||'')}">
@@ -534,6 +536,7 @@ function renderFiles(){
   fileList.querySelectorAll('.file-desc').forEach(el=>{
     el.addEventListener('input',(e)=>{uploadedFiles[parseInt(e.target.dataset.fileIdx)]._desc=e.target.value})
   });
+  lucide.createIcons();
 }
 
 function fileToBase64(file){
@@ -597,6 +600,7 @@ document.getElementById('discoveryForm').addEventListener('submit',async(e)=>{
 });
 
 updateProgress();
+lucide.createIcons();
 </script>
 </body>
 </html>
