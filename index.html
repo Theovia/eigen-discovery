@@ -780,36 +780,7 @@ select {
         <textarea name="vision" placeholder="Escriba aquí…" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.15); color: #fff;"></textarea>
       </div>
 
-      <div class="card">
-        <div class="card-label">Inversión y timeline</div>
-        <div class="card-question">¿Tienen un rango de inversión en mente y una fecha ideal para empezar?</div>
-        <div class="card-hint">No hay respuesta incorrecta — esto nos permite proponer algo que haga sentido para su realidad. Si no tienen un número, está bien.</div>
-        <div class="input-grid">
-          <div>
-            <label class="input-label">Rango de inversión</label>
-            <select name="presupuesto">
-              <option value="">Seleccione una opción…</option>
-              <option value="explorar">Solo estoy explorando opciones</option>
-              <option value="5-15k">$5,000 - $15,000 MXN/mes</option>
-              <option value="15-30k">$15,000 - $30,000 MXN/mes</option>
-              <option value="30-60k">$30,000 - $60,000 MXN/mes</option>
-              <option value="60k+">$60,000+ MXN/mes</option>
-              <option value="proyecto">Prefiero un costo único por proyecto</option>
-              <option value="no-se">Aún no tengo un número en mente</option>
-            </select>
-          </div>
-          <div>
-            <label class="input-label">¿Cuándo les gustaría arrancar?</label>
-            <select name="timeline">
-              <option value="">Seleccione una opción…</option>
-              <option value="ya">Lo antes posible</option>
-              <option value="1mes">En el próximo mes</option>
-              <option value="3meses">En los próximos 3 meses</option>
-              <option value="explorando">Solo explorando por ahora</option>
-            </select>
-          </div>
-        </div>
-      </div>
+
 
       <!-- FILE UPLOAD -->
       <div class="card">
@@ -896,8 +867,7 @@ const PREGUNTAS = [
   { name: 'costo_error', tag: 'Costo del Error', pregunta: '¿Qué pasa cuando ocurre un error?' },
   { name: 'estacionalidad', tag: 'Estacionalidad', pregunta: '¿Cuáles son los meses más pesados?' },
   { name: 'vision', tag: 'Visión 30 Días', pregunta: 'Si la IA pudiera resolver un solo problema en 30 días, ¿cuál sería?' },
-  { name: 'presupuesto', tag: 'Presupuesto', pregunta: 'Rango de inversión' },
-  { name: 'timeline', tag: 'Timeline', pregunta: '¿Cuándo les gustaría arrancar?' },
+
 ];
 
 function updateProgress() {
