@@ -175,7 +175,7 @@ input.error{border-color:var(--red)}
         </div>
         <div class="field">
           <label class="field-label" for="giro">¿A qué se dedica su empresa?</label>
-          <input type="text" id="giro" name="giro" placeholder="Ej: Contabilidad, logística, salud…">
+          <input type="text" id="giro" name="giro" placeholder="Ej: Logística, salud, retail, servicios…">
         </div>
       </div>
       <div class="field">
@@ -196,19 +196,19 @@ input.error{border-color:var(--red)}
           <input type="text" id="equipo" name="equipo" placeholder="Ej: 4 personas">
         </div>
         <div class="field">
-          <label class="field-label" for="volumen">Clientes o casos al mes</label>
-          <input type="text" id="volumen" name="volumen" placeholder="Ej: ~60 clientes mensuales">
+          <label class="field-label" for="volumen">Volumen de trabajo mensual</label>
+          <input type="text" id="volumen" name="volumen" placeholder="Ej: 200 pedidos, 50 pacientes, 80 casos…">
         </div>
       </div>
       <div class="field">
         <label class="field-label" for="software">¿Qué software y herramientas usan?</label>
-        <div class="field-hint">Software contable, portales gubernamentales, Excel, WhatsApp, email…</div>
-        <textarea id="software" name="software" placeholder="Ej: Contpaq Nube, portal del SAT para CFDI, Excel, WhatsApp para recibir docs…"></textarea>
+        <div class="field-hint">CRM, Excel, WhatsApp, software especializado, portales web…</div>
+        <textarea id="software" name="software" placeholder="Ej: Shopify + Excel + WhatsApp para pedidos…"></textarea>
       </div>
       <div class="field">
         <label class="field-label" for="flujo">Flujo de un caso típico de inicio a fin</label>
         <div class="field-hint">¿Cómo llega la información? ¿Qué hacen con ella? ¿Dónde se atasca? ¿Cómo se entrega?</div>
-        <textarea id="flujo" name="flujo" placeholder="Ej: Cliente manda facturas por WhatsApp → se descargan y renombran → se capturan en Contpaq → se cruzan contra SAT → se genera declaración → se envía por email…" style="min-height:120px"></textarea>
+        <textarea id="flujo" name="flujo" placeholder="Ej: Nos llega pedido por WhatsApp → lo capturamos en Excel → se prepara → se envía y se factura…" style="min-height:120px"></textarea>
       </div>
     </div>
 
@@ -219,7 +219,7 @@ input.error{border-color:var(--red)}
       <div class="section-label"><i data-lucide="alert-triangle"></i> Lo que más duele</div>
       <div class="field">
         <label class="field-label">Si pudiera eliminar 3 problemas de su operación, ¿cuáles serían?</label>
-        <div class="field-hint">"Perdemos 2 horas buscando facturas en PDFs escaneados" es mejor que "documentos".</div>
+        <div class="field-hint">"Perdemos 2 horas al día capturando datos a mano" es mejor que "ineficiencia".</div>
         <div class="ranking">
           <div class="ranking-item"><div class="ranking-num">1</div><input type="text" name="dolor_1" placeholder="El que más tiempo o dinero les cuesta…"></div>
           <div class="ranking-item"><div class="ranking-num">2</div><input type="text" name="dolor_2" placeholder="El segundo…"></div>
@@ -238,17 +238,17 @@ input.error{border-color:var(--red)}
       </div>
       <div class="field">
         <label class="field-label" for="errores">¿Rehacen trabajo por errores? ¿Qué cuesta corregirlo?</label>
-        <div class="field-hint">Datos mal capturados, declaraciones incorrectas — tiempo, multas, relación con clientes.</div>
-        <textarea id="errores" name="errores" placeholder="Ej: 1-2 veces por semana alguien captura mal un RFC. Corregir cuesta 3-4 horas + llamada con el cliente…"></textarea>
+        <div class="field-hint">Datos mal capturados, entregas incorrectas — tiempo, dinero, relación con clientes.</div>
+        <textarea id="errores" name="errores" placeholder="Ej: 1-2 veces por semana hay un error de captura. Corregirlo cuesta horas + disculpas al cliente…"></textarea>
       </div>
       <div class="field">
         <label class="field-label" for="estacionalidad">¿Meses o periodos donde la carga es insostenible?</label>
-        <textarea id="estacionalidad" name="estacionalidad" placeholder="Ej: Marzo-abril por declaración anual. Primeros 5 días de cada mes por cierres…" style="min-height:72px"></textarea>
+        <textarea id="estacionalidad" name="estacionalidad" placeholder="Ej: Fin de mes, temporada alta en diciembre, lunes después de fin de semana…" style="min-height:72px"></textarea>
       </div>
       <div class="field">
         <label class="field-label" for="intentos">¿Han intentado resolverlo antes?</label>
         <div class="field-hint">Macros, software que probaron, contratar más gente… ¿qué funcionó y qué no?</div>
-        <textarea id="intentos" name="intentos" placeholder="Ej: Probamos un OCR pero no leía bien las facturas del SAT…"></textarea>
+        <textarea id="intentos" name="intentos" placeholder="Ej: Probamos un software pero no se adaptó a nuestro flujo…"></textarea>
       </div>
     </div>
 
@@ -269,13 +269,13 @@ input.error{border-color:var(--red)}
       <div class="field">
         <label class="field-label" for="datos_digitales">¿Tienen historial digital de sus procesos?</label>
         <div class="field-hint">Excel, bases de datos, archivos en la nube, PDFs organizados… Esto determina qué tan rápido podemos implementar.</div>
-        <textarea id="datos_digitales" name="datos_digitales" placeholder="Ej: Todo en Contpaq desde 2020, Excels de conciliaciones, carpeta compartida con PDFs…" style="min-height:72px"></textarea>
+        <textarea id="datos_digitales" name="datos_digitales" placeholder="Ej: Excel desde 2022, carpeta en Drive con documentos, base de datos del sistema…" style="min-height:72px"></textarea>
       </div>
 
       <div class="field">
         <label class="field-label" for="exito">¿Qué considerarían un éxito en 6 meses?</label>
         <div class="field-hint">Nos alinea en expectativas antes de empezar.</div>
-        <textarea id="exito" name="exito" placeholder="Ej: Que el equipo recupere 10 horas/semana y los errores en declaraciones bajen a cero…" style="min-height:72px"></textarea>
+        <textarea id="exito" name="exito" placeholder="Ej: Que el equipo recupere 10 horas/semana y los errores bajen a cero…" style="min-height:72px"></textarea>
       </div>
 
       <!-- FILES -->
@@ -295,6 +295,23 @@ input.error{border-color:var(--red)}
         <div class="encrypt-badge">
           <i data-lucide="lock" style="width:16px;height:16px;flex-shrink:0;margin-top:1px"></i>
           <div><strong>Cifrado y confidencial.</strong> Conexión HTTPS cifrada. Revisados exclusivamente por Raúl Chío León. No se almacenan en servidores de terceros.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- PRESUPUESTO Y TIEMPOS -->
+    <div class="section">
+      <div class="section-label"><i data-lucide="clock"></i> Presupuesto y tiempos</div>
+      <div class="row">
+        <div class="field">
+          <label class="field-label" for="urgencia">¿Qué tan urgente es?</label>
+          <input type="text" id="urgencia" name="urgencia" placeholder="Ej: Para ayer, este trimestre, explorando…">
+        </div>
+        <div class="field">
+          <label class="field-label" for="presupuesto">Rango de inversión mensual</label>
+          <input type="text" id="presupuesto" name="presupuesto" placeholder="Ej: $5K-15K MXN, no tengo claro…">
         </div>
       </div>
     </div>
@@ -343,7 +360,7 @@ const MAX_TOTAL_SIZE=50*1024*1024;
 let uploadedFiles=[];
 let saveTimeout=null;
 
-const ALL_FIELDS=['empresa','contacto','contactInfo','giro','decisor','equipo','volumen','software','flujo','dolor_1','dolor_2','dolor_3','horas_dolor','valor_resolver','errores','estacionalidad','intentos','vision','datos_digitales','exito'];
+const ALL_FIELDS=['empresa','contacto','contactInfo','giro','decisor','equipo','volumen','software','flujo','dolor_1','dolor_2','dolor_3','horas_dolor','valor_resolver','errores','estacionalidad','intentos','vision','datos_digitales','exito','urgencia','presupuesto'];
 
 const PREGUNTAS=[
   {name:'decisor',tag:'Decisor'},
@@ -362,6 +379,8 @@ const PREGUNTAS=[
   {name:'vision',tag:'Visión 30 Días'},
   {name:'datos_digitales',tag:'Datos Digitales'},
   {name:'exito',tag:'Criterio de Éxito (6 meses)'},
+  {name:'urgencia',tag:'Urgencia'},
+  {name:'presupuesto',tag:'Presupuesto Mensual'},
 ];
 
 // ═══ AUTO-SAVE ═══
