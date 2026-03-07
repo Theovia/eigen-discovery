@@ -108,7 +108,8 @@ export default {
         for (const archivo of data.archivos) {
           try {
             const buffer = base64ToArrayBuffer(archivo.data);
-            const caption = `📎 ${archivo.name} (${(archivo.size / 1024).toFixed(0)} KB) — de ${data.despacho || 'Discovery'}`;
+            let caption = `📎 ${archivo.name} (${(archivo.size / 1024).toFixed(0)} KB) — de ${data.despacho || 'Discovery'}`;
+            if (archivo.desc) caption += `\n📝 ${archivo.desc}`;
             await sendTelegramDocument(env.TELEGRAM_BOT_TOKEN, buffer, archivo.name, caption);
           } catch (e) {
             console.error('File send error:', archivo.name, e.message);

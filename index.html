@@ -153,6 +153,15 @@ textarea { min-height: 88px; resize: vertical; line-height: 1.6; }
 .file-info { flex: 1; min-width: 0; }
 .file-name { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .file-size { font-size: 11px; color: var(--text-muted); }
+.file-desc {
+  width: 100%; font-family: var(--sans); font-size: 13px;
+  color: var(--text); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 8px 10px; margin-top: 6px; outline: none;
+  transition: border-color 0.2s;
+}
+.file-desc:focus { border-color: var(--accent); }
+.file-desc::placeholder { color: #c0bfba; }
 .file-remove {
   width: 24px; height: 24px; border: none; background: none;
   color: var(--text-muted); cursor: pointer; border-radius: 6px;
@@ -445,16 +454,25 @@ function handleFiles(files) {
 function removeFile(idx) { uploadedFiles.splice(idx, 1); renderFiles(); }
 function renderFiles() {
   fileList.innerHTML = uploadedFiles.map((f, i) => `
-    <div class="file-item">
-      <div class="file-info">
-        <div class="file-name">${f.name}</div>
-        <div class="file-size">${(f.size/1024).toFixed(0)} KB</div>
+    <div class="file-item" style="flex-wrap:wrap">
+      <div class="file-info" style="display:flex;align-items:center;gap:10px;width:100%">
+        <div style="flex:1;min-width:0">
+          <div class="file-name">${f.name}</div>
+          <div class="file-size">${(f.size/1024).toFixed(0)} KB</div>
+        </div>
+        <button type="button" class="file-remove" onclick="removeFile(${i})">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
       </div>
-      <button type="button" class="file-remove" onclick="removeFile(${i})">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
+      <input type="text" class="file-desc" data-file-idx="${i}" placeholder="¿Qué es este archivo y qué representa?" value="${f._desc || ''}">
     </div>
   `).join('');
+  // Bind description inputs
+  fileList.querySelectorAll('.file-desc').forEach(el => {
+    el.addEventListener('input', (e) => {
+      uploadedFiles[parseInt(e.target.dataset.fileIdx)]._desc = e.target.value;
+    });
+  });
 }
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
@@ -503,7 +521,7 @@ document.getElementById('discoveryForm').addEventListener('submit', async (e) =>
   for (const file of uploadedFiles) {
     try {
       const b64 = await fileToBase64(file);
-      payload.archivos.push({ name: file.name, type: file.type, size: file.size, data: b64 });
+      payload.archivos.push({ name: file.name, type: file.type, size: file.size, data: b64, desc: file._desc || '' });
     } catch (err) { console.error(err); }
   }
 
