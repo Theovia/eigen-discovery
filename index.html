@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Discovery Brief — Raúl Chío León</title>
+<title>Diagnóstico de IA — Raúl Chío León</title>
+<meta name="description" content="Formulario de diagnóstico previo al diseño de soluciones de Inteligencia Artificial. Confidencial.">
+<meta property="og:title" content="Discovery Brief — Raúl Chío León">
+<meta property="og:description" content="Diagnóstico para diseñar una solución de IA a la medida de su operación.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
 <style>
@@ -12,10 +16,12 @@
   --surface: #ffffff;
   --surface-alt: #f5f4f0;
   --border: #e8e6e1;
+  --border-focus: #1a1a1a;
   --text: #1a1a1a;
   --text-secondary: #6b6b6b;
   --text-muted: #9a9a9a;
   --accent: #1a1a1a;
+  --accent-soft: #f0efe8;
   --green: #1a7a4c;
   --green-bg: #edf7f0;
   --green-border: #c5e8d0;
@@ -24,216 +30,143 @@
   --serif: 'Fraunces', Georgia, serif;
   --sans: 'Inter', -apple-system, sans-serif;
   --radius: 12px;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
-  --shadow-md: 0 4px 20px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: var(--sans);
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  font-size: 15px;
-  -webkit-font-smoothing: antialiased;
-}
-.app { max-width: 640px; margin: 0 auto; padding: 48px 20px 80px; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;font-size:15px;-webkit-font-smoothing:antialiased;min-height:100vh}
+.app{max-width:640px;margin:0 auto;padding:40px 20px 80px}
+
+/* ═══ BRAND ═══ */
+.brand{text-align:center;margin-bottom:40px}
+.brand-mark{font-family:var(--serif);font-size:18px;font-weight:500;letter-spacing:1px;margin-bottom:4px}
+.brand-mark span{color:var(--text-muted);font-weight:300}
+.brand-sub{font-size:11px;color:var(--text-muted);letter-spacing:0.5px}
+.brand-cred{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);background:var(--surface-alt);border:1px solid var(--border);padding:4px 12px;border-radius:100px;margin-top:8px}
 
 /* ═══ HEADER ═══ */
-.header { text-align: center; margin-bottom: 56px; }
-.header-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 12px; font-weight: 500; color: var(--green);
-  background: var(--green-bg); border: 1px solid var(--green-border);
-  padding: 6px 14px; border-radius: 100px; margin-bottom: 24px;
-}
-.header-badge svg { width: 14px; height: 14px; }
-.header h1 {
-  font-family: var(--serif);
-  font-size: clamp(32px, 6vw, 42px);
-  font-weight: 400; line-height: 1.15;
-  letter-spacing: -0.5px; margin-bottom: 12px;
-}
-.header h1 em { font-style: italic; font-weight: 300; opacity: 0.6; }
-.header-sub {
-  font-size: 15px; color: var(--text-secondary);
-  max-width: 460px; margin: 0 auto; line-height: 1.7;
-}
+.header{text-align:center;margin-bottom:48px}
+.header-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--green);background:var(--green-bg);border:1px solid var(--green-border);padding:6px 14px;border-radius:100px;margin-bottom:24px}
+.header-badge svg{width:14px;height:14px}
+.header h1{font-family:var(--serif);font-size:clamp(30px,6vw,40px);font-weight:400;line-height:1.2;letter-spacing:-0.5px;margin-bottom:12px}
+.header h1 em{font-style:italic;font-weight:300;opacity:.6}
+.header-sub{font-size:15px;color:var(--text-secondary);max-width:480px;margin:0 auto;line-height:1.7}
+.header-value{font-size:13px;color:var(--text-muted);margin-top:8px;font-style:italic}
 
-/* ═══ SECTIONS ═══ */
-.section { margin-bottom: 48px; }
-.section-label {
-  font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
-  text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px;
-}
+/* ═══ PROGRESS ═══ */
+.progress-wrap{position:sticky;top:0;z-index:100;background:rgba(250,250,248,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:16px 0 12px;margin-bottom:32px;border-bottom:1px solid transparent;transition:border-color .3s}
+.progress-wrap.scrolled{border-bottom-color:var(--border)}
+.progress-steps{display:flex;gap:6px;margin-bottom:8px}
+.progress-step{flex:1;height:4px;border-radius:100px;background:var(--border);transition:background .4s ease}
+.progress-step.done{background:var(--accent)}
+.progress-step.active{background:var(--accent)}
+.progress-text{display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);font-weight:500}
+
+/* ═══ STEPS ═══ */
+.step{display:none;animation:stepIn .4s ease}
+.step.active{display:block}
+@keyframes stepIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+.step-header{margin-bottom:28px}
+.step-number{font-size:12px;font-weight:600;color:var(--text-muted);letter-spacing:0.5px;margin-bottom:4px}
+.step-title{font-family:var(--serif);font-size:26px;font-weight:400;letter-spacing:-0.3px;margin-bottom:4px}
+.step-desc{font-size:14px;color:var(--text-secondary);line-height:1.6}
 
 /* ═══ FIELDS ═══ */
-.field { margin-bottom: 24px; }
-.field-label {
-  display: block; font-size: 14px; font-weight: 500;
-  color: var(--text); margin-bottom: 4px;
-}
-.field-hint {
-  font-size: 13px; color: var(--text-muted);
-  line-height: 1.5; margin-bottom: 8px;
-}
-input[type="text"], input[type="email"], textarea {
-  width: 100%; font-family: var(--sans); font-size: 15px;
-  color: var(--text); background: var(--surface);
-  border: 1.5px solid var(--border); border-radius: 8px;
-  padding: 12px 14px; outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-input:focus, textarea:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(26,26,26,0.06);
-}
-input::placeholder, textarea::placeholder { color: #c0bfba; }
-textarea { min-height: 88px; resize: vertical; line-height: 1.6; }
-
-.row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.field{margin-bottom:22px}
+.field-label{display:block;font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px}
+.field-hint{font-size:13px;color:var(--text-muted);line-height:1.5;margin-bottom:8px}
+input[type="text"],input[type="email"],textarea{width:100%;font-family:var(--sans);font-size:15px;color:var(--text);background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:12px 14px;outline:none;transition:border-color .2s,box-shadow .2s}
+input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(26,26,26,.06)}
+input::placeholder,textarea::placeholder{color:#c0bfba}
+textarea{min-height:88px;resize:vertical;line-height:1.6}
+input.error,textarea.error{border-color:var(--red)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
 /* ═══ RANKING ═══ */
-.ranking { display: flex; flex-direction: column; gap: 10px; }
-.ranking-item { display: flex; align-items: center; gap: 10px; }
-.ranking-num {
-  width: 28px; height: 28px; background: var(--surface-alt);
-  border-radius: 8px; display: flex; align-items: center;
-  justify-content: center; font-weight: 600; font-size: 13px;
-  color: var(--text-muted); flex-shrink: 0;
-}
-
-/* ═══ DIVIDER ═══ */
-.divider {
-  height: 1px; background: var(--border); margin: 48px 0;
-}
+.ranking{display:flex;flex-direction:column;gap:10px}
+.ranking-item{display:flex;align-items:center;gap:10px}
+.ranking-num{width:28px;height:28px;background:var(--surface-alt);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;color:var(--text-muted);flex-shrink:0}
 
 /* ═══ DARK CARD ═══ */
-.dark-card {
-  background: var(--accent); color: #fff;
-  border-radius: var(--radius); padding: 32px;
-  margin-bottom: 24px;
-}
-.dark-card .field-label { color: rgba(255,255,255,0.9); }
-.dark-card .field-hint { color: rgba(255,255,255,0.4); }
-.dark-card textarea {
-  background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12);
-  color: #fff;
-}
-.dark-card textarea:focus {
-  border-color: rgba(255,255,255,0.3);
-  box-shadow: 0 0 0 3px rgba(255,255,255,0.05);
-}
-.dark-card textarea::placeholder { color: rgba(255,255,255,0.3); }
+.dark-card{background:var(--accent);color:#fff;border-radius:var(--radius);padding:32px;margin-bottom:24px}
+.dark-card .field-label{color:rgba(255,255,255,.9)}
+.dark-card .field-hint{color:rgba(255,255,255,.4)}
+.dark-card textarea{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);color:#fff}
+.dark-card textarea:focus{border-color:rgba(255,255,255,.3);box-shadow:0 0 0 3px rgba(255,255,255,.05)}
+.dark-card textarea::placeholder{color:rgba(255,255,255,.3)}
 
 /* ═══ FILE UPLOAD ═══ */
-.upload-zone {
-  border: 2px dashed var(--border); border-radius: var(--radius);
-  padding: 36px 24px; text-align: center; cursor: pointer;
-  transition: all 0.2s; background: var(--surface);
-}
-.upload-zone:hover { border-color: var(--accent); background: var(--surface-alt); }
-.upload-zone.dragover { border-color: var(--accent); background: var(--surface-alt); }
-.upload-icon {
-  width: 40px; height: 40px; margin: 0 auto 12px;
-  background: var(--surface-alt); border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-}
-.upload-icon svg { width: 20px; height: 20px; color: var(--text-secondary); }
-.upload-text { font-size: 14px; font-weight: 500; margin-bottom: 2px; }
-.upload-sub { font-size: 12px; color: var(--text-muted); }
-.upload-input { display: none; }
+.upload-zone{border:2px dashed var(--border);border-radius:var(--radius);padding:32px 24px;text-align:center;cursor:pointer;transition:all .2s;background:var(--surface);position:relative;overflow:hidden}
+.upload-zone:hover,.upload-zone.dragover{border-color:var(--accent);background:var(--accent-soft)}
+.upload-zone[tabindex]:focus{outline:2px solid var(--accent);outline-offset:2px}
+.upload-icon{width:40px;height:40px;margin:0 auto 12px;background:var(--surface-alt);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.upload-icon svg{width:20px;height:20px;color:var(--text-secondary)}
+.upload-text{font-size:14px;font-weight:500;margin-bottom:2px}
+.upload-sub{font-size:12px;color:var(--text-muted)}
+.upload-input{display:none}
+.upload-count{font-size:11px;color:var(--text-muted);margin-top:8px}
 
-.file-list { margin-top: 12px; }
-.file-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 14px; background: var(--surface-alt);
-  border-radius: 8px; margin-bottom: 6px; animation: fadeIn 0.3s ease;
-}
-.file-info { flex: 1; min-width: 0; }
-.file-name { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.file-size { font-size: 11px; color: var(--text-muted); }
-.file-desc {
-  width: 100%; font-family: var(--sans); font-size: 13px;
-  color: var(--text); background: var(--surface);
-  border: 1px solid var(--border); border-radius: 6px;
-  padding: 8px 10px; margin-top: 6px; outline: none;
-  transition: border-color 0.2s;
-}
-.file-desc:focus { border-color: var(--accent); }
-.file-desc::placeholder { color: #c0bfba; }
-.file-remove {
-  width: 24px; height: 24px; border: none; background: none;
-  color: var(--text-muted); cursor: pointer; border-radius: 6px;
-  display: flex; align-items: center; justify-content: center;
-}
-.file-remove:hover { background: var(--red-bg); color: var(--red); }
+.file-list{margin-top:12px}
+.file-item{padding:12px 14px;background:var(--surface-alt);border-radius:8px;margin-bottom:8px;animation:stepIn .3s ease}
+.file-top{display:flex;align-items:center;gap:10px}
+.file-info{flex:1;min-width:0}
+.file-name{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.file-size{font-size:11px;color:var(--text-muted)}
+.file-remove{width:24px;height:24px;border:none;background:none;color:var(--text-muted);cursor:pointer;border-radius:6px;display:flex;align-items:center;justify-content:center}
+.file-remove:hover{background:var(--red-bg);color:var(--red)}
+.file-desc{width:100%;font-family:var(--sans);font-size:13px;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 10px;margin-top:8px;outline:none}
+.file-desc:focus{border-color:var(--accent)}
+.file-desc::placeholder{color:#c0bfba}
 
-.encrypt-badge {
-  display: flex; align-items: flex-start; gap: 10px;
-  padding: 14px 16px; background: var(--green-bg);
-  border: 1px solid var(--green-border); border-radius: 10px;
-  margin-top: 16px; font-size: 12px; color: var(--green); line-height: 1.5;
-}
-.encrypt-badge svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; }
-.encrypt-badge strong { font-weight: 600; }
+.encrypt-badge{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:10px;margin-top:16px;font-size:12px;color:var(--green);line-height:1.5}
+.encrypt-badge svg{width:16px;height:16px;flex-shrink:0;margin-top:1px}
+.encrypt-badge strong{font-weight:600}
 
-/* ═══ SUBMIT ═══ */
-.submit-wrap { text-align: center; margin-top: 48px; }
-.btn-submit {
-  font-family: var(--sans); font-size: 15px; font-weight: 600;
-  background: var(--accent); color: #fff; border: none;
-  border-radius: 10px; padding: 16px 48px; cursor: pointer;
-  transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
-}
-.btn-submit:hover { opacity: 0.88; transform: translateY(-1px); box-shadow: var(--shadow-md); }
-.btn-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-.submit-note { font-size: 12px; color: var(--text-muted); margin-top: 12px; }
+/* ═══ NAVIGATION ═══ */
+.nav{display:flex;gap:12px;margin-top:32px}
+.btn{font-family:var(--sans);font-size:14px;font-weight:600;border:none;border-radius:10px;padding:14px 28px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary{background:var(--accent);color:#fff;flex:1;justify-content:center}
+.btn-primary:hover{opacity:.88;transform:translateY(-1px);box-shadow:var(--shadow-md)}
+.btn-primary:active{transform:translateY(0)}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-secondary{background:var(--surface);color:var(--text-secondary);border:1px solid var(--border)}
+.btn-secondary:hover{background:var(--surface-alt)}
+.btn-submit{background:var(--accent);color:#fff;flex:1;justify-content:center;font-size:15px;padding:16px 32px}
+.btn-submit:hover{opacity:.88;transform:translateY(-1px);box-shadow:var(--shadow-md)}
+.btn-submit:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
 
-.error-msg {
-  display: none; padding: 12px 16px; background: var(--red-bg);
-  border: 1px solid #fecaca; border-radius: 10px; color: var(--red);
-  font-size: 14px; margin-top: 16px; text-align: center;
-}
-.error-msg.show { display: block; animation: fadeIn 0.3s ease; }
+.social-proof{text-align:center;margin-top:16px;font-size:12px;color:var(--text-muted);font-style:italic}
+
+.error-msg{display:none;padding:12px 16px;background:var(--red-bg);border:1px solid #fecaca;border-radius:10px;color:var(--red);font-size:14px;margin-top:16px;text-align:center}
+.error-msg.show{display:block;animation:stepIn .3s ease}
 
 /* ═══ FOOTER ═══ */
-.footer {
-  text-align: center; padding: 32px 0;
-  border-top: 1px solid var(--border); margin-top: 56px;
-}
-.footer-name { font-family: var(--serif); font-size: 16px; color: var(--text); margin-bottom: 2px; }
-.footer-role { font-size: 12px; color: var(--text-muted); }
+.footer{text-align:center;padding:32px 0;border-top:1px solid var(--border);margin-top:56px}
+.footer-name{font-family:var(--serif);font-size:16px;color:var(--text);margin-bottom:2px}
+.footer-role{font-size:12px;color:var(--text-muted)}
 
 /* ═══ SUCCESS ═══ */
-.success-overlay {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);
-  z-index: 1000; justify-content: center; align-items: center; padding: 20px;
-}
-.success-overlay.show { display: flex; animation: fadeIn 0.3s ease; }
-.success-card {
-  background: var(--surface); padding: 48px 40px; border-radius: 20px;
-  text-align: center; max-width: 420px; width: 100%; box-shadow: var(--shadow-lg);
-}
-.success-check {
-  width: 56px; height: 56px; background: var(--green-bg); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
-}
-.success-check svg { width: 28px; height: 28px; color: var(--green); }
-.success-title { font-family: var(--serif); font-size: 22px; margin-bottom: 8px; }
-.success-text { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px; }
-.success-close {
-  font-size: 14px; font-weight: 600; color: var(--accent);
-  background: var(--surface-alt); border: 1px solid var(--border);
-  padding: 10px 28px; border-radius: 10px; cursor: pointer;
-}
-.success-close:hover { background: var(--border); }
+.success-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:1000;justify-content:center;align-items:center;padding:20px}
+.success-overlay.show{display:flex;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.success-card{background:var(--surface);padding:48px 40px;border-radius:20px;text-align:center;max-width:440px;width:100%;box-shadow:var(--shadow-lg);animation:popIn .4s cubic-bezier(.2,.8,.2,1)}
+@keyframes popIn{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.success-check{width:64px;height:64px;background:var(--green-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px}
+.success-check svg{width:32px;height:32px;color:var(--green)}
+.success-title{font-family:var(--serif);font-size:24px;margin-bottom:8px}
+.success-text{font-size:14px;color:var(--text-secondary);line-height:1.7;margin-bottom:24px}
+.success-next{font-size:13px;color:var(--text-muted);margin-bottom:24px;padding:16px;background:var(--surface-alt);border-radius:10px;text-align:left;line-height:1.7}
+.success-next strong{color:var(--text)}
+.success-close{font-size:14px;font-weight:600;color:var(--accent);background:var(--surface-alt);border:1px solid var(--border);padding:12px 32px;border-radius:10px;cursor:pointer}
+.success-close:hover{background:var(--border)}
 
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@media (max-width: 640px) {
-  .app { padding: 32px 16px 60px; }
-  .row { grid-template-columns: 1fr; }
+@media(max-width:640px){
+  .app{padding:24px 16px 60px}
+  .row{grid-template-columns:1fr}
+  .nav{flex-direction:column-reverse}
+  .btn-secondary{justify-content:center}
 }
 </style>
 </head>
@@ -241,159 +174,224 @@ textarea { min-height: 88px; resize: vertical; line-height: 1.6; }
 
 <div class="app">
 
+  <!-- BRAND -->
+  <div class="brand">
+    <div class="brand-mark">RAÚL CHÍO LEÓN <span>| IA</span></div>
+    <div class="brand-sub">Consultoría en Inteligencia Artificial</div>
+    <div class="brand-cred">🎓 Ing. Biotecnología · M.C. IA Aplicada — Tec de Monterrey</div>
+  </div>
+
+  <!-- HEADER -->
   <div class="header">
     <div class="header-badge">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      Conexión segura · Información confidencial
+      Conexión cifrada · Información confidencial
     </div>
     <h1>Discovery <em>Brief</em></h1>
-    <p class="header-sub">Diagnóstico para diseñar una solución de IA a la medida de su operación. Toma ~10 minutos.</p>
+    <p class="header-sub">Este diagnóstico toma ~10 minutos. Con él diseño una propuesta ajustada a su operación real, no genérica.</p>
+    <p class="header-value">Mientras más específicas sus respuestas, mejor la propuesta.</p>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-steps">
+      <div class="progress-step active" data-ps="1"></div>
+      <div class="progress-step" data-ps="2"></div>
+      <div class="progress-step" data-ps="3"></div>
+      <div class="progress-step" data-ps="4"></div>
+    </div>
+    <div class="progress-text">
+      <span id="progressLabel">Paso 1 de 4</span>
+      <span id="progressPct">0%</span>
+    </div>
   </div>
 
   <form id="discoveryForm" novalidate>
 
-    <!-- ═══ SOBRE USTED ═══ -->
-    <div class="section">
-      <div class="section-label">Sobre usted</div>
+    <!-- ═══ STEP 1: QUIÉN ES ═══ -->
+    <div class="step active" data-step="1">
+      <div class="step-header">
+        <div class="step-number">Paso 1 de 4</div>
+        <div class="step-title">Sobre usted</div>
+        <div class="step-desc">Para personalizar la propuesta y dar seguimiento.</div>
+      </div>
+
       <div class="row">
         <div class="field">
-          <label class="field-label">Empresa</label>
-          <input type="text" id="empresa" placeholder="Nombre de la empresa" required>
+          <label class="field-label" for="empresa">Empresa</label>
+          <input type="text" id="empresa" name="empresa" placeholder="Nombre de la empresa" required aria-required="true">
         </div>
         <div class="field">
-          <label class="field-label">Contacto</label>
-          <input type="text" id="contacto" placeholder="Su nombre" required>
+          <label class="field-label" for="contacto">Su nombre</label>
+          <input type="text" id="contacto" name="contacto" placeholder="Nombre completo" required aria-required="true">
         </div>
       </div>
       <div class="row">
         <div class="field">
-          <label class="field-label">Email o teléfono</label>
-          <input type="text" id="contactInfo" placeholder="Para darle seguimiento" required>
+          <label class="field-label" for="contactInfo">Email o teléfono</label>
+          <input type="text" id="contactInfo" name="contactInfo" placeholder="Para darle seguimiento" required aria-required="true">
         </div>
         <div class="field">
-          <label class="field-label">Giro</label>
-          <input type="text" id="giro" placeholder="Ej: Contabilidad, logística…">
+          <label class="field-label" for="giro">¿A qué se dedica su empresa?</label>
+          <input type="text" id="giro" name="giro" placeholder="Ej: Contabilidad, logística, salud…">
         </div>
+      </div>
+      <div class="field">
+        <label class="field-label" for="decisor">¿Quién más participará en esta decisión?</label>
+        <div class="field-hint">Director, socio, equipo de TI… Saber esto nos ayuda a preparar la propuesta para las personas correctas.</div>
+        <input type="text" id="decisor" name="decisor" placeholder="Ej: Mi socio Carlos y el contador general">
+      </div>
+
+      <div class="nav">
+        <button type="button" class="btn btn-primary" onclick="nextStep()">Siguiente →</button>
       </div>
     </div>
 
-    <!-- ═══ CONTEXTO ═══ -->
-    <div class="section">
-      <div class="section-label">Su operación hoy</div>
+    <!-- ═══ STEP 2: SU OPERACIÓN ═══ -->
+    <div class="step" data-step="2">
+      <div class="step-header">
+        <div class="step-number">Paso 2 de 4</div>
+        <div class="step-title">Su operación hoy</div>
+        <div class="step-desc">Entender cómo funciona su negocio para proponer algo que encaje.</div>
+      </div>
+
       <div class="field">
-        <label class="field-label">Equipo, clientes y herramientas</label>
-        <div class="field-hint">¿Cuántas personas son? ¿Cuántos clientes o casos manejan? ¿Qué software usan (y versiones si las conocen)?</div>
-        <textarea name="contexto_operativo" placeholder="Ej: 4 personas, ~60 clientes/mes. Usamos Contpaq Nube, Excel, portal del SAT, WhatsApp…"></textarea>
+        <label class="field-label" for="equipo">¿Cuántas personas tiene el equipo?</label>
+        <input type="text" id="equipo" name="equipo" placeholder="Ej: 4 personas — 2 contadores, 1 admin, 1 director">
+      </div>
+      <div class="field">
+        <label class="field-label" for="volumen">¿Cuántos clientes, casos o transacciones manejan al mes?</label>
+        <input type="text" id="volumen" name="volumen" placeholder="Ej: ~60 clientes mensuales, ~200 declaraciones">
+      </div>
+      <div class="field">
+        <label class="field-label" for="software">¿Qué software y herramientas usan?</label>
+        <div class="field-hint">Incluya todo: software contable, portales gubernamentales, Excel, WhatsApp, email…</div>
+        <textarea id="software" name="software" placeholder="Ej: Contpaq Nube, portal del SAT para CFDI, Excel para conciliaciones, WhatsApp para recibir docs de clientes…"></textarea>
+      </div>
+      <div class="field">
+        <label class="field-label" for="flujo">Describa el flujo de un caso típico de inicio a fin</label>
+        <div class="field-hint">¿Cómo llega la información? ¿Qué hacen con ella? ¿Dónde se atasca? ¿Cómo se entrega el resultado?</div>
+        <textarea id="flujo" name="flujo" placeholder="Ej: El cliente manda facturas por WhatsApp → alguien las descarga y renombra → se capturan en Contpaq → se cruzan contra el SAT → se genera la declaración → se envía por email…" style="min-height:120px"></textarea>
+      </div>
+
+      <div class="nav">
+        <button type="button" class="btn btn-secondary" onclick="prevStep()">← Atrás</button>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">Siguiente →</button>
       </div>
     </div>
 
-    <div class="divider"></div>
+    <!-- ═══ STEP 3: DOLORES ═══ -->
+    <div class="step" data-step="3">
+      <div class="step-header">
+        <div class="step-number">Paso 3 de 4</div>
+        <div class="step-title">Lo que más duele</div>
+        <div class="step-desc">Sin sugerencias ni sesgos — usted decide qué es lo que más afecta.</div>
+      </div>
 
-    <!-- ═══ DOLORES ═══ -->
-    <div class="section">
-      <div class="section-label">Lo que más duele</div>
       <div class="field">
-        <label class="field-label">Si pudiera eliminar 3 problemas mañana, ¿cuáles serían?</label>
-        <div class="field-hint">En orden de importancia. Sea específico — "2 horas buscando facturas" es mejor que "documentos".</div>
+        <label class="field-label">Si pudiera eliminar 3 problemas de su operación, ¿cuáles serían?</label>
+        <div class="field-hint">En orden de importancia. "Perdemos 2 horas buscando facturas en PDFs escaneados" es mejor que "documentos".</div>
         <div class="ranking">
           <div class="ranking-item"><div class="ranking-num">1</div><input type="text" name="dolor_1" placeholder="El que más tiempo o dinero les cuesta…"></div>
           <div class="ranking-item"><div class="ranking-num">2</div><input type="text" name="dolor_2" placeholder="El segundo…"></div>
           <div class="ranking-item"><div class="ranking-num">3</div><input type="text" name="dolor_3" placeholder="El tercero…"></div>
         </div>
       </div>
-      <div class="field">
-        <label class="field-label">¿Cuántas horas a la semana cuesta el dolor #1?</label>
-        <textarea name="impacto_dolor1" placeholder="Un estimado está bien — nos ayuda a calcular el retorno de inversión." style="min-height:72px"></textarea>
+      <div class="row">
+        <div class="field">
+          <label class="field-label" for="horas_dolor">¿Cuántas horas/semana cuesta el dolor #1?</label>
+          <input type="text" id="horas_dolor" name="horas_dolor" placeholder="Ej: ~15 horas entre el equipo">
+        </div>
+        <div class="field">
+          <label class="field-label" for="valor_resolver">¿Cuánto vale resolverlo al año?</label>
+          <div class="field-hint">Estimado en tiempo, dinero o ambos.</div>
+          <input type="text" id="valor_resolver" name="valor_resolver" placeholder="Ej: $200K MXN en salarios + multas">
+        </div>
       </div>
       <div class="field">
-        <label class="field-label">¿Han intentado resolverlo antes?</label>
-        <div class="field-hint">Macros, software que probaron, contratar más gente… ¿qué funcionó y qué no?</div>
-        <textarea name="intentos_previos" placeholder="Ej: Probamos un OCR pero no leía bien las facturas del SAT…"></textarea>
+        <label class="field-label" for="errores">¿Con qué frecuencia rehacen trabajo por errores y qué cuesta corregirlo?</label>
+        <div class="field-hint">Datos mal capturados, archivos confundidos, declaraciones incorrectas — incluya el costo en tiempo, multas o relación con clientes.</div>
+        <textarea id="errores" name="errores" placeholder="Ej: Mínimo 1-2 veces por semana alguien captura mal un RFC. Corregir una declaración cuesta 3-4 horas + llamada incómoda con el cliente…"></textarea>
+      </div>
+      <div class="field">
+        <label class="field-label" for="estacionalidad">¿Cuáles son los meses o periodos donde la carga es insostenible?</label>
+        <textarea id="estacionalidad" name="estacionalidad" placeholder="Ej: Marzo-abril por declaración anual. Los primeros 5 días de cada mes por cierres…" style="min-height:72px"></textarea>
+      </div>
+      <div class="field">
+        <label class="field-label" for="intentos">¿Han intentado resolverlo antes? ¿Qué funcionó y qué no?</label>
+        <div class="field-hint">Macros de Excel, software que probaron y abandonaron, contratar más gente…</div>
+        <textarea id="intentos" name="intentos" placeholder="Ej: Probamos un OCR pero no leía bien las facturas del SAT. Contratamos un becario pero era mucho entrenamiento…"></textarea>
+      </div>
+
+      <div class="nav">
+        <button type="button" class="btn btn-secondary" onclick="prevStep()">← Atrás</button>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">Siguiente →</button>
       </div>
     </div>
 
-    <div class="divider"></div>
+    <!-- ═══ STEP 4: VISIÓN + ARCHIVOS ═══ -->
+    <div class="step" data-step="4">
+      <div class="step-header">
+        <div class="step-number">Paso 4 de 4</div>
+        <div class="step-title">Visión y evidencia</div>
+        <div class="step-desc">La pregunta más importante y los documentos que nos ayudan a entender su realidad.</div>
+      </div>
 
-    <!-- ═══ PROCESO ═══ -->
-    <div class="section">
-      <div class="section-label">Un caso típico, paso a paso</div>
+      <div class="dark-card">
+        <div class="field" style="margin-bottom:0">
+          <label class="field-label" for="vision" style="font-family:var(--serif);font-size:19px;font-weight:400">Si la IA pudiera resolver <strong>un solo problema</strong> en los próximos 30 días, ¿cuál sería?</label>
+          <div class="field-hint">Esta respuesta define la prioridad #1 de la propuesta.</div>
+          <textarea id="vision" name="vision" placeholder="Escriba aquí…"></textarea>
+        </div>
+      </div>
+
       <div class="field">
-        <label class="field-label">Describa el flujo de un caso o cliente desde que entra hasta que se entrega</label>
-        <div class="field-hint">¿Cómo llega la información? ¿Qué hacen con ella? ¿Dónde se atasca? ¿Cómo se entrega el resultado?</div>
-        <textarea name="flujo_proceso" placeholder="Ej: El cliente manda sus facturas por WhatsApp → alguien las descarga y renombra → se capturan en Contpaq → se cruzan contra el SAT → se genera la declaración → se envía al cliente por email…" style="min-height:120px"></textarea>
+        <label class="field-label" for="datos_digitales">¿Tienen historial digital de sus procesos?</label>
+        <div class="field-hint">Excel, bases de datos, archivos en la nube, PDFs organizados… Esto determina qué tan rápido podemos implementar.</div>
+        <textarea id="datos_digitales" name="datos_digitales" placeholder="Ej: Tenemos todo en Contpaq desde 2020. También hay Excels de conciliaciones y una carpeta compartida con PDFs de clientes…" style="min-height:72px"></textarea>
       </div>
+
       <div class="field">
-        <label class="field-label">¿En qué paso se atasca todo o se acumula trabajo?</label>
-        <textarea name="cuellos_botella" placeholder="Ej: La captura en Contpaq depende de una sola persona — si falta, se para todo…" style="min-height:72px"></textarea>
+        <label class="field-label" for="exito">¿Qué considerarían un éxito en 6 meses?</label>
+        <div class="field-hint">Esto nos alinea en expectativas antes de empezar.</div>
+        <textarea id="exito" name="exito" placeholder="Ej: Que el equipo recupere mínimo 10 horas a la semana y que los errores en declaraciones bajen a cero…" style="min-height:72px"></textarea>
       </div>
-    </div>
 
-    <div class="divider"></div>
-
-    <!-- ═══ ERRORES Y PICOS ═══ -->
-    <div class="section">
-      <div class="section-label">Errores y picos de trabajo</div>
-      <div class="field">
-        <label class="field-label">¿Con qué frecuencia rehacen trabajo por errores humanos y qué cuesta corregirlo?</label>
-        <div class="field-hint">Datos mal capturados, archivos confundidos, declaraciones incorrectas. Incluya el costo: tiempo, multas, relación con el cliente.</div>
-        <textarea name="errores_retrabajo" placeholder="Ej: Mínimo 1-2 veces por semana alguien captura mal un RFC. Corregir una declaración cuesta 3-4 horas + llamada incómoda con el cliente…"></textarea>
-      </div>
-      <div class="field">
-        <label class="field-label">¿Cuáles son los meses o periodos donde la carga se vuelve insostenible?</label>
-        <textarea name="estacionalidad" placeholder="Ej: Marzo-abril por declaración anual. Los primeros 5 días de cada mes por el cierre…" style="min-height:72px"></textarea>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- ═══ VISIÓN ═══ -->
-    <div class="dark-card">
-      <div class="field" style="margin-bottom:0">
-        <label class="field-label" style="font-family:var(--serif);font-size:19px;font-weight:400;">Si la IA pudiera resolver <strong>un solo problema</strong> en 30 días, ¿cuál sería?</label>
-        <div class="field-hint">Esta respuesta define la prioridad #1 de la propuesta.</div>
-        <textarea name="vision" placeholder="Escriba aquí…"></textarea>
-      </div>
-    </div>
-
-    <!-- ═══ ARCHIVOS ═══ -->
-    <div class="section" style="margin-top:32px">
-      <div class="section-label">Archivos de apoyo</div>
+      <!-- FILE UPLOAD -->
       <div class="field">
         <label class="field-label">Suba documentos que representen sus dolores</label>
-        <div class="field-hint">PDFs que les quitan tiempo, capturas de pantalla, formatos, lo que sea útil para entender su operación.</div>
+        <div class="field-hint">Si tienen un formato que llenan a mano o en Excel, eso es exactamente lo que necesitamos ver. También sirven capturas de pantalla de sus procesos.</div>
 
-        <div class="upload-zone" id="uploadZone">
+        <div class="upload-zone" id="uploadZone" tabindex="0" role="button" aria-label="Subir archivos">
           <div class="upload-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           </div>
           <div class="upload-text">Arrastre archivos o haga clic para seleccionar</div>
-          <div class="upload-sub">Cualquier formato — máx. 10 MB por archivo</div>
-          <input type="file" class="upload-input" id="fileInput" multiple>
+          <div class="upload-sub">Cualquier formato — máx. 10 MB por archivo, hasta 10 archivos</div>
+          <input type="file" class="upload-input" id="fileInput" multiple aria-hidden="true">
         </div>
-
+        <div class="upload-count" id="uploadCount"></div>
         <div class="file-list" id="fileList"></div>
 
         <div class="encrypt-badge">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          <div>
-            <strong>Cifrado y confidencial.</strong> Transmisión con cifrado TLS 256 bits. Revisados exclusivamente por Raúl Chío León. No se almacenan en servidores de terceros.
-          </div>
+          <div><strong>Cifrado y confidencial.</strong> Conexión HTTPS cifrada. Sus archivos son revisados exclusivamente por Raúl Chío León. No se almacenan en servidores de terceros ni se comparten con nadie.</div>
         </div>
       </div>
-    </div>
 
-    <!-- ═══ SUBMIT ═══ -->
-    <div class="submit-wrap">
-      <button type="submit" class="btn-submit" id="submitBtn">Enviar Discovery Brief</button>
-      <div class="submit-note">Sus respuestas son confidenciales. Raúl se pondrá en contacto en menos de 24 horas.</div>
-      <div class="error-msg" id="errorMsg"></div>
+      <div class="nav">
+        <button type="button" class="btn btn-secondary" onclick="prevStep()">← Atrás</button>
+        <button type="submit" class="btn btn-submit" id="submitBtn">Enviar Discovery Brief</button>
+      </div>
+      <p class="social-proof">Empresas han reducido hasta 60% su carga operativa tras el diagnóstico.</p>
+      <div class="error-msg" id="errorMsg" role="alert"></div>
     </div>
 
   </form>
 
   <div class="footer">
     <div class="footer-name">Raúl Chío León</div>
-    <div class="footer-role">Ing. en Biotecnología · M.C. en Inteligencia Artificial Aplicada · Tec de Monterrey</div>
+    <div class="footer-role">Consultoría en Inteligencia Artificial</div>
   </div>
 </div>
 
@@ -404,8 +402,10 @@ textarea { min-height: 88px; resize: vertical; line-height: 1.6; }
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
     </div>
     <div class="success-title">Brief recibido</div>
-    <div class="success-text">
-      Gracias por su tiempo. Raúl revisará sus respuestas y se pondrá en contacto en las próximas <strong>24 horas</strong>.
+    <div class="success-text">Gracias por su tiempo. Ya tengo lo que necesito para preparar algo concreto.</div>
+    <div class="success-next">
+      <strong>Siguiente paso:</strong><br>
+      En las próximas 24 horas agendo una llamada de 30 minutos para revisar sus respuestas juntos y presentar las opciones de solución.
     </div>
     <button class="success-close" onclick="location.reload()">Cerrar</button>
   </div>
@@ -413,133 +413,190 @@ textarea { min-height: 88px; resize: vertical; line-height: 1.6; }
 
 <script>
 const WORKER_URL = 'https://discovery-webhook.raul-chio-leon.workers.dev';
+const TOTAL_STEPS = 4;
+const MAX_FILES = 10;
+const MAX_FILE_SIZE = 10 * 1024 * 1024;
+const MAX_TOTAL_SIZE = 50 * 1024 * 1024;
+let currentStep = 1;
 let uploadedFiles = [];
-const MAX_SIZE = 10 * 1024 * 1024;
 
 const PREGUNTAS = [
-  { name: 'contexto_operativo', tag: 'Contexto Operativo' },
-  { name: 'dolor_1', tag: 'Dolor #1' },
-  { name: 'dolor_2', tag: 'Dolor #2' },
-  { name: 'dolor_3', tag: 'Dolor #3' },
-  { name: 'impacto_dolor1', tag: 'Impacto Dolor #1' },
-  { name: 'intentos_previos', tag: 'Intentos Previos' },
-  { name: 'flujo_proceso', tag: 'Flujo de Proceso' },
-  { name: 'cuellos_botella', tag: 'Cuellos de Botella' },
-  { name: 'errores_retrabajo', tag: 'Errores y Retrabajo' },
-  { name: 'estacionalidad', tag: 'Estacionalidad' },
-  { name: 'vision', tag: 'Visión 30 Días' },
+  {name:'decisor',tag:'Decisor'},
+  {name:'equipo',tag:'Equipo'},
+  {name:'volumen',tag:'Volumen'},
+  {name:'software',tag:'Software/Herramientas'},
+  {name:'flujo',tag:'Flujo de Proceso'},
+  {name:'dolor_1',tag:'Dolor #1'},
+  {name:'dolor_2',tag:'Dolor #2'},
+  {name:'dolor_3',tag:'Dolor #3'},
+  {name:'horas_dolor',tag:'Horas/Semana Dolor #1'},
+  {name:'valor_resolver',tag:'Valor Anual de Resolver'},
+  {name:'errores',tag:'Errores y Retrabajo'},
+  {name:'estacionalidad',tag:'Estacionalidad'},
+  {name:'intentos',tag:'Intentos Previos'},
+  {name:'vision',tag:'Visión 30 Días'},
+  {name:'datos_digitales',tag:'Datos Digitales'},
+  {name:'exito',tag:'Criterio de Éxito (6 meses)'},
 ];
 
-// File upload
-const uploadZone = document.getElementById('uploadZone');
-const fileInput = document.getElementById('fileInput');
-const fileList = document.getElementById('fileList');
+// Sanitize text for innerHTML
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
 
-uploadZone.addEventListener('click', () => fileInput.click());
-uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.classList.add('dragover'); });
-uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
-uploadZone.addEventListener('drop', (e) => {
-  e.preventDefault(); uploadZone.classList.remove('dragover');
-  handleFiles(e.dataTransfer.files);
+// Progress
+function updateProgress(){
+  const pct=Math.round(((currentStep-1)/(TOTAL_STEPS-1))*100);
+  document.querySelectorAll('.progress-step').forEach((el,i)=>{
+    el.classList.toggle('done',i+1<currentStep);
+    el.classList.toggle('active',i+1===currentStep);
+  });
+  document.getElementById('progressLabel').textContent=`Paso ${currentStep} de ${TOTAL_STEPS}`;
+  document.getElementById('progressPct').textContent=pct+'%';
+}
+
+function showStep(n){
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.querySelector(`[data-step="${n}"]`).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  updateProgress();
+}
+
+function nextStep(){
+  if(currentStep===1){
+    let valid=true;
+    ['empresa','contacto','contactInfo'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(!el.value.trim()){
+        el.classList.add('error');
+        el.setAttribute('aria-invalid','true');
+        el.addEventListener('input',()=>{el.classList.remove('error');el.removeAttribute('aria-invalid')},{once:true});
+        valid=false;
+      }
+    });
+    if(!valid)return;
+  }
+  if(currentStep<TOTAL_STEPS){currentStep++;showStep(currentStep)}
+}
+function prevStep(){if(currentStep>1){currentStep--;showStep(currentStep)}}
+
+// Sticky progress shadow
+window.addEventListener('scroll',()=>{
+  document.getElementById('progressWrap').classList.toggle('scrolled',window.scrollY>10);
 });
-fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
 
-function handleFiles(files) {
-  for (const file of files) {
-    if (file.size > MAX_SIZE) { alert(`"${file.name}" excede 10 MB.`); continue; }
+// File upload
+const uploadZone=document.getElementById('uploadZone');
+const fileInput=document.getElementById('fileInput');
+const fileList=document.getElementById('fileList');
+
+uploadZone.addEventListener('click',()=>fileInput.click());
+uploadZone.addEventListener('keydown',(e)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();fileInput.click()}});
+uploadZone.addEventListener('dragover',(e)=>{e.preventDefault();uploadZone.classList.add('dragover')});
+uploadZone.addEventListener('dragleave',()=>uploadZone.classList.remove('dragover'));
+uploadZone.addEventListener('drop',(e)=>{e.preventDefault();uploadZone.classList.remove('dragover');handleFiles(e.dataTransfer.files)});
+fileInput.addEventListener('change',(e)=>handleFiles(e.target.files));
+
+function getTotalSize(){return uploadedFiles.reduce((s,f)=>s+f.size,0)}
+
+function handleFiles(files){
+  for(const file of files){
+    if(uploadedFiles.length>=MAX_FILES){alert(`Máximo ${MAX_FILES} archivos.`);break}
+    if(file.size>MAX_FILE_SIZE){alert(`"${file.name}" excede 10 MB.`);continue}
+    if(getTotalSize()+file.size>MAX_TOTAL_SIZE){alert('El total de archivos excede 50 MB.');break}
+    if(uploadedFiles.some(f=>f.name===file.name&&f.size===file.size)){continue}// dedup
+    file._desc='';
     uploadedFiles.push(file);
   }
-  renderFiles(); fileInput.value = '';
+  renderFiles();fileInput.value='';
 }
-function removeFile(idx) { uploadedFiles.splice(idx, 1); renderFiles(); }
-function renderFiles() {
-  fileList.innerHTML = uploadedFiles.map((f, i) => `
-    <div class="file-item" style="flex-wrap:wrap">
-      <div class="file-info" style="display:flex;align-items:center;gap:10px;width:100%">
-        <div style="flex:1;min-width:0">
-          <div class="file-name">${f.name}</div>
+function removeFile(idx){uploadedFiles.splice(idx,1);renderFiles()}
+
+function renderFiles(){
+  const countEl=document.getElementById('uploadCount');
+  if(uploadedFiles.length>0){
+    const totalMB=(getTotalSize()/1024/1024).toFixed(1);
+    countEl.textContent=`${uploadedFiles.length} archivo${uploadedFiles.length>1?'s':''} · ${totalMB} MB total`;
+  }else{countEl.textContent=''}
+
+  fileList.innerHTML=uploadedFiles.map((f,i)=>`
+    <div class="file-item">
+      <div class="file-top">
+        <div class="file-info">
+          <div class="file-name">${esc(f.name)}</div>
           <div class="file-size">${(f.size/1024).toFixed(0)} KB</div>
         </div>
-        <button type="button" class="file-remove" onclick="removeFile(${i})">
+        <button type="button" class="file-remove" onclick="removeFile(${i})" aria-label="Eliminar ${esc(f.name)}">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
       </div>
-      <input type="text" class="file-desc" data-file-idx="${i}" placeholder="¿Qué es este archivo y qué representa?" value="${f._desc || ''}">
+      <input type="text" class="file-desc" data-file-idx="${i}" placeholder="¿Qué es este archivo y qué representa?" value="${esc(f._desc||'')}">
     </div>
   `).join('');
-  // Bind description inputs
-  fileList.querySelectorAll('.file-desc').forEach(el => {
-    el.addEventListener('input', (e) => {
-      uploadedFiles[parseInt(e.target.dataset.fileIdx)]._desc = e.target.value;
-    });
+  fileList.querySelectorAll('.file-desc').forEach(el=>{
+    el.addEventListener('input',(e)=>{uploadedFiles[parseInt(e.target.dataset.fileIdx)]._desc=e.target.value})
   });
 }
-function fileToBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result.split(',')[1]);
-    reader.onerror = reject;
+
+function fileToBase64(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(reader.result.split(',')[1]);
+    reader.onerror=reject;
     reader.readAsDataURL(file);
   });
 }
 
 // Submit
-document.getElementById('discoveryForm').addEventListener('submit', async (e) => {
+document.getElementById('discoveryForm').addEventListener('submit',async(e)=>{
   e.preventDefault();
-  const btn = document.getElementById('submitBtn');
-  const errEl = document.getElementById('errorMsg');
+  const btn=document.getElementById('submitBtn');
+  const errEl=document.getElementById('errorMsg');
 
-  // Validate required
-  let valid = true;
-  ['empresa','contacto','contactInfo'].forEach(id => {
-    const el = document.getElementById(id);
-    if (!el.value.trim()) {
-      el.style.borderColor = 'var(--red)';
-      el.addEventListener('input', () => { el.style.borderColor = ''; }, { once: true });
-      valid = false;
-    }
-  });
-  if (!valid) { document.getElementById('empresa').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+  btn.disabled=true;btn.textContent='Enviando…';errEl.classList.remove('show');
 
-  btn.disabled = true; btn.textContent = 'Enviando…';
-  errEl.classList.remove('show');
-
-  const form = e.target;
-  const payload = {
-    despacho: document.getElementById('empresa').value,
-    giro: document.getElementById('giro')?.value || '',
-    contacto: document.getElementById('contacto').value,
-    contactInfo: document.getElementById('contactInfo').value,
-    preguntas: PREGUNTAS.map(p => ({
-      tag: p.tag,
-      pregunta: p.tag,
-      respuesta: form.querySelector(`[name="${p.name}"]`)?.value || '(sin respuesta)',
+  const form=e.target;
+  const payload={
+    despacho:document.getElementById('empresa').value,
+    giro:document.getElementById('giro')?.value||'',
+    contacto:document.getElementById('contacto').value,
+    contactInfo:document.getElementById('contactInfo').value,
+    preguntas:PREGUNTAS.map(p=>({
+      tag:p.tag,
+      pregunta:p.tag,
+      respuesta:form.querySelector(`[name="${p.name}"]`)?.value||form.querySelector(`#${p.name}`)?.value||'(sin respuesta)',
     })),
-    archivos: [],
+    archivos:[],
   };
 
-  for (const file of uploadedFiles) {
-    try {
-      const b64 = await fileToBase64(file);
-      payload.archivos.push({ name: file.name, type: file.type, size: file.size, data: b64, desc: file._desc || '' });
-    } catch (err) { console.error(err); }
+  // Convert files
+  let fileErrors=0;
+  for(const file of uploadedFiles){
+    try{
+      const b64=await fileToBase64(file);
+      payload.archivos.push({name:file.name,type:file.type,size:file.size,data:b64,desc:file._desc||''});
+    }catch(err){fileErrors++;console.error(err)}
   }
-
-  try {
-    const res = await fetch(WORKER_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-    if (res.ok) {
-      document.getElementById('successOverlay').classList.add('show');
-      form.reset(); uploadedFiles = []; renderFiles();
-    } else {
-      errEl.textContent = 'Error al enviar. Intente de nuevo o contacte directamente a Raúl.';
-      errEl.classList.add('show');
-    }
-  } catch (err) {
-    errEl.textContent = 'Error de conexión. Verifique su internet.';
+  if(fileErrors>0&&uploadedFiles.length>0){
+    errEl.textContent=`${fileErrors} archivo(s) no se pudieron procesar. El resto se enviará.`;
     errEl.classList.add('show');
   }
-  btn.disabled = false; btn.textContent = 'Enviar Discovery Brief';
+
+  try{
+    const res=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    if(res.ok){
+      document.getElementById('successOverlay').classList.add('show');
+      form.reset();uploadedFiles=[];renderFiles();currentStep=1;showStep(1);
+    }else{
+      errEl.textContent='Error al enviar. Intente de nuevo o contacte directamente a Raúl.';
+      errEl.classList.add('show');
+    }
+  }catch(err){
+    errEl.textContent='Error de conexión. Verifique su internet.';
+    errEl.classList.add('show');
+  }
+  btn.disabled=false;btn.textContent='Enviar Discovery Brief';
 });
+
+updateProgress();
 </script>
 </body>
 </html>
