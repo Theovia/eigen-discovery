@@ -67,6 +67,9 @@
     margin: 0 auto;
     line-height: 1.7;
   }
+  .header p.header-sub {
+    margin-top: 8px;
+  }
 
   /* ── PROGRESS ── */
   .progress-wrap {
@@ -140,7 +143,7 @@
     margin-bottom: 16px;
   }
 
-  .card textarea, .card input, .card select {
+  .card textarea, .card input[type="text"], .card input[type="email"], .card select {
     width: 100%;
     font-family: var(--font);
     font-size: 15px;
@@ -157,19 +160,12 @@
     resize: vertical;
     line-height: 1.6;
   }
-  .card textarea:focus, .card input:focus, .card select:focus {
+  .card textarea:focus, .card input[type="text"]:focus, .card input[type="email"]:focus, .card select:focus {
     border-color: var(--accent);
     box-shadow: 0 0 0 3px rgba(196, 162, 101, 0.12);
   }
   .card textarea::placeholder, .card input::placeholder {
     color: #b5b3ae;
-  }
-  .card select {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5' stroke='%2371706b' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    padding-right: 36px;
   }
 
   /* ── RANGE SLIDER ── */
@@ -253,6 +249,35 @@
   }
   .context-box strong { color: var(--text); }
 
+  /* ── ROLE SELECTOR (Step 0) ── */
+  .role-card {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-align: center;
+  }
+  .role-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  }
+  .role-card:active { transform: translateY(0); }
+  .role-card .role-icon { font-size: 36px; margin-bottom: 12px; }
+  .role-card .role-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .role-card .role-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
   /* ── NAV ── */
   .nav {
     display: flex;
@@ -319,6 +344,7 @@
     .header { padding: 32px 0 24px; }
     .header h1 { font-size: 21px; }
     .card { padding: 20px 18px; }
+    .role-card { padding: 24px 18px; }
   }
 </style>
 </head>
@@ -329,24 +355,45 @@
   <!-- HEADER -->
   <div class="header">
     <div class="header-badge">🔒 Confidencial</div>
-    <h1>Cuestionario Operativo</h1>
-    <p>Hola — soy Raúl. Ya platiqué con Edmundo sobre el despacho. Ahora necesito entender <strong>desde su perspectiva</strong> qué procesos les quitan más tiempo. Son ~5 minutos.</p>
+    <h1 id="mainTitle">Cuestionario Operativo</h1>
+    <p id="mainDesc">Hola — soy Raúl. Ya platiqué con Edmundo sobre el despacho. Necesito entender <strong>desde su perspectiva</strong> qué procesos les quitan más tiempo. Son ~5 minutos.</p>
   </div>
 
   <!-- PROGRESS -->
-  <div class="progress-wrap">
+  <div class="progress-wrap" id="progressWrap" style="display:none;">
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-    <div class="progress-text" id="progressText">Paso 1 de 5</div>
+    <div class="progress-text" id="progressText"></div>
   </div>
 
-  <form id="briefForm">
+  <!-- ═══ STEP 0: Selector de perfil ═══ -->
+  <div class="step active" data-step="0">
+    <div class="card" style="border: none; background: transparent; padding: 0 0 8px;">
+      <div class="card-question" style="text-align: center; font-size: 15px; color: var(--muted); font-weight: 400;">¿Quién está contestando?</div>
+    </div>
+    <div class="role-card" onclick="selectProfile('owner')">
+      <div class="role-icon">👔</div>
+      <div class="role-title">Edmundo</div>
+      <div class="role-desc">Dueño / director del despacho</div>
+    </div>
+    <div class="role-card" onclick="selectProfile('team')">
+      <div class="role-icon">💼</div>
+      <div class="role-title">Equipo del despacho</div>
+      <div class="role-desc">Colaboradora o miembro del equipo operativo</div>
+    </div>
+  </div>
 
-  <!-- ═══ STEP 1: Quién eres ═══ -->
-  <div class="step active" data-step="1">
+  <form id="briefForm" style="display:none;">
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- TEAM PATH: Steps 1-5 (original)    -->
+  <!-- ═══════════════════════════════════ -->
+
+  <!-- TEAM STEP 1: Quién eres -->
+  <div class="step" data-step="t1">
     <div class="card">
       <div class="card-label">Sobre usted</div>
       <div class="card-question">¿Cuál es su nombre?</div>
-      <input type="text" name="nombre" placeholder="Ej: María García" required>
+      <input type="text" name="nombre" placeholder="Ej: María García">
     </div>
 
     <div class="card">
@@ -360,16 +407,17 @@
         <div class="chip" data-value="Atención a clientes">Atención a clientes</div>
         <div class="chip" data-value="Todo un poco">Un poco de todo</div>
       </div>
-      <input type="hidden" name="rol" required>
+      <input type="hidden" name="rol">
     </div>
 
     <div class="nav">
-      <button type="button" class="btn btn-next" onclick="goStep(2)">Siguiente →</button>
+      <button type="button" class="btn btn-back" onclick="goStep('0')">← Atrás</button>
+      <button type="button" class="btn btn-next" onclick="goStep('t2')">Siguiente →</button>
     </div>
   </div>
 
-  <!-- ═══ STEP 2: Los 3 dolores ═══ -->
-  <div class="step" data-step="2">
+  <!-- TEAM STEP 2: Los 3 dolores -->
+  <div class="step" data-step="t2">
     <div class="context-box">
       Edmundo nos contó que la <strong>reclasificación de facturas</strong> y la <strong>captura manual</strong> son los procesos más pesados. Queremos saber si desde su experiencia diaria hay algo más que les quite tiempo.
     </div>
@@ -394,13 +442,13 @@
     </div>
 
     <div class="nav">
-      <button type="button" class="btn btn-back" onclick="goStep(1)">← Atrás</button>
-      <button type="button" class="btn btn-next" onclick="goStep(3)">Siguiente →</button>
+      <button type="button" class="btn btn-back" onclick="goStep('t1')">← Atrás</button>
+      <button type="button" class="btn btn-next" onclick="goStep('t3')">Siguiente →</button>
     </div>
   </div>
 
-  <!-- ═══ STEP 3: Tiempo y volumen ═══ -->
-  <div class="step" data-step="3">
+  <!-- TEAM STEP 3: Tiempo y volumen -->
+  <div class="step" data-step="t3">
     <div class="card">
       <div class="card-label">Volumen</div>
       <div class="card-question">¿Cuántos clientes maneja usted directamente?</div>
@@ -430,13 +478,13 @@
     </div>
 
     <div class="nav">
-      <button type="button" class="btn btn-back" onclick="goStep(2)">← Atrás</button>
-      <button type="button" class="btn btn-next" onclick="goStep(4)">Siguiente →</button>
+      <button type="button" class="btn btn-back" onclick="goStep('t2')">← Atrás</button>
+      <button type="button" class="btn btn-next" onclick="goStep('t4')">Siguiente →</button>
     </div>
   </div>
 
-  <!-- ═══ STEP 4: Herramientas y flujo ═══ -->
-  <div class="step" data-step="4">
+  <!-- TEAM STEP 4: Herramientas y flujo -->
+  <div class="step" data-step="t4">
     <div class="context-box">
       Ya sabemos que usan <strong>Contpaq</strong> como sistema principal y un <strong>sistema de descarga masiva</strong> de facturas. Aquí queremos entender qué más usan y dónde hay trabajo manual entre un sistema y otro.
     </div>
@@ -468,13 +516,13 @@
     </div>
 
     <div class="nav">
-      <button type="button" class="btn btn-back" onclick="goStep(3)">← Atrás</button>
-      <button type="button" class="btn btn-next" onclick="goStep(5)">Siguiente →</button>
+      <button type="button" class="btn btn-back" onclick="goStep('t3')">← Atrás</button>
+      <button type="button" class="btn btn-next" onclick="goStep('t5')">Siguiente →</button>
     </div>
   </div>
 
-  <!-- ═══ STEP 5: La pregunta final ═══ -->
-  <div class="step" data-step="5">
+  <!-- TEAM STEP 5: Pregunta final -->
+  <div class="step" data-step="t5">
     <div class="card" style="background: var(--text); color: white; border-color: transparent;">
       <div class="card-label" style="color: var(--accent);">Pregunta final</div>
       <div class="card-question" style="font-size: 18px; color: white;">
@@ -491,8 +539,151 @@
     </div>
 
     <div class="nav">
-      <button type="button" class="btn btn-back" onclick="goStep(4)">← Atrás</button>
+      <button type="button" class="btn btn-back" onclick="goStep('t4')">← Atrás</button>
       <button type="submit" class="btn btn-submit" id="submitBtn">Enviar ✓</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- OWNER PATH: Steps o1-o5            -->
+  <!-- ═══════════════════════════════════ -->
+
+  <!-- OWNER STEP 1: Contexto del despacho -->
+  <div class="step" data-step="o1">
+    <div class="context-box">
+      Edmundo, esto es para complementar lo que ya platicamos. Quiero capturar tu perspectiva como dueño — lo estratégico que tu equipo no necesariamente ve.
+    </div>
+
+    <div class="card">
+      <div class="card-label">Tu despacho hoy</div>
+      <div class="card-question">¿Cuántas personas trabajan contigo y qué hace cada una?</div>
+      <div class="card-hint">No necesito nombres — más bien roles. Ej: "2 contadoras generales, 1 de nóminas, 1 auxiliar".</div>
+      <textarea name="o_equipo" placeholder="Describe brevemente tu equipo..."></textarea>
+    </div>
+
+    <div class="card">
+      <div class="card-question">¿Cuántos clientes manejan en total?</div>
+      <div class="range-wrap">
+        <div class="range-value" id="oClientesVal">30</div>
+        <div class="range-unit">clientes</div>
+        <input type="range" name="o_clientes_total" min="5" max="200" value="30" step="5" oninput="document.getElementById('oClientesVal').textContent=this.value">
+        <div class="range-labels"><span>5</span><span>100</span><span>200</span></div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button type="button" class="btn btn-back" onclick="goStep('0')">← Atrás</button>
+      <button type="button" class="btn btn-next" onclick="goStep('o2')">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- OWNER STEP 2: Dolores estratégicos -->
+  <div class="step" data-step="o2">
+    <div class="card">
+      <div class="card-label">Cuello de botella #1</div>
+      <div class="card-question">¿Qué proceso del despacho te quita el sueño?</div>
+      <div class="card-hint">Lo que frena el crecimiento, genera errores, o te obliga a ti a intervenir cuando no deberías.</div>
+      <textarea name="o_cuello1" placeholder="El proceso que más te preocupa..."></textarea>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Cuello de botella #2</div>
+      <div class="card-question">¿Hay algo que dependa 100% de una persona y si no está, se para todo?</div>
+      <textarea name="o_cuello2" placeholder="Personas clave sin las cuales no funciona algo..."></textarea>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Errores</div>
+      <div class="card-question">¿Qué tipo de errores se repiten seguido?</div>
+      <div class="card-hint">Ej: facturas mal clasificadas, declaraciones con datos incorrectos, clientes que reciben info equivocada.</div>
+      <textarea name="o_errores" placeholder="Errores recurrentes que te cuestan tiempo o dinero..."></textarea>
+    </div>
+
+    <div class="nav">
+      <button type="button" class="btn btn-back" onclick="goStep('o1')">← Atrás</button>
+      <button type="button" class="btn btn-next" onclick="goStep('o3')">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- OWNER STEP 3: Intentos previos y herramientas -->
+  <div class="step" data-step="o3">
+    <div class="card">
+      <div class="card-label">Lo que ya intentaste</div>
+      <div class="card-question">¿Has intentado automatizar o mejorar algún proceso antes?</div>
+      <div class="card-hint">Puede ser software que compraste, consultor que contrataste, proceso que reorganizaste. Nos sirve saber qué ya probaron.</div>
+      <textarea name="o_intentos" placeholder="Qué intentaste y qué pasó..."></textarea>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Stack tecnológico</div>
+      <div class="card-question">¿Qué sistemas usan hoy?</div>
+      <div class="chips" data-name="o_sistemas" data-multi="true">
+        <div class="chip" data-value="Contpaq">Contpaq</div>
+        <div class="chip" data-value="Aspel/COI">Aspel/COI</div>
+        <div class="chip" data-value="Excel">Excel</div>
+        <div class="chip" data-value="Portal SAT">Portal SAT</div>
+        <div class="chip" data-value="Sistema de descarga masiva">Descarga masiva</div>
+        <div class="chip" data-value="Facturador">Facturador</div>
+        <div class="chip" data-value="Otro">Otro</div>
+      </div>
+      <input type="hidden" name="o_sistemas">
+      <textarea name="o_sistemas_otro" placeholder="Si seleccionaste 'Otro', cuéntanos cuáles..." style="margin-top: 12px; min-height: 60px;"></textarea>
+    </div>
+
+    <div class="nav">
+      <button type="button" class="btn btn-back" onclick="goStep('o2')">← Atrás</button>
+      <button type="button" class="btn btn-next" onclick="goStep('o4')">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- OWNER STEP 4: Visión y expectativas -->
+  <div class="step" data-step="o4">
+    <div class="card">
+      <div class="card-label">Visión</div>
+      <div class="card-question">Si todo funcionara perfecto, ¿cómo se vería tu despacho en 6 meses?</div>
+      <div class="card-hint">Más clientes con la misma gente, menos errores, menos horas extras, poder delegar más... lo que sea.</div>
+      <textarea name="o_vision" placeholder="El escenario ideal..."></textarea>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Expectativa concreta</div>
+      <div class="card-question">¿Qué resultado necesitarías ver para decir "valió la pena"?</div>
+      <div class="card-hint">Algo medible: "reducir X horas", "eliminar errores en Y", "poder atender Z clientes más".</div>
+      <textarea name="o_resultado" placeholder="El resultado que justifica la inversión..."></textarea>
+    </div>
+
+    <div class="card">
+      <div class="card-question">¿Hay algún deadline o periodo que haga esto urgente?</div>
+      <div class="card-hint">Ej: "quiero resolverlo antes de las anuales de abril", "este trimestre quiero crecer la cartera".</div>
+      <textarea name="o_timeline" placeholder="¿Cuándo necesitas que esto esté funcionando?"></textarea>
+    </div>
+
+    <div class="nav">
+      <button type="button" class="btn btn-back" onclick="goStep('o3')">← Atrás</button>
+      <button type="button" class="btn btn-next" onclick="goStep('o5')">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- OWNER STEP 5: Pregunta final -->
+  <div class="step" data-step="o5">
+    <div class="card" style="background: var(--text); color: white; border-color: transparent;">
+      <div class="card-label" style="color: var(--accent);">Pregunta final</div>
+      <div class="card-question" style="font-size: 18px; color: white;">
+        Si pudieras resolver <strong style="color: var(--accent);">un solo problema</strong> del despacho mañana, ¿cuál sería?
+      </div>
+      <div class="card-hint" style="color: #999;">Esto define la prioridad #1 de la propuesta.</div>
+      <textarea name="o_prioridad" placeholder="El problema #1..." style="background: rgba(255,255,255,0.08); color: white; border-color: rgba(255,255,255,0.15);"></textarea>
+    </div>
+
+    <div class="card">
+      <div class="card-question">¿Algo más que quieras agregar?</div>
+      <div class="card-hint">Contexto extra que no hayamos cubierto.</div>
+      <textarea name="o_adicional" placeholder="Opcional..."></textarea>
+    </div>
+
+    <div class="nav">
+      <button type="button" class="btn btn-back" onclick="goStep('o4')">← Atrás</button>
+      <button type="submit" class="btn btn-submit" id="submitBtnOwner">Enviar ✓</button>
     </div>
   </div>
 
@@ -502,7 +693,7 @@
   <div class="success-screen" id="successScreen">
     <div class="success-icon">✦</div>
     <h2>¡Listo, gracias!</h2>
-    <p>Sus respuestas ya llegaron. Raúl las revisará y preparará una propuesta personalizada para el despacho. No necesita hacer nada más.</p>
+    <p id="successMsg">Sus respuestas ya llegaron. Raúl las revisará y preparará una propuesta personalizada para el despacho.</p>
   </div>
 
   <div class="footer">
@@ -513,16 +704,54 @@
 
 <script>
 const WORKER_URL = 'https://discovery-webhook.raul-chio-leon.workers.dev';
-const TOTAL_STEPS = 5;
-let currentStep = 1;
+let currentProfile = null; // 'owner' or 'team'
+let currentStep = '0';
 
-function goStep(n) {
-  if (n < 1 || n > TOTAL_STEPS) return;
-  document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
-  document.querySelector(`.step[data-step="${n}"]`).classList.add('active');
-  currentStep = n;
-  document.getElementById('progressFill').style.width = ((n / TOTAL_STEPS) * 100) + '%';
-  document.getElementById('progressText').textContent = `Paso ${n} de ${TOTAL_STEPS}`;
+const TEAM_STEPS = ['t1','t2','t3','t4','t5'];
+const OWNER_STEPS = ['o1','o2','o3','o4','o5'];
+
+function selectProfile(profile) {
+  currentProfile = profile;
+  document.getElementById('briefForm').style.display = 'block';
+  document.getElementById('progressWrap').style.display = 'block';
+
+  if (profile === 'owner') {
+    document.getElementById('mainTitle').textContent = 'Cuestionario Estratégico';
+    document.getElementById('mainDesc').innerHTML = 'Edmundo — esto complementa lo que ya platicamos. Quiero capturar <strong>tu perspectiva como dueño</strong>: los cuellos de botella, la visión y qué resultado esperarías. ~5 minutos.';
+    goStep('o1');
+  } else {
+    document.getElementById('mainTitle').textContent = 'Cuestionario Operativo';
+    document.getElementById('mainDesc').innerHTML = 'Hola — soy Raúl. Ya platiqué con Edmundo sobre el despacho. Necesito entender <strong>desde su perspectiva</strong> qué procesos les quitan más tiempo. Son ~5 minutos.';
+    goStep('t1');
+  }
+}
+
+function goStep(stepId) {
+  // Hide current
+  const cur = document.querySelector(`.step[data-step="${currentStep}"]`);
+  if (cur) cur.classList.remove('active');
+
+  // If going back to step 0, hide form & progress
+  if (stepId === '0') {
+    document.getElementById('briefForm').style.display = 'none';
+    document.getElementById('progressWrap').style.display = 'none';
+    currentProfile = null;
+  }
+
+  // Show target
+  const target = document.querySelector(`.step[data-step="${stepId}"]`);
+  if (target) target.classList.add('active');
+  currentStep = stepId;
+
+  // Update progress
+  const steps = currentProfile === 'owner' ? OWNER_STEPS : TEAM_STEPS;
+  const idx = steps.indexOf(stepId);
+  if (idx >= 0) {
+    const pct = ((idx + 1) / steps.length) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressText').textContent = `Paso ${idx + 1} de ${steps.length}`;
+  }
+
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -547,30 +776,56 @@ document.querySelectorAll('.chips').forEach(group => {
 // Submit
 document.getElementById('briefForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const btn = document.getElementById('submitBtn');
+  const btn = currentProfile === 'owner' ? document.getElementById('submitBtnOwner') : document.getElementById('submitBtn');
   btn.disabled = true;
   btn.textContent = 'Enviando...';
 
   const fd = new FormData(e.target);
-  const data = {
-    despacho: 'Despacho Edmundo',
-    contacto: fd.get('nombre') || '(sin nombre)',
-    contactInfo: 'Vía brief personalizado',
-    preguntas: [
-      { tag: 'Rol', pregunta: 'Rol principal en el despacho', respuesta: fd.get('rol') || '(sin selección)' },
-      { tag: 'Dolor #1', pregunta: 'Tarea que más tiempo quita en la semana', respuesta: fd.get('dolor1') || '(sin respuesta)' },
-      { tag: 'Dolor #2', pregunta: 'Otra tarea repetitiva que quisiera eliminar', respuesta: fd.get('dolor2') || '(sin respuesta)' },
-      { tag: 'Dolor #3', pregunta: 'Algo que hacen a mano y que una computadora debería hacer', respuesta: fd.get('dolor3') || '(sin respuesta)' },
-      { tag: 'Clientes', pregunta: 'Cuántos clientes maneja directamente', respuesta: fd.get('clientes') || '?' },
-      { tag: 'Horas manuales', pregunta: 'Horas al día de trabajo manual', respuesta: fd.get('horas_manuales') || '?' },
-      { tag: 'Picos de carga', pregunta: 'Meses o periodos donde la carga es insostenible', respuesta: fd.get('picos') || '(sin respuesta)' },
-      { tag: 'Herramientas', pregunta: 'Programas y portales que usa diariamente', respuesta: fd.get('herramientas') || '(sin respuesta)' },
-      { tag: 'Transferencia manual', pregunta: 'Dónde copia datos de un programa a otro', respuesta: fd.get('transferencia') || '(sin respuesta)' },
-      { tag: 'Canales de entrada', pregunta: 'Cómo reciben información de clientes', respuesta: fd.get('canales') || '(sin selección)' },
-      { tag: '⭐ Prioridad #1', pregunta: 'Si pudieran quitarle una sola tarea de encima para siempre', respuesta: fd.get('prioridad') || '(sin respuesta)' },
-      { tag: 'Comentarios', pregunta: 'Algo adicional', respuesta: fd.get('adicional') || '(nada)' },
-    ],
-  };
+  let data;
+
+  if (currentProfile === 'owner') {
+    data = {
+      despacho: 'Despacho Edmundo',
+      contacto: 'Edmundo (Dueño)',
+      contactInfo: 'Vía brief personalizado',
+      perfil: 'dueño',
+      preguntas: [
+        { tag: 'Equipo', pregunta: 'Personas que trabajan contigo y qué hace cada una', respuesta: fd.get('o_equipo') || '(sin respuesta)' },
+        { tag: 'Clientes totales', pregunta: 'Cuántos clientes manejan en total', respuesta: fd.get('o_clientes_total') || '?' },
+        { tag: 'Cuello de botella #1', pregunta: 'Qué proceso te quita el sueño', respuesta: fd.get('o_cuello1') || '(sin respuesta)' },
+        { tag: 'Cuello de botella #2', pregunta: 'Persona de la que depende todo', respuesta: fd.get('o_cuello2') || '(sin respuesta)' },
+        { tag: 'Errores recurrentes', pregunta: 'Errores que se repiten seguido', respuesta: fd.get('o_errores') || '(sin respuesta)' },
+        { tag: 'Intentos previos', pregunta: 'Qué has intentado automatizar antes', respuesta: fd.get('o_intentos') || '(sin respuesta)' },
+        { tag: 'Sistemas', pregunta: 'Stack tecnológico actual', respuesta: [fd.get('o_sistemas'), fd.get('o_sistemas_otro')].filter(Boolean).join('. ') || '(sin respuesta)' },
+        { tag: 'Visión 6 meses', pregunta: 'Cómo se vería tu despacho si todo funcionara perfecto', respuesta: fd.get('o_vision') || '(sin respuesta)' },
+        { tag: 'Resultado esperado', pregunta: 'Qué resultado necesitarías ver para decir que valió la pena', respuesta: fd.get('o_resultado') || '(sin respuesta)' },
+        { tag: 'Timeline', pregunta: 'Deadline o urgencia', respuesta: fd.get('o_timeline') || '(sin respuesta)' },
+        { tag: '⭐ Prioridad #1', pregunta: 'Si pudieras resolver un solo problema mañana', respuesta: fd.get('o_prioridad') || '(sin respuesta)' },
+        { tag: 'Comentarios', pregunta: 'Algo adicional', respuesta: fd.get('o_adicional') || '(nada)' },
+      ],
+    };
+  } else {
+    data = {
+      despacho: 'Despacho Edmundo',
+      contacto: fd.get('nombre') || '(sin nombre)',
+      contactInfo: 'Vía brief personalizado',
+      perfil: 'equipo',
+      preguntas: [
+        { tag: 'Rol', pregunta: 'Rol principal en el despacho', respuesta: fd.get('rol') || '(sin selección)' },
+        { tag: 'Dolor #1', pregunta: 'Tarea que más tiempo quita en la semana', respuesta: fd.get('dolor1') || '(sin respuesta)' },
+        { tag: 'Dolor #2', pregunta: 'Otra tarea repetitiva que quisiera eliminar', respuesta: fd.get('dolor2') || '(sin respuesta)' },
+        { tag: 'Dolor #3', pregunta: 'Algo que hacen a mano y que una computadora debería hacer', respuesta: fd.get('dolor3') || '(sin respuesta)' },
+        { tag: 'Clientes', pregunta: 'Cuántos clientes maneja directamente', respuesta: fd.get('clientes') || '?' },
+        { tag: 'Horas manuales', pregunta: 'Horas al día de trabajo manual', respuesta: fd.get('horas_manuales') || '?' },
+        { tag: 'Picos de carga', pregunta: 'Meses o periodos donde la carga es insostenible', respuesta: fd.get('picos') || '(sin respuesta)' },
+        { tag: 'Herramientas', pregunta: 'Programas y portales que usa diariamente', respuesta: fd.get('herramientas') || '(sin respuesta)' },
+        { tag: 'Transferencia manual', pregunta: 'Dónde copia datos de un programa a otro', respuesta: fd.get('transferencia') || '(sin respuesta)' },
+        { tag: 'Canales de entrada', pregunta: 'Cómo reciben información de clientes', respuesta: fd.get('canales') || '(sin selección)' },
+        { tag: '⭐ Prioridad #1', pregunta: 'Si pudieran quitarle una sola tarea de encima para siempre', respuesta: fd.get('prioridad') || '(sin respuesta)' },
+        { tag: 'Comentarios', pregunta: 'Algo adicional', respuesta: fd.get('adicional') || '(nada)' },
+      ],
+    };
+  }
 
   try {
     const res = await fetch(WORKER_URL, {
@@ -580,7 +835,11 @@ document.getElementById('briefForm').addEventListener('submit', async (e) => {
     });
     if (res.ok) {
       document.getElementById('briefForm').style.display = 'none';
-      document.querySelector('.progress-wrap').style.display = 'none';
+      document.getElementById('progressWrap').style.display = 'none';
+      const msg = currentProfile === 'owner'
+        ? 'Tus respuestas ya llegaron. Con esto y lo que conteste tu equipo, prepararé una propuesta concreta.'
+        : 'Sus respuestas ya llegaron. Raúl las revisará y preparará una propuesta personalizada para el despacho. No necesita hacer nada más.';
+      document.getElementById('successMsg').textContent = msg;
       document.getElementById('successScreen').classList.add('show');
     } else {
       alert('Error al enviar. Intente de nuevo o contacte a Raúl directamente.');
@@ -591,9 +850,6 @@ document.getElementById('briefForm').addEventListener('submit', async (e) => {
   btn.disabled = false;
   btn.textContent = 'Enviar ✓';
 });
-
-// Init progress
-document.getElementById('progressFill').style.width = ((1 / TOTAL_STEPS) * 100) + '%';
 </script>
 </body>
 </html>
