@@ -717,9 +717,9 @@
 
   <!-- SUCCESS -->
   <div class="success-screen" id="successScreen">
-    <div class="success-icon">✦</div>
-    <h2>¡Listo, gracias!</h2>
-    <p id="successMsg">Sus respuestas ya llegaron. Raúl las revisará y preparará una propuesta personalizada para el despacho.</p>
+    <div class="success-icon">✓</div>
+    <h2>Respuestas recibidas</h2>
+    <p id="successMsg">Raúl preparará una propuesta con base en esta información. Te contactará en las próximas 24 horas.</p>
   </div>
 
   <div class="footer">
@@ -866,7 +866,7 @@ document.getElementById('briefForm').addEventListener('submit', async (e) => {
       document.getElementById('briefForm').style.display = 'none';
       document.getElementById('progressWrap').style.display = 'none';
       const msg = currentProfile === 'owner'
-        ? 'Tus respuestas ya llegaron. Con esto y lo que conteste tu equipo, prepararé una propuesta concreta.'
+        ? 'Información recibida. Con esto y las respuestas del equipo, Raúl preparará la propuesta. Contacto en menos de 24 horas.'
         : 'Sus respuestas ya llegaron. Raúl las revisará y preparará una propuesta personalizada para el despacho. No necesita hacer nada más.';
       document.getElementById('successMsg').textContent = msg;
       document.getElementById('successScreen').classList.add('show');
