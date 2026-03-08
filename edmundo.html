@@ -391,18 +391,19 @@
   <!-- TEAM STEP 1: Quién eres -->
   <div class="step" data-step="t1">
     <div class="card">
-      <div class="card-label">Sobre usted</div>
-      <div class="card-question">¿Cuál es su nombre?</div>
+      <div class="card-label">Sobre ti</div>
+      <div class="card-question">¿Cómo te llamas?</div>
       <input type="text" name="nombre" placeholder="Ej: María García">
     </div>
 
     <div class="card">
-      <div class="card-question">¿Cuál es su rol principal en el despacho?</div>
-      <div class="card-hint">Seleccione lo que mejor describa su función día a día.</div>
+      <div class="card-question">¿Cuál es tu rol principal en el despacho?</div>
+      <div class="card-hint">Selecciona lo que mejor describa tu día a día.</div>
       <div class="chips" data-name="rol">
         <div class="chip" data-value="Contabilidad general">Contabilidad general</div>
         <div class="chip" data-value="Nómina y seguro social">Nómina y seguro social</div>
         <div class="chip" data-value="Cálculo y presentación de impuestos">Impuestos</div>
+        <div class="chip" data-value="Fiscal y declaraciones">Fiscal / declaraciones</div>
         <div class="chip" data-value="Estados financieros y reportes">Reportes financieros</div>
         <div class="chip" data-value="Atención a clientes">Atención a clientes</div>
         <div class="chip" data-value="Todo un poco">Un poco de todo</div>
@@ -424,21 +425,22 @@
 
     <div class="card">
       <div class="card-label">Dolor #1</div>
-      <div class="card-question">¿Qué tarea le quita más tiempo en la semana?</div>
-      <div class="card-hint">Sea específica: "reclasificar 200 facturas nuevas al mes" es mejor que "captura de datos".</div>
-      <textarea name="dolor1" placeholder="Describa la tarea y aproximadamente cuántas horas le dedica por semana..."></textarea>
+      <div class="card-question">¿Qué tarea te quita más tiempo en la semana?</div>
+      <div class="card-hint">Sé específica: "reclasificar 200 facturas nuevas al mes" es mejor que "captura de datos".</div>
+      <textarea name="dolor1" placeholder="Describe la tarea y más o menos cuántas horas le dedicas por semana..."></textarea>
     </div>
 
     <div class="card">
       <div class="card-label">Dolor #2</div>
-      <div class="card-question">¿Qué otra tarea repetitiva le gustaría no tener que hacer?</div>
+      <div class="card-question">¿Qué otra tarea repetitiva te gustaría no tener que hacer?</div>
       <textarea name="dolor2" placeholder="Puede ser algo que no es difícil pero consume mucho tiempo..."></textarea>
     </div>
 
     <div class="card">
       <div class="card-label">Dolor #3</div>
-      <div class="card-question">¿Hay algo que hagan a mano y que sienta que una computadora debería poder hacer?</div>
-      <textarea name="dolor3" placeholder="Copiar datos de un lado a otro, buscar folios, comparar documentos..."></textarea>
+      <div class="card-question">¿Hay algo que hagas a mano y que sientas que una computadora debería poder hacer?</div>
+      <div class="card-hint">Ej: copiar datos de un lado a otro, cruzar XMLs contra el estado de cuenta, buscar folios uno por uno...</div>
+      <textarea name="dolor3" placeholder="Copiar datos, comparar documentos, buscar información..."></textarea>
     </div>
 
     <div class="nav">
@@ -451,7 +453,7 @@
   <div class="step" data-step="t3">
     <div class="card">
       <div class="card-label">Volumen</div>
-      <div class="card-question">¿Cuántos clientes maneja usted directamente?</div>
+      <div class="card-question">¿Cuántos clientes manejas tú directamente?</div>
       <div class="range-wrap">
         <div class="range-value" id="clientesVal">15</div>
         <div class="range-unit">clientes</div>
@@ -462,7 +464,7 @@
 
     <div class="card">
       <div class="card-label">Horas</div>
-      <div class="card-question">De sus horas de trabajo al día, ¿cuántas son de captura/procesamiento manual?</div>
+      <div class="card-question">De tus horas de trabajo al día, ¿cuántas son de captura/procesamiento manual?</div>
       <div class="range-wrap">
         <div class="range-value" id="horasVal">4</div>
         <div class="range-unit">horas al día en trabajo manual</div>
@@ -491,20 +493,20 @@
 
     <div class="card">
       <div class="card-label">Herramientas</div>
-      <div class="card-question">¿Qué otros programas o portales usa en su día a día?</div>
+      <div class="card-question">¿Qué otros programas o portales usas en tu día a día?</div>
       <div class="card-hint">Excel, portal del SAT, portal del IMSS, editor de PDF, WhatsApp para clientes, etc.</div>
       <textarea name="herramientas" placeholder="Liste todo lo que use, aunque parezca obvio..."></textarea>
     </div>
 
     <div class="card">
       <div class="card-label">Transferencia manual</div>
-      <div class="card-question">¿En qué momento tiene que copiar datos de un programa a otro manualmente?</div>
+      <div class="card-question">¿En qué momento tienes que copiar datos de un programa a otro a mano?</div>
       <div class="card-hint">Ej: "Copio el total del estado de cuenta al Excel, luego lo verifico contra Contpaq".</div>
-      <textarea name="transferencia" placeholder="Describa los pasos donde mueve información a mano..."></textarea>
+      <textarea name="transferencia" placeholder="Describe los pasos donde mueves información a mano..."></textarea>
     </div>
 
     <div class="card">
-      <div class="card-question">¿Cómo les llega la información de los clientes?</div>
+      <div class="card-question">¿Cómo te llega la información de los clientes?</div>
       <div class="chips" data-name="canales" data-multi="true">
         <div class="chip" data-value="WhatsApp">WhatsApp</div>
         <div class="chip" data-value="Correo electrónico">Correo</div>
@@ -526,15 +528,15 @@
     <div class="card" style="background: var(--text); color: white; border-color: transparent;">
       <div class="card-label" style="color: var(--accent);">Pregunta final</div>
       <div class="card-question" style="font-size: 18px; color: white;">
-        Si pudiéramos quitarle <strong style="color: var(--accent);">una sola tarea</strong> de encima para siempre, ¿cuál escogería?
+        Si pudiéramos quitarte <strong style="color: var(--accent);">una sola tarea</strong> de encima para siempre, ¿cuál escogerías?
       </div>
       <div class="card-hint" style="color: #999;">Esta respuesta define la prioridad #1 de la propuesta que le haremos a Edmundo.</div>
-      <textarea name="prioridad" placeholder="La que más le pese..." style="background: rgba(255,255,255,0.08); color: white; border-color: rgba(255,255,255,0.15);"></textarea>
+      <textarea name="prioridad" placeholder="La que más te pese..." style="background: rgba(255,255,255,0.08); color: white; border-color: rgba(255,255,255,0.15);"></textarea>
     </div>
 
     <div class="card">
-      <div class="card-question">¿Hay algo más que quiera comentar?</div>
-      <div class="card-hint">Cualquier detalle que sienta relevante y que no hayamos preguntado.</div>
+      <div class="card-question">¿Hay algo más que quieras comentar?</div>
+      <div class="card-hint">Cualquier detalle que sientas relevante y que no hayamos preguntado.</div>
       <textarea name="adicional" placeholder="Opcional — pero todo suma..."></textarea>
     </div>
 
@@ -582,7 +584,7 @@
     <div class="card">
       <div class="card-label">Cuello de botella #1</div>
       <div class="card-question">¿Qué proceso del despacho te quita el sueño?</div>
-      <div class="card-hint">Lo que frena el crecimiento, genera errores, o te obliga a ti a intervenir cuando no deberías.</div>
+      <div class="card-hint">Lo que frena el crecimiento, genera re-trabajo, o te obliga a ti a intervenir cuando no deberías.</div>
       <textarea name="o_cuello1" placeholder="El proceso que más te preocupa..."></textarea>
     </div>
 
@@ -593,10 +595,10 @@
     </div>
 
     <div class="card">
-      <div class="card-label">Errores</div>
-      <div class="card-question">¿Qué tipo de errores se repiten seguido?</div>
-      <div class="card-hint">Ej: facturas mal clasificadas, declaraciones con datos incorrectos, clientes que reciben info equivocada.</div>
-      <textarea name="o_errores" placeholder="Errores recurrentes que te cuestan tiempo o dinero..."></textarea>
+      <div class="card-label">Re-trabajo</div>
+      <div class="card-question">¿Qué tan seguido tienen que presentar declaraciones complementarias o corregir algo ya enviado al SAT?</div>
+      <div class="card-hint">Complementarias, sustituciones, facturas reclasificadas después de declarar, devoluciones rechazadas por errores.</div>
+      <textarea name="o_retrabajo" placeholder="Cada cuánto pasa y por qué..."></textarea>
     </div>
 
     <div class="nav">
@@ -636,50 +638,41 @@
     </div>
   </div>
 
-  <!-- OWNER STEP 4: Visión y expectativas -->
+  <!-- OWNER STEP 4: Los 3 procesos pesados -->
   <div class="step" data-step="o4">
-    <div class="card">
-      <div class="card-label">Visión</div>
-      <div class="card-question">Si todo funcionara perfecto, ¿cómo se vería tu despacho en 6 meses?</div>
-      <div class="card-hint">Más clientes con la misma gente, menos errores, menos horas extras, poder delegar más... lo que sea.</div>
-      <textarea name="o_vision" placeholder="El escenario ideal..."></textarea>
+    <div class="context-box">
+      Ya me contaste que los procesos más pesados son <strong>reclasificación de facturas</strong>, <strong>edición de declaraciones</strong> y <strong>conciliación bancaria</strong>. Aquí necesito que te explayes — mientras más detalle, mejor propuesta.
     </div>
 
     <div class="card">
-      <div class="card-label">Expectativa concreta</div>
-      <div class="card-question">¿Qué resultado necesitarías ver para decir "valió la pena"?</div>
-      <div class="card-hint">Algo medible: "reducir X horas", "eliminar errores en Y", "poder atender Z clientes más".</div>
-      <textarea name="o_resultado" placeholder="El resultado que justifica la inversión..."></textarea>
+      <div class="card-label">🔴 Reclasificación masiva</div>
+      <div class="card-question">Cuando reclasifican facturas, ¿cómo es el proceso paso a paso?</div>
+      <div class="card-hint">Desde que bajan los XMLs hasta que quedan reclasificados en Contpaq. ¿Quién lo hace? ¿Cuántas facturas por cliente? ¿Cuánto tiempo por cliente?</div>
+      <textarea name="o_reclasificacion" placeholder="Ej: 'Bajamos los XMLs del sistema ST, los importamos a Contpaq, pero la clasificación automática falla en el 60% y hay que reclasificar uno por uno...'"></textarea>
     </div>
 
     <div class="card">
-      <div class="card-label">PDFs y Excel</div>
-      <div class="card-question">Cuéntame sobre el flujo de PDFs y Excel en el despacho</div>
-      <div class="card-hint">Queremos entender exactamente qué hacen con estos archivos hoy.</div>
-      <div class="chips" data-name="o_pdf_tareas" data-multi="true">
-        <div class="chip" data-value="Extraer datos de PDFs a Excel">Extraer datos de PDF → Excel</div>
-        <div class="chip" data-value="Editar PDFs manualmente">Editar PDFs a mano</div>
-        <div class="chip" data-value="Llenar formatos PDF">Llenar formatos/plantillas PDF</div>
-        <div class="chip" data-value="Conciliar Excel vs facturas">Conciliar Excel vs facturas</div>
-        <div class="chip" data-value="Armar reportes en Excel desde varias fuentes">Armar reportes desde varias fuentes</div>
-        <div class="chip" data-value="Convertir entre formatos">Convertir entre formatos</div>
-      </div>
-      <input type="hidden" name="o_pdf_tareas">
+      <div class="card-label">🔴 Edición de PDFs / Declaraciones</div>
+      <div class="card-question">Cuando editas una declaración o estado financiero en PDF, ¿qué herramientas usas y qué cambias exactamente?</div>
+      <div class="card-hint">¿Qué tipo de documentos editas? ¿Qué datos modificas? ¿Con qué programa? ¿Cuánto tiempo te lleva por documento?</div>
+      <textarea name="o_edicion_pdf" placeholder="Ej: 'Uso Adobe para modificar los montos en el acuse de la declaración anual. Cambio X campo para que coincida con...'"></textarea>
     </div>
 
     <div class="card">
-      <div class="card-question">¿Qué es lo más tedioso de trabajar con PDFs o Excel hoy?</div>
-      <div class="card-hint">Ej: "cada factura la abro, copio el RFC y el total a mano al Excel", "los PDFs del SAT no se pueden editar y tengo que re-capturar todo".</div>
-      <textarea name="o_pdf_dolor" placeholder="Describe el proceso paso a paso..."></textarea>
+      <div class="card-label">🔴 Conciliación bancaria</div>
+      <div class="card-question">¿Cómo concilian los estados de cuenta con las facturas hoy?</div>
+      <div class="card-hint">¿Es manual en Excel? ¿Cruzan movimiento por movimiento? ¿Cuántos movimientos por cliente al mes? ¿Qué pasa cuando no cuadra?</div>
+      <textarea name="o_conciliacion" placeholder="Ej: 'Descargamos el estado de cuenta en PDF, lo pasamos a Excel a mano, y comparamos línea por línea contra los CFDIs del mes...'"></textarea>
     </div>
 
     <div class="card">
-      <div class="card-question">¿Cuántos PDFs o archivos Excel procesan en una semana típica?</div>
+      <div class="card-label">Tiempo total</div>
+      <div class="card-question">De estos 3 procesos, ¿cuántas horas-persona al mes se van entre todos?</div>
       <div class="range-wrap">
-        <div class="range-value" id="oPdfVal">50</div>
-        <div class="range-unit">archivos por semana</div>
-        <input type="range" name="o_pdf_volumen" min="5" max="500" value="50" step="5" oninput="document.getElementById('oPdfVal').textContent=this.value">
-        <div class="range-labels"><span>5</span><span>250</span><span>500+</span></div>
+        <div class="range-value" id="oHorasVal">40</div>
+        <div class="range-unit">horas al mes en estos 3 procesos</div>
+        <input type="range" name="o_horas_procesos" min="5" max="200" value="40" step="5" oninput="document.getElementById('oHorasVal').textContent=this.value">
+        <div class="range-labels"><span>5h</span><span>100h</span><span>200h+</span></div>
       </div>
     </div>
 
@@ -689,21 +682,43 @@
     </div>
   </div>
 
-  <!-- OWNER STEP 5: Pregunta final -->
+  <!-- OWNER STEP 5: Visión + inversión + cierre -->
   <div class="step" data-step="o5">
-    <div class="card" style="background: var(--text); color: white; border-color: transparent;">
-      <div class="card-label" style="color: var(--accent);">Pregunta final</div>
-      <div class="card-question" style="font-size: 18px; color: white;">
-        Si pudieras resolver <strong style="color: var(--accent);">un solo problema</strong> del despacho mañana, ¿cuál sería?
-      </div>
-      <div class="card-hint" style="color: #999;">Esto define la prioridad #1 de la propuesta.</div>
-      <textarea name="o_prioridad" placeholder="El problema #1..." style="background: rgba(255,255,255,0.08); color: white; border-color: rgba(255,255,255,0.15);"></textarea>
+    <div class="card">
+      <div class="card-label">Visión</div>
+      <div class="card-question">Si todo funcionara perfecto, ¿cómo se vería tu despacho en 6 meses?</div>
+      <div class="card-hint">Más clientes con la misma gente, menos re-trabajo, tus colaboradoras enfocadas en lo que importa... lo que sea.</div>
+      <textarea name="o_vision" placeholder="El escenario ideal..."></textarea>
     </div>
 
     <div class="card">
-      <div class="card-question">¿Algo más que quieras agregar?</div>
-      <div class="card-hint">Contexto extra que no hayamos cubierto.</div>
-      <textarea name="o_adicional" placeholder="Opcional..."></textarea>
+      <div class="card-label">Resultado esperado</div>
+      <div class="card-question">¿Qué resultado necesitarías ver para decir "valió la pena"?</div>
+      <div class="card-hint">Algo concreto: "que la reclasificación se haga sola", "reducir 30 horas al mes", "poder atender 10 clientes más sin contratar".</div>
+      <textarea name="o_resultado" placeholder="El resultado que justifica la inversión..."></textarea>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Inversión</div>
+      <div class="card-question">¿Qué rango de inversión sería razonable si te ahorra esas horas?</div>
+      <div class="card-hint">No hay respuesta incorrecta — necesito calibrar la propuesta. Piensa en lo que te costaría contratar otra persona vs. automatizar.</div>
+      <div class="chips" data-name="o_inversion">
+        <div class="chip" data-value="Menos de $30,000 MXN">< $30k MXN</div>
+        <div class="chip" data-value="$30,000 - $80,000 MXN">$30k – $80k</div>
+        <div class="chip" data-value="$80,000 - $150,000 MXN">$80k – $150k</div>
+        <div class="chip" data-value="Más de $150,000 MXN">$150k+</div>
+        <div class="chip" data-value="Depende del ROI">Depende del ROI</div>
+      </div>
+      <input type="hidden" name="o_inversion">
+    </div>
+
+    <div class="card" style="background: var(--text); color: white; border-color: transparent;">
+      <div class="card-label" style="color: var(--accent);">Pregunta final</div>
+      <div class="card-question" style="font-size: 18px; color: white;">
+        De los 3 procesos (reclasificación, edición de declaraciones, conciliación), ¿cuál resolverías <strong style="color: var(--accent);">primero</strong>?
+      </div>
+      <div class="card-hint" style="color: #999;">Esto define por dónde arrancamos.</div>
+      <textarea name="o_prioridad" placeholder="¿Cuál y por qué?" style="background: rgba(255,255,255,0.08); color: white; border-color: rgba(255,255,255,0.15);"></textarea>
     </div>
 
     <div class="nav">
@@ -819,16 +834,17 @@ document.getElementById('briefForm').addEventListener('submit', async (e) => {
         { tag: 'Clientes totales', pregunta: 'Cuántos clientes manejan en total', respuesta: fd.get('o_clientes_total') || '?' },
         { tag: 'Cuello de botella #1', pregunta: 'Qué proceso te quita el sueño', respuesta: fd.get('o_cuello1') || '(sin respuesta)' },
         { tag: 'Cuello de botella #2', pregunta: 'Persona de la que depende todo', respuesta: fd.get('o_cuello2') || '(sin respuesta)' },
-        { tag: 'Errores recurrentes', pregunta: 'Errores que se repiten seguido', respuesta: fd.get('o_errores') || '(sin respuesta)' },
+        { tag: 'Re-trabajo', pregunta: 'Frecuencia de complementarias/correcciones al SAT', respuesta: fd.get('o_retrabajo') || '(sin respuesta)' },
         { tag: 'Intentos previos', pregunta: 'Qué has intentado automatizar antes', respuesta: fd.get('o_intentos') || '(sin respuesta)' },
         { tag: 'Sistemas', pregunta: 'Stack tecnológico actual', respuesta: [fd.get('o_sistemas'), fd.get('o_sistemas_otro')].filter(Boolean).join('. ') || '(sin respuesta)' },
+        { tag: '🔴 Reclasificación masiva', pregunta: 'Proceso paso a paso de reclasificación', respuesta: fd.get('o_reclasificacion') || '(sin respuesta)' },
+        { tag: '🔴 Edición PDFs/Declaraciones', pregunta: 'Herramientas y proceso de edición de PDFs', respuesta: fd.get('o_edicion_pdf') || '(sin respuesta)' },
+        { tag: '🔴 Conciliación bancaria', pregunta: 'Proceso de conciliación estados de cuenta vs facturas', respuesta: fd.get('o_conciliacion') || '(sin respuesta)' },
+        { tag: 'Horas en 3 procesos', pregunta: 'Horas-persona al mes en los 3 procesos', respuesta: fd.get('o_horas_procesos') || '?' },
         { tag: 'Visión 6 meses', pregunta: 'Cómo se vería tu despacho si todo funcionara perfecto', respuesta: fd.get('o_vision') || '(sin respuesta)' },
-        { tag: 'Resultado esperado', pregunta: 'Qué resultado necesitarías ver para decir que valió la pena', respuesta: fd.get('o_resultado') || '(sin respuesta)' },
-        { tag: 'PDF/Excel — Tareas', pregunta: 'Qué hacen con PDFs y Excel', respuesta: fd.get('o_pdf_tareas') || '(sin selección)' },
-        { tag: 'PDF/Excel — Dolor', pregunta: 'Lo más tedioso de trabajar con PDFs/Excel', respuesta: fd.get('o_pdf_dolor') || '(sin respuesta)' },
-        { tag: 'PDF/Excel — Volumen', pregunta: 'Archivos procesados por semana', respuesta: fd.get('o_pdf_volumen') || '?' },
-        { tag: '⭐ Prioridad #1', pregunta: 'Si pudieras resolver un solo problema mañana', respuesta: fd.get('o_prioridad') || '(sin respuesta)' },
-        { tag: 'Comentarios', pregunta: 'Algo adicional', respuesta: fd.get('o_adicional') || '(nada)' },
+        { tag: 'Resultado esperado', pregunta: 'Resultado concreto que justifica la inversión', respuesta: fd.get('o_resultado') || '(sin respuesta)' },
+        { tag: '💰 Inversión', pregunta: 'Rango de inversión razonable', respuesta: fd.get('o_inversion') || '(sin selección)' },
+        { tag: '⭐ Prioridad #1', pregunta: 'De los 3 procesos, cuál resolver primero', respuesta: fd.get('o_prioridad') || '(sin respuesta)' },
       ],
     };
   } else {
