@@ -373,12 +373,10 @@
     <div class="role-card" onclick="selectProfile('owner')">
       <div class="role-icon">👔</div>
       <div class="role-title">Edmundo</div>
-      <div class="role-desc">Dueño / director del despacho</div>
     </div>
     <div class="role-card" onclick="selectProfile('team')">
       <div class="role-icon">💼</div>
       <div class="role-title">Equipo del despacho</div>
-      <div class="role-desc">Colaboradora o miembro del equipo operativo</div>
     </div>
   </div>
 
@@ -698,19 +696,7 @@
       <textarea name="o_resultado" placeholder="El resultado que justifica la inversión..."></textarea>
     </div>
 
-    <div class="card">
-      <div class="card-label">Inversión</div>
-      <div class="card-question">¿Qué rango de inversión sería razonable si te ahorra esas horas?</div>
-      <div class="card-hint">No hay respuesta incorrecta — necesito calibrar la propuesta. Piensa en lo que te costaría contratar otra persona vs. automatizar.</div>
-      <div class="chips" data-name="o_inversion">
-        <div class="chip" data-value="Menos de $30,000 MXN">< $30k MXN</div>
-        <div class="chip" data-value="$30,000 - $80,000 MXN">$30k – $80k</div>
-        <div class="chip" data-value="$80,000 - $150,000 MXN">$80k – $150k</div>
-        <div class="chip" data-value="Más de $150,000 MXN">$150k+</div>
-        <div class="chip" data-value="Depende del ROI">Depende del ROI</div>
-      </div>
-      <input type="hidden" name="o_inversion">
-    </div>
+
 
     <div class="card" style="background: var(--text); color: white; border-color: transparent;">
       <div class="card-label" style="color: var(--accent);">Pregunta final</div>
@@ -843,7 +829,7 @@ document.getElementById('briefForm').addEventListener('submit', async (e) => {
         { tag: 'Horas en 3 procesos', pregunta: 'Horas-persona al mes en los 3 procesos', respuesta: fd.get('o_horas_procesos') || '?' },
         { tag: 'Visión 6 meses', pregunta: 'Cómo se vería tu despacho si todo funcionara perfecto', respuesta: fd.get('o_vision') || '(sin respuesta)' },
         { tag: 'Resultado esperado', pregunta: 'Resultado concreto que justifica la inversión', respuesta: fd.get('o_resultado') || '(sin respuesta)' },
-        { tag: '💰 Inversión', pregunta: 'Rango de inversión razonable', respuesta: fd.get('o_inversion') || '(sin selección)' },
+
         { tag: '⭐ Prioridad #1', pregunta: 'De los 3 procesos, cuál resolver primero', respuesta: fd.get('o_prioridad') || '(sin respuesta)' },
       ],
     };
