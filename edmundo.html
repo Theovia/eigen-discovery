@@ -653,9 +653,34 @@
     </div>
 
     <div class="card">
-      <div class="card-question">¿Hay algún deadline o periodo que haga esto urgente?</div>
-      <div class="card-hint">Ej: "quiero resolverlo antes de las anuales de abril", "este trimestre quiero crecer la cartera".</div>
-      <textarea name="o_timeline" placeholder="¿Cuándo necesitas que esto esté funcionando?"></textarea>
+      <div class="card-label">PDFs y Excel</div>
+      <div class="card-question">Cuéntame sobre el flujo de PDFs y Excel en el despacho</div>
+      <div class="card-hint">Queremos entender exactamente qué hacen con estos archivos hoy.</div>
+      <div class="chips" data-name="o_pdf_tareas" data-multi="true">
+        <div class="chip" data-value="Extraer datos de PDFs a Excel">Extraer datos de PDF → Excel</div>
+        <div class="chip" data-value="Editar PDFs manualmente">Editar PDFs a mano</div>
+        <div class="chip" data-value="Llenar formatos PDF">Llenar formatos/plantillas PDF</div>
+        <div class="chip" data-value="Conciliar Excel vs facturas">Conciliar Excel vs facturas</div>
+        <div class="chip" data-value="Armar reportes en Excel desde varias fuentes">Armar reportes desde varias fuentes</div>
+        <div class="chip" data-value="Convertir entre formatos">Convertir entre formatos</div>
+      </div>
+      <input type="hidden" name="o_pdf_tareas">
+    </div>
+
+    <div class="card">
+      <div class="card-question">¿Qué es lo más tedioso de trabajar con PDFs o Excel hoy?</div>
+      <div class="card-hint">Ej: "cada factura la abro, copio el RFC y el total a mano al Excel", "los PDFs del SAT no se pueden editar y tengo que re-capturar todo".</div>
+      <textarea name="o_pdf_dolor" placeholder="Describe el proceso paso a paso..."></textarea>
+    </div>
+
+    <div class="card">
+      <div class="card-question">¿Cuántos PDFs o archivos Excel procesan en una semana típica?</div>
+      <div class="range-wrap">
+        <div class="range-value" id="oPdfVal">50</div>
+        <div class="range-unit">archivos por semana</div>
+        <input type="range" name="o_pdf_volumen" min="5" max="500" value="50" step="5" oninput="document.getElementById('oPdfVal').textContent=this.value">
+        <div class="range-labels"><span>5</span><span>250</span><span>500+</span></div>
+      </div>
     </div>
 
     <div class="nav">
@@ -799,7 +824,9 @@ document.getElementById('briefForm').addEventListener('submit', async (e) => {
         { tag: 'Sistemas', pregunta: 'Stack tecnológico actual', respuesta: [fd.get('o_sistemas'), fd.get('o_sistemas_otro')].filter(Boolean).join('. ') || '(sin respuesta)' },
         { tag: 'Visión 6 meses', pregunta: 'Cómo se vería tu despacho si todo funcionara perfecto', respuesta: fd.get('o_vision') || '(sin respuesta)' },
         { tag: 'Resultado esperado', pregunta: 'Qué resultado necesitarías ver para decir que valió la pena', respuesta: fd.get('o_resultado') || '(sin respuesta)' },
-        { tag: 'Timeline', pregunta: 'Deadline o urgencia', respuesta: fd.get('o_timeline') || '(sin respuesta)' },
+        { tag: 'PDF/Excel — Tareas', pregunta: 'Qué hacen con PDFs y Excel', respuesta: fd.get('o_pdf_tareas') || '(sin selección)' },
+        { tag: 'PDF/Excel — Dolor', pregunta: 'Lo más tedioso de trabajar con PDFs/Excel', respuesta: fd.get('o_pdf_dolor') || '(sin respuesta)' },
+        { tag: 'PDF/Excel — Volumen', pregunta: 'Archivos procesados por semana', respuesta: fd.get('o_pdf_volumen') || '?' },
         { tag: '⭐ Prioridad #1', pregunta: 'Si pudieras resolver un solo problema mañana', respuesta: fd.get('o_prioridad') || '(sin respuesta)' },
         { tag: 'Comentarios', pregunta: 'Algo adicional', respuesta: fd.get('o_adicional') || '(nada)' },
       ],
